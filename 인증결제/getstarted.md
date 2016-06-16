@@ -55,7 +55,7 @@ IMP.request_pay({
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
 | pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakao"**, **"html5\_inicis"**와 같이 **{PG사명}**만 지정, **"html5\_inicis.INIpayTest"**와 같이 **{PG사명}.{상점아이디}**로 지정 | 1.1.0 부터 |
-| pay_method | string | 결제수단 | card | **card**(*신용카드*), **trans**(*실시간계좌이체*), **vbank**(*가상계좌*), **phone**(*휴대폰소액결제*) | 1.0.0부터 |
+| pay_method | string | 결제수단 | card | **card**(*신용카드*), **trans**(*실시간계좌이체*), **vbank**(*가상계좌*), **phone**(*휴대폰소액결제*), **cultureland**(*문화상품권 / 이니시스 전용*), **smartculture**(*스마트문상 / 이니시스 전용*), **happymoney**(*해피머니 / 이니시스 전용*) | 1.0.0부터 |
 | escrow | boolean | 에스크로 결제여부 | false | (선택항목) 에스크로가 적용되는 결제창을 호출 | 1.0.0부터 |
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호  | random | (필수항목) 결제가 된 적이 있는 merchant_uid로는 재결제 불가  | 1.0.0부터 |
 | name | string | 주문명 | undefined | (선택항목) 원활한 결제정보 확인을 위해 입력 권장 (PG사마다 차이가 있지만) 16자이내로 작성하시길 권장 | 1.0.0부터 |
