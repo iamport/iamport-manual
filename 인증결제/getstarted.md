@@ -60,6 +60,7 @@ IMP.request_pay({
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호  | random | (필수항목) 결제가 된 적이 있는 merchant_uid로는 재결제 불가  | 1.0.0부터 |
 | name | string | 주문명 | undefined | (선택항목) 원활한 결제정보 확인을 위해 입력 권장 (PG사마다 차이가 있지만) 16자이내로 작성하시길 권장 | 1.0.0부터 |
 | amount | number | 결제할 금액 | undefined | (필수항목) | 1.0.0부터 |
+| vat | number | amount 중 부가세 금액 | undefined | (선택항목) 부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다. | 1.0.0부터 |
 | currency | string | 화폐단위 | KRW | (선택항목) KRW / USD | 1.0.0부터 |
 | buyer_name | string | 주문자명 | undefined | (선택항목) | 1.0.0부터 |
 | buyer_tel | string | 주문자 연락처 | undefined | (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류 발생 | 1.0.0부터 |
