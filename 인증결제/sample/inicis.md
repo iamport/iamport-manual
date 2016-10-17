@@ -222,3 +222,5 @@ canOpenURL() 함수 사용을 위해 info.plist에 다음과 같이 whitelist를
     <string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
 </array>
 ```
+
+보다 상세한 내용은 [KG이니시스용 iOS 샘플소스](https://github.com/iamport/iamport-inicis-ios) 를 참고해주세요.
