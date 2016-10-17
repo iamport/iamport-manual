@@ -286,9 +286,10 @@ ELSE
 - [KG이니시스](sample/inicis.md)
 - [LGU+](sample/uplus.md)
 - [나이스정보통신](sample/nice.md)
-- [JTNet](jtnet.md)
-- [카카오페이](kakao.md)
-- [다날(휴대폰소액결제)](danal.md)
+- [JTNet](sample/jtnet.md)
+- [카카오페이](sample/kakao.md)
+- [다날(휴대폰소액결제)](sample/danal.md)
+- [KICC(한국정보통신)](sample/kicc.md)
 
 ## 2.3 REST API로 결제정보 확인하기
 결제 프로세스가 시작되면 결제해야할 금액 정보를 *(가맹점 서버를 거치지 않고)* 구매자의 브라우저로부터 PG사에 직접 전달하는 구조이므로, 결제가 실제 완료된 시점에 가맹점 서버는 결제되었어야 할 금액이 변경없이 제대로 결제되었는지를 확인하는 것이 보다 안전합니다.  
