@@ -51,7 +51,8 @@ IMP.request_pay({
 });
 ```
 `IMP.request_pay(param, callback)` 는 2개의 argument를 받는 함수입니다.  
-#### param 속성(공통 속성)
+
+### 2.1.1 param 속성(공통 속성)
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
 | pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakao"**, **"html5\_inicis"**와 같이 **{PG사명}**만 지정, **"html5\_inicis.INIpayTest"**와 같이 **{PG사명}.{상점아이디}**로 지정 | 1.1.0 부터 |
@@ -69,8 +70,14 @@ IMP.request_pay({
 | buyer_postcode | string | 주문자 우편번호 | undefined | (선택항목) | 1.0.0부터 |
 | custom_data | object | 가맹점 임의 지정 데이터  | undefined | (선택항목)주문건에 대해 부가정보를 저장할 공간이 필요할 때 사용. json notation(string)으로 저장됨 | 1.0.0부터 |
 | notice_url | string / array of string | Notification URL | undefined | (선택항목) 아임포트 관리자 페이지에서 설정하는 Notification URL을 overwrite할 수 있음. 주문마다 다른 Notification URL이 필요하거나 복수의 Notification URL이 필요한 경우 사용 | 1.0.0부터 |
+| display | object | 결제화면과 관련한 옵션 설정 | undefined | (선택항목) 구매자에게 제공되는 결제창 화면에 대한 UI옵션. 2.1.1.a참조 | 1.0.0부터 |
 
-#### param 속성(특정 상황에만 필요한 속성)
+#### 2.1.1.a display 속성  
+| 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
+|---|---|---|---|---|---|
+| card_quota | array of integer | 할부개월수 선택 UI제어옵션 | undefined | (선택항목) 50,000원 이상금액 결제 시 PG사 결제창에서 선택할 수 있는 할부개월목록 UI 제어. <br>1) undefined이면 PG사가 기본 제공하는 할부개월 수 목록을 출력 <br>2) []이면 일시불만 결제 가능 <br>3) [2,3,4,5,6]이면 일시불 + 2,3,4,5,6개월까지 할부개월 선택 가능  | 1.0.0부터 |
+
+### 2.1.2 param 속성(특정 상황에만 필요한 속성)
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
 | digital | boolean | 결제상품이 컨텐츠인지 여부 | false | (선택항목) 휴대폰소액결제시 필수. 반드시 실물/컨텐츠를 정확히 구분해주어야 함 | 1.0.0부터 |
@@ -79,7 +86,7 @@ IMP.request_pay({
 | app\_scheme<sup>(*example*)</sup> | string | 모바일 앱 결제도중 앱복귀를 위한 URL scheme | undefined | (선택항목) WebView 결제시 필수. ISP/앱카드 앱에서 결제정보인증 후 원래 앱으로 복귀할 때 사용됨 | 1.0.0부터 |
 
 
-#### callback의 구성
+### 2.1.3 callback의 구성
 ```javascript
 function(rsp) {
 	if ( rsp.success ) {
