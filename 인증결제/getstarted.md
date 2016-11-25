@@ -62,7 +62,7 @@ IMP.request_pay({
 | name | string | 주문명 | undefined | (선택항목) 원활한 결제정보 확인을 위해 입력 권장 (PG사마다 차이가 있지만) 16자이내로 작성하시길 권장 | 1.0.0부터 |
 | amount | number | 결제할 금액 | undefined | (필수항목) | 1.0.0부터 |
 | vat | number | amount 중 부가세 금액 | undefined | (선택항목) 부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다. | 1.0.0부터 |
-| currency | string | 화폐단위 | KRW | (선택항목) KRW / USD / EUR / JPY | 1.0.0부터 |
+| currency | string | 화폐단위 | KRW<br>(페이팔의 경우에는 USD가 기본값) | (선택항목) KRW / USD / EUR / JPY<br>(참조)페이팔정책상 KRW는 지원되는 결제화폐가 아니므로 USD가 기본 적용됩니다. | 1.0.0부터 |
 | buyer_name | string | 주문자명 | undefined | (선택항목) | 1.0.0부터 |
 | buyer_tel | string | 주문자 연락처 | undefined | (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류 발생 | 1.0.0부터 |
 | buyer_email | string | 주문자 Email | undefined | (선택항목) | 1.0.0부터 |
