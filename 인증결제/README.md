@@ -222,8 +222,8 @@ ELSE
 
 1. `IMP.request_pay(param, callback)` 호출로 결제창 호출
 2. PG사 페이지로 이동(redirect)하면서 결제 프로세스 시작
-3. 결제 후 `m_redirect_url`에 지정된 주소로 페이지 이동. 이 때, `m_redirect_url`에 query string으로 **imp\_uid** 가 추가된 주소로 이동됨. (예시. https://www.myservice.com/payment/mobile/success로 지정하면 https://www.myservice.com/payment/mobile/success?imp_uid=imp1234567890 로 이동됨)
-4. 가맹점 서버(https://www.myservice.com/payment/mobile/success에 대한 처리를 하는 서버로직)에서 query string에 포함된 imp_uid값을 추출하여 REST API로 결제정보 조회 (예시.[`https://api.iamport.kr/payments/{imp_uid}`](https://api.iamport.kr/#!/payments/getPaymentByImpUid))
+3. 결제 후 `m_redirect_url`에 지정된 주소로 페이지 이동. 이 때, `m_redirect_url`에 query string으로 **imp\_uid** 와 **merchant\_uid** 가 추가된 주소로 이동됨. (예시. https://www.myservice.com/payment/mobile/success로 지정하면 https://www.myservice.com/payment/mobile/success?imp_uid=imp1234567890&merchant_uid=order12345 로 이동됨)
+4. 가맹점 서버(https://www.myservice.com/payment/mobile/success에 대한 처리를 하는 서버로직)에서 query string에 포함된 imp_uid값 또는 merchant_uid값을 추출하여 REST API로 결제정보 조회 (예시.[`https://api.iamport.kr/payments/{imp_uid}`](https://api.iamport.kr/#!/payments/getPaymentByImpUid))
 5. 조회된 결제 정보가 `status == 'paid' && amount == {결제되었어야 할 금액}` 조건에 해당되는지 체크
 6. 가맹점 DB에 필요한 정보 기록 및 서비스 루틴 수행
 
@@ -249,9 +249,9 @@ PC와 달리 `IMP.request_pay(param)`호출 시 callback함수를 지정하지 �
 실제 redirect되는 주소는 m\_redirect\_url에 2개의 query string이 추가되어있습니다.  
 
 - imp_uid(string)
-- imp_success(boolean)
+- merchant_uid(string) 
 
-즉, 위 예제의 경우 `https://www.myservice.com/payments/complete?imp_uid=xxxxxxx&imp_success=true`로 redirect됩니다.  
+즉, 위 예제의 경우 `https://www.myservice.com/payments/complete?imp_uid=xxxxxxx&merchant_uid=yyyyyyy`로 redirect됩니다.  
 
 
 #### server (https://www.myservice.com/payments/complete에 대한 request를 처리하는 루틴)  
@@ -260,6 +260,7 @@ PC와 달리 `IMP.request_pay(param)`호출 시 callback함수를 지정하지 �
 
 ```
 imp_uid = extract_GET_value_from_url('imp_uid') //GET query string으로부터 imp_uid확인
+//merchant_uid = extract_GET_value_from_url('merchant_uid') //또는, GET query string으로부터 merchant_uid확인
 
 payment_result = rest_api_to_find_payment(imp_uid) //imp_uid로 아임포트로부터 결제정보 조회
 amount_to_be_paid = query_amount_to_be_paid(payment_result.merchant_uid) //결제되었어야 하는 금액 조회. 가맹점에서는 merchant_uid기준으로 관리
@@ -433,7 +434,7 @@ IMP.request_pay({
 
 #### URL scheme에 의해 실행된 Activity에서 Intent처리  
 인증 후 3rd-party앱이 URL scheme에 해당하는 Intent를 호출함으로써  My앱의 지정된 Activity가 실행됩니다.  
-**URL scheme뒤에는 WebView가 이동해야 할 Web URL이 파라메터로 전달**되는데 이것을  `WebView.loadUrl(redirectURL)`하면 WebView는 최종적으로 `m_redirect_url`로 랜딩됩니다. *(브라우저와 마찬가지로 `imp_uid`가 query string으로 포함)*  
+**URL scheme뒤에는 WebView가 이동해야 할 Web URL이 파라메터로 전달**되는데 이것을  `WebView.loadUrl(redirectURL)`하면 WebView는 최종적으로 `m_redirect_url`로 랜딩됩니다. *(브라우저와 마찬가지로 `imp_uid`와 `merchant_uid`가 query string으로 포함)*  
 
 예시) `iamporttest://://https://web.nicepay.co.kr/smart/card/isp/ispResult.jsp?tid=nictest00m01011604160159435894`
 
