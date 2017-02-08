@@ -84,7 +84,7 @@ IMP.request_pay({
 | vbank_due | string | 가상계좌 입금기한 | undefined | (선택항목) YYYYMMDDhhmm 형식 | 1.0.0부터 |
 | m\_redirect\_url<sup>(*example*)</sup> | string | 모바일 결제 후 이동될 주소 | undefined | (선택항목) 모바일 결제시에만 사용됨 | 1.0.0부터 |
 | app\_scheme<sup>(*example*)</sup> | string | 모바일 앱 결제도중 앱복귀를 위한 URL scheme | undefined | (선택항목) WebView 결제시 필수. ISP/앱카드 앱에서 결제정보인증 후 원래 앱으로 복귀할 때 사용됨 | 1.0.0부터 |
-
+| biz\_num | string | 계약된 사업자등록번호 10자리(기호를 포함하면 안됨) | undefined | (선택항목) 다날-가상계좌 결제시 반드시 설정되어야 합니다. | 1.0.0부터 |
 
 ### 2.1.3 callback의 구성
 ```javascript
