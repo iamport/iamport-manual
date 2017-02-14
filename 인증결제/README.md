@@ -63,6 +63,7 @@ IMP.request_pay({
 | amount | number | 결제할 금액 | undefined | (필수항목) | 1.0.0부터 |
 | vat | number | amount 중 부가세 금액 | undefined | (선택항목) 부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다. | 1.0.0부터 |
 | currency | string | 화폐단위 | KRW<br>(페이팔의 경우에는 USD가 기본값) | (선택항목) KRW / USD / EUR / JPY<br>(참조)페이팔정책상 KRW는 지원되는 결제화폐가 아니므로 USD가 기본 적용됩니다. | 1.0.0부터 |
+| language | string | 결제창의 언어 설정 | ko | (선택항목) 구매자에게 제공되는 결제창 화면의 언어 설정 **en** 또는 **ko**<br>*KG이니시스와 나이스페이먼츠의 PC결제창만 사용 가능* | 1.0.0부터 |
 | buyer_name | string | 주문자명 | undefined | (선택항목) | 1.0.0부터 |
 | buyer_tel | string | 주문자 연락처 | undefined | (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류 발생 | 1.0.0부터 |
 | buyer_email | string | 주문자 Email | undefined | (선택항목) | 1.0.0부터 |
@@ -71,6 +72,7 @@ IMP.request_pay({
 | custom_data | object | 가맹점 임의 지정 데이터  | undefined | (선택항목)주문건에 대해 부가정보를 저장할 공간이 필요할 때 사용. json notation(string)으로 저장됨 | 1.0.0부터 |
 | notice_url | string / array of string | Notification URL | undefined | (선택항목) 아임포트 관리자 페이지에서 설정하는 Notification URL을 overwrite할 수 있음. 주문마다 다른 Notification URL이 필요하거나 복수의 Notification URL이 필요한 경우 사용 | 1.0.0부터 |
 | display | object | 결제화면과 관련한 옵션 설정 | undefined | (선택항목) 구매자에게 제공되는 결제창 화면에 대한 UI옵션. 2.1.1.a참조 | 1.0.0부터 |
+
 
 #### 2.1.1.a display 속성  
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
