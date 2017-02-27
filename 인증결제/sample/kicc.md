@@ -53,5 +53,41 @@ IMP.request_pay({
 ```
 
 #2. 모바일 브라우저 연동
+## 2.1 결제창 호출하기(m\_redirect\_url 설정)
 
-현재 KICC모듈 모바일 연동 준비 중입니다.  
+KICC 모바일 브라우저 결제에서는 페이지 이동이 자동으로 이뤄지기 때문에 `IMP.request_pay(param)`호출을 하셔야하고, PC와 달리 `callback` 함수를 사용하실 수 없습니다.  
+대신, `param`에 `m_redirect_url`파라메터를 설정해 결제완료를 인지하실 수 있습니다.  
+
+```javascript
+IMP.request_pay({
+    pg : 'html5_inicis',
+    pay_method : 'card',
+    merchant_uid : 'merchant_' + new Date().getTime(),
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456',
+    m_redirect_url : 'https://www.my-service.com/payments/complete/mobile'
+});
+```
+
+## 2.2 서버단에서 결제완료 인지하기  
+`m_redirect_url`을 `https://www.my-service.com/payments/complete/mobile`로 지정하면, 실제 결제완료 후 이동하는 URL은 `https://www.my-service.com/payments/complete/mobile?imp_uid={아임포트거래고유번호}&merchant_uid={merchant_uid}`와 같이 imp\_uid, merchant\_uid값이 Query String에 추가된 URL이 됩니다.  
+때문에, **https://www.my-service.com/payments/complete/mobile** 주소에 대한 GET request를 처리하는 서버단 로직에서 다음과 같이 결제완료 정보를 조회하면 됩니다.  
+
+```
+imp_uid = extract_GET_value('imp_uid')
+
+payment_result = rest_api_to_find_payment(imp_uid) //imp_uid로 아임포트로부터 결제정보 조회
+amount_to_be_paid = query_amount_to_be_paid(payment_result.merchant_uid) //결제되었어야 하는 금액 조회. 가맹점에서는 merchant_uid기준으로 관리
+
+IF payment_result.status == 'paid' AND payment_result.amount == amount_to_be_paid
+	success_post_process(payment_result) //결제까지 성공적으로 완료
+ELSE IF payment_result.status == 'ready' AND payment.pay_method == 'vbank'
+	vbank_number_assigned(payment_result) //가상계좌 발급성공
+ELSE
+	fail_post_process(payment_result) //결제실패 처리
+```
