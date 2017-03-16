@@ -1,4 +1,4 @@
-#1. PC 연동  
+# 1. PC 연동  
 
 `IMP.request_pay(param, callback)`의 callback 함수를 활용하여 결제완료 통지를 받을 수 있습니다.  
 
@@ -53,7 +53,7 @@ IMP.request_pay({
 });
 ```
 
-#2. 모바일 브라우저 연동
+# 2. 모바일 브라우저 연동  
 ## 2.1 결제창 호출하기(m\_redirect\_url 설정)
 
 KICC 모바일 브라우저 결제에서는 페이지 이동이 자동으로 이뤄지기 때문에 `IMP.request_pay(param)`호출을 하셔야하고, PC와 달리 `callback` 함수를 사용하실 수 없습니다.  

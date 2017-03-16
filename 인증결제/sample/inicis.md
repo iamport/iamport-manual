@@ -1,4 +1,4 @@
-#1. PC 연동  
+# 1. PC 연동  
 
 `IMP.request_pay(param, callback)`의 callback 함수를 활용하여 결제완료 통지를 받을 수 있습니다.  
 
@@ -53,7 +53,7 @@ IMP.request_pay({
 });
 ```
 
-#2. 모바일 브라우저 연동
+# 2. 모바일 브라우저 연동  
 ## 2.1 결제창 호출하기(m\_redirect\_url 설정)
 
 이니시스 모바일 브라우저 결제에서는 페이지 이동이 자동으로 이뤄지기 때문에 `IMP.request_pay(param)`호출을 하셔야하고, PC와 달리 `callback` 함수를 사용하실 수 없습니다.  
@@ -93,7 +93,7 @@ ELSE
 	fail_post_process(payment_result) //결제실패 처리
 ```
 
-#3. 모바일 WebView 연동  
+# 3. 모바일 WebView 연동  
 ## 3.1 안드로이드  
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 거의 동일한 프로세스를 가지게 됩니다. 다만, 앱 간 이동을 위해 URL Scheme처리를 위한 Native Code가 추가로 필요하며, `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`파라메터를 통해 AndroidManifest.xml에 선언된 나의 scheme값을 지정해야 합니다.  
 

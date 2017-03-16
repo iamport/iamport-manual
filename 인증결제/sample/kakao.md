@@ -1,4 +1,4 @@
-#1. PC, 모바일 브라우저 연동  
+# 1. PC, 모바일 브라우저 연동  
 
 
 카카오페이의 경우 제공되는 결제창을 활용했을 때 서비스의 기본 페이지로부터 이동을 할 필요가 없어 PC, 모바일 브라우저 환경에서 동일한 소스코드를 적용할 수 있습니다.  
@@ -62,8 +62,8 @@ IMP.request_pay({
 
 ![](screenshot/kakao_open_app.png)
 
-#2. WebView 연동  
-##2.1 안드로이드  
+# 2. WebView 연동  
+## 2.1 안드로이드  
 - 샘플 프로젝트 : [https://github.com/iamport/iamport-kakao-android](https://github.com/iamport/iamport-kakao-android)  
 
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 동일한 프로세스를 가지게 됩니다. 다만, 다음과 같은 추가 처리가 필요합니다.  

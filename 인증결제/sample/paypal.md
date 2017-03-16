@@ -1,4 +1,4 @@
-#1. PC, 모바일 브라우저 연동  
+# 1. PC, 모바일 브라우저 연동  
 
 
 Paypal의 경우 Paypal 보안정책으로 인해 PC, 모바일 모두 `IMP.request_pay(param, callback)`의 `callback`함수를 사용할 수 없습니다.  
@@ -24,7 +24,7 @@ IMP.request_pay({
 });
 ```
 
-#2. m\_redirect\_url 사용
+# 2. m\_redirect\_url 사용  
 
 보다 상세한 내용은 [인증결제/getstarted.md](../getstarted.md) 의 **2.2.b m\_redirect\_url** 섹션을 참조해주세요.  
 
