@@ -1,5 +1,6 @@
 #1. PC, 모바일 브라우저 연동  
 
+
 Paypal의 경우 Paypal 보안정책으로 인해 PC, 모바일 모두 `IMP.request_pay(param, callback)`의 `callback`함수를 사용할 수 없습니다.  
 Express Checkout을 위해 Paypal로 페이지 이동(redirection)이 이루어지기 때문에 PC, 모바일 모두 `m_redirect_url`파라메터를 반드시 설정해주셔야 합니다.  
 

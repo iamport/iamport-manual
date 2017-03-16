@@ -1,21 +1,20 @@
 #1. PC 연동  
-
 `IMP.request_pay(param, callback)`의 callback 함수를 활용하여 결제완료 통지를 받을 수 있습니다.  
 
-- 이니시스를 "기본PG사"로 설정해 하나만 사용하시는 경우에는 `pg`파라메터는 생략이 가능합니다. (관리자 페이지에 설정된 정보를 기본으로 사용합니다)  
-- 복수개의 PG설정을 해두신 경우 이니시스 결제창을 호출하시려면 `pg`파라메터를 `html5_inicis`로 설정해주세요.(웹표준 방식이 아닌, ActiveX 방식 결제창을 굳이 사용하시려면 `inicis` 로 설정하시면 됩니다)  
+- JTNet을 "기본PG사"로 설정해 하나만 사용하시는 경우에는 `pg`파라메터는 생략이 가능합니다. (관리자 페이지에 설정된 정보를 기본으로 사용합니다)  
+- 복수개의 PG설정을 해두신 경우 JTNet 결제창을 호출하시려면 `pg`파라메터를 `jtnet`로 설정해주세요.  
 
 
 ```javascript
 IMP.request_pay({
-    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+    pg : 'jtnet',
     pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
     merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',
     buyer_name : '구매자이름',
-    buyer_tel : '010-1234-5678', //누락되면 이니시스 결제창에서 오류
+    buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456'
 }, function(rsp) {
@@ -56,12 +55,12 @@ IMP.request_pay({
 #2. 모바일 브라우저 연동
 ## 2.1 결제창 호출하기(m\_redirect\_url 설정)
 
-이니시스 모바일 브라우저 결제에서는 페이지 이동이 자동으로 이뤄지기 때문에 `IMP.request_pay(param)`호출을 하셔야하고, PC와 달리 `callback` 함수를 사용하실 수 없습니다.  
+JTNet 모바일 브라우저 결제에서는 페이지 이동이 자동으로 이뤄지기 때문에 `IMP.request_pay(param)`호출을 하셔야하고, PC와 달리 `callback` 함수를 사용하실 수 없습니다.  
 대신, `param`에 `m_redirect_url`파라메터를 설정해 결제완료를 인지하실 수 있습니다.  
 
 ```javascript
 IMP.request_pay({
-    pg : 'html5_inicis',
+    pg : 'jtnet',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',
@@ -99,7 +98,7 @@ ELSE
 
 ```javascript
 IMP.request_pay({
-    pg : 'html5_inicis',
+    pg : 'jtnet',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',
@@ -115,6 +114,8 @@ IMP.request_pay({
 ```
 
 ### 3.1.1 WebView에서 외부 앱 호출  
+카드사별 다양한 앱 호출 및 설치 요구에 대응하기 위해 다음의 코드가 추가되어야 합니다.  
+[WebViewClient](https://developer.android.com/reference/android/webkit/WebViewClient.html) 참조  
 
 ```java
 @Override
@@ -167,7 +168,6 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 </activity>
 ```
 
-보다 상세한 내용은 [KG이니시스용 안드로이드 샘플소스](http://www.github.com/iamport/iamport-inicis-android) 를 참고해주세요.  
 
 ## 3.2 iOS  
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 거의 동일한 프로세스를 가지게 됩니다. 다만, 앱 간 이동을 위해 URL Scheme처리를 위한 Native Code가 추가로 필요하며, `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`파라메터를 통해 `info.plist` 에 선언된 나의 `CFBundleURLSchemes` 값을 지정해야 합니다.(javascript는 안드로이드와 동일)  
@@ -224,4 +224,3 @@ canOpenURL() 함수 사용을 위해 info.plist에 다음과 같이 whitelist를
 </array>
 ```
 
-보다 상세한 내용은 [KG이니시스용 iOS 샘플소스](https://github.com/iamport/iamport-inicis-ios) 를 참고해주세요.
