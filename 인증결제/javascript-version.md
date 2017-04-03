@@ -1,5 +1,22 @@
 # javascript 버전별 안내
 
+### iamport.payment-1.1.5.js  
+
+```html  
+<script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+```  
+**2017-04-03 배포**  
+- 모바일 결제에서 `IMP.request_pay(param)`와 같이 callback function 이 누락된 채 호출되었으나, 결제프로세스 시작 전 사전 필터링 단계에서 실패사유가 발생한 경우에도 `m_redirect_url`로 이동하게 됩니다.  
+*(결제프로세스가 시작된 후 성공/실패에 대한 경우에는 이전 버전에서도 `m_redirect_url`로 이동이 이루어지고 있습니다.)*  
+
+##### 결제프로세스 시작 전에 발생할 수 있는 실패 사유   
+- 이미 결제된 merchant_uid를 재시도하는 경우
+- 결제요청 파라메터가 올바르지 않은 경우
+
+##### 결제프로세스 시작 후 발생할 수 있는 실패 사유  
+- 카드 사용 정지, 한도초과  
+- 비밀번호 오류 횟수 초과  
+
 ### iamport.payment-1.1.4.js  
 
 ```html  

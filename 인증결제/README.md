@@ -88,7 +88,53 @@ IMP.request_pay({
 | app\_scheme<sup>(*example*)</sup> | string | 모바일 앱 결제도중 앱복귀를 위한 URL scheme | undefined | (선택항목) WebView 결제시 필수. ISP/앱카드 앱에서 결제정보인증 후 원래 앱으로 복귀할 때 사용됨 | 1.0.0부터 |
 | biz\_num | string | 계약된 사업자등록번호 10자리(기호를 포함하면 안됨) | undefined | (선택항목) 다날-가상계좌 결제시 반드시 설정되어야 합니다. | 1.0.0부터 |
 
-### 2.1.3 callback의 구성
+### 2.1.3 m\_redirect\_url  
+`m_redirect_url`은 모바일 결제프로세스가 시작되면서 PG사의 페이지로 redirect되었다가, 완료 후 다시 사이트로 복귀하기 위해 사용되는 파라메터입니다. 
+이 경우, `m_redirect_url`에 해당되는 서버 핸들러에서 결제여부 체크 및 금액 변조확인이 이루어져야 합니다. 이를 위해 결제완료 후 랜딩되는 URL은 다음과 같은 추가 파라메터를 가지게 됩니다.  
+
+- imp_uid
+- merchant_uid
+- imp_success(@Deprecated. 참조 용도로만 사용 하시고 결제검증에 사용하시면 안됩니다)
+
+```
+{
+	m_redirect_url : 'http://www.iamport.kr/mobile/landing'
+}
+```
+으로 지정하셨다면, 실제 랜딩되는 주소는 다음과 같습니다.  
+
+```
+http://www.iamport.kr/mobile/landing?imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_uid={true/false}
+```
+
+query string이 포함된 `m_redirect_url`도 사용하실 수 있습니다.  
+
+```
+{
+	m_redirect_url : 'http://www.iamport.kr/mobile/landing?utm_source=mobile'
+}
+```
+
+으로 지정하셨다면, 실제 랜딩되는 주소는 다음과 같습니다.  
+
+```
+http://www.iamport.kr/mobile/landing?utm_source=mobile&imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_uid={true/false}
+```
+
+#### Since iamport.payment-1.1.5.js  
+iamport.payment-1.1.5.js부터는, 모바일 결제에서 `IMP.request_pay(param)`와 같이 callback function 이 누락된 채 호출되었으나, 결제프로세스 시작 전 사전 필터링 단계에서 실패사유가 발생한 경우에도 `m_redirect_url`로 이동하게 됩니다.  
+(결제프로세스가 시작된 후 성공/실패에 대한 경우에는 이전 버전에서도 `m_redirect_url`로 이동이 이루어지고 있습니다.)  
+
+##### 결제프로세스 시작 전에 발생할 수 있는 실패 사유   
+- 이미 결제된 merchant_uid를 재시도하는 경우
+- 결제요청 파라메터가 올바르지 않은 경우
+
+##### 결제프로세스 시작 후 발생할 수 있는 실패 사유  
+- 카드 사용 정지, 한도초과  
+- 비밀번호 오류 횟수 초과  
+
+
+### 2.1.4 callback의 구성  
 ```javascript
 function(rsp) {
 	if ( rsp.success ) {
@@ -110,7 +156,7 @@ function(rsp) {
 |success|boolean|결제처리가 성공적이었는지 여부|실제 결제승인이 이뤄졌거나, 가상계좌 발급이 성공된 경우, true|
 |error_code|string|결제처리에 실패한 경우 단축메세지|현재 코드체계는 없음|
 |error_msg|string|결제처리에 실패한 경우 상세메세지||
-|imp_uid|string|아임포트 거래 고유 번호|아임포트에서 부여하는 거래건 당 고유한 번호|
+|imp_uid|string|아임포트 거래 고유 번호|아임포트에서 부여하는 거래건 당 고유한 번호(success:false일 때, 사전 validation에 실패한 경우라면 imp_uid는 null일 수 있음)|
 |merchant_uid|string|가맹점에서 생성/관리하는 고유 주문번호||
 |pay_method|string|결제수단|**card**(*신용카드*), **trans**(*실시간계좌이체*), **vbank**(*가상계좌*), **phone**(*휴대폰소액결제*)|
 |paid_amount|number|결제금액|실제 결제승인된 금액이나 가상계좌 입금예정 금액|
@@ -283,6 +329,7 @@ ELSE
 
 - 카카오페이
 - 다날 
+- 모빌리언스
 
 #### 모바일 결제 시, `m_redirect_url`을 사용해야하는 PG사
 - KG이니시스(웹표준결제, 일반결제 동일)
