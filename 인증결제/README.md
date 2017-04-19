@@ -104,7 +104,7 @@ IMP.request_pay({
 으로 지정하셨다면, 실제 랜딩되는 주소는 다음과 같습니다.  
 
 ```
-http://www.iamport.kr/mobile/landing?imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_uid={true/false}
+http://www.iamport.kr/mobile/landing?imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_success={true/false}
 ```
 
 query string이 포함된 `m_redirect_url`도 사용하실 수 있습니다.  
