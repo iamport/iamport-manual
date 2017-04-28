@@ -353,6 +353,8 @@ ELSE
 
 특히, 모바일 결제의 경우 `2.1.3`처럼 결제완료 시점을 포착하는 것은 `m_redirect_url`에 전적으로 의존할 수 밖에 없는데, 만약 구매자의 브라우저가 `m_redirect_url` 로 redirect를 하기 전에 비정상적으로 종료가 된다거나 네트웍불안정의 이유로 redirect요청에 실패한다거나 하게 되면 **아임포트 서버는 "결제완료" 상태로 바뀌어있으나 가맹점의 서버는 "미결제" 상태**로 남아있는 문제가 있을 수 있습니다.  
 
+![Notification 개념도](screenshot/background/notification.png)
+
 이런 경우를 대비한 Backup routine으로 제공되는 기능이 Notification입니다. Notification 은 [Webhook](https://en.wikipedia.org/wiki/Webhook) 방식으로써, **아임포트 서버와 가맹점 서버가 데이터 동기화를 할 필요가 있을 때** 호출됩니다.  
 
 - 매출이 발생했을 때(신용카드가 결제완료되었을 때, 가상계좌에 실제 입금이 되었을 때 등) 
