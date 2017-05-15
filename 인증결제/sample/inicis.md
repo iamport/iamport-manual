@@ -170,7 +170,13 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 보다 상세한 내용은 [KG이니시스용 안드로이드 샘플소스](http://www.github.com/iamport/iamport-inicis-android) 를 참고해주세요.  
 
 ## 3.2 iOS  
+- 샘플 프로젝트 : [https://github.com/iamport/iamport-inicis-ios](https://github.com/iamport/iamport-inicis-ios)
+
+### 3.2.1 URL Scheme  
+
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 거의 동일한 프로세스를 가지게 됩니다. 다만, 앱 간 이동을 위해 URL Scheme처리를 위한 Native Code가 추가로 필요하며, `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`파라메터를 통해 `info.plist` 에 선언된 나의 `CFBundleURLSchemes` 값을 지정해야 합니다.(javascript는 안드로이드와 동일)  
+
+![Xcode Capture](screenshot/nice_xcode_scheme.png)
 
 ```xml
 <key>CFBundleURLSchemes</key>
@@ -178,50 +184,47 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 	<string>iamporttest</string>
 </array>
 ```
-### 3.2.1 WebView에서 외부 앱 호출  
-```objective-c
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    //ISP 호출하는 경우
-    if([URLString hasPrefix:@"ispmobile://"]) {
-        NSURL *appURL = [NSURL URLWithString:URLString];
-        if([[UIApplication sharedApplication] canOpenURL:appURL]) {
-            [[UIApplication sharedApplication] openURL:appURL];
-        } else {
-            [self showAlertViewWithEvent:@"모바일 ISP가 설치되어 있지 않아\nApp Store로 이동합니다." tagNum:99];
-            return NO;
-        }
-    }
-}
-```
 
-canOpenURL() 함수 사용을 위해 info.plist에 다음과 같이 whitelist를 모두 추가해두시는 것을 권장합니다.  
+### 3.2.2 Info.plist whitelist  
+앱 연동 과정에서 카드사의 앱카드, ISP앱 등으로 이동이 이뤄지는 경우가 있습니다. iOS10이후 보안정책으로, 이동이 일어날 수 있는 앱들의 URL scheme에 대한 whitelist를 미리 정의해두어야 합니다.  
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
 <array>
 	<string>kftc-bankpay</string> <!-- 계좌이체 -->
 	<string>ispmobile</string> <!-- ISP모바일 -->
-    <string>itms-apps</string> <!-- 앱스토어 -->
-    <string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
-    <string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
-    <string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
-    <string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
-    <string>kb-acp</string> <!-- 국민카드-앱카드 -->
-    <string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
-    <string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
-    <string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
-    <string>vguardstart</string> <!-- 삼성카드-백신 -->
-    <string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
-    <string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
-    <string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
-    <string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
-    <string>cloudpay</string> <!-- 하나카드-앱카드 -->
-    <string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
-    <string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
-    <string>citispay</string> <!-- 씨티카드-앱카드 -->
-    <string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
+	<string>itms-apps</string> <!-- 앱스토어 -->
+	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
+	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
+	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
+	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
+	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
+	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
+	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
+	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
+	<string>vguardstart</string> <!-- 삼성카드-백신 -->
+	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
+	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
+	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
+	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
+	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
+	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
+	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
+	<string>citispay</string> <!-- 씨티카드-앱카드 -->
+	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
+	<string>kakaotalk</string> <!-- 카카오페이 -->
 </array>
 ```
 
-보다 상세한 내용은 [KG이니시스용 iOS 샘플소스](https://github.com/iamport/iamport-inicis-ios) 를 참고해주세요.
+### 3.2.3 Cookie 설정  
+KG이니시스 모듈과 카드사 모듈 간 연동과정에서 쿠키가 사용되는 경우가 있습니다. 때문에, 다음과 같은 설정을 해주셔야 원활한 결제가 이뤄지게 됩니다.  
+
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    //iOS6에서 세션끊어지는 상황 방지하기 위해 쿠키 설정.
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    return YES;
+}
+```
