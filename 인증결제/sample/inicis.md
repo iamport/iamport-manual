@@ -170,7 +170,8 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 보다 상세한 내용은 [KG이니시스용 안드로이드 샘플소스](http://www.github.com/iamport/iamport-inicis-android) 를 참고해주세요.  
 
 ## 3.2 iOS  
-- 샘플 프로젝트 : [https://github.com/iamport/iamport-inicis-ios](https://github.com/iamport/iamport-inicis-ios)
+- 샘플 프로젝트(Swift) : [https://github.com/JosephNK/SwiftyIamport](https://github.com/JosephNK/SwiftyIamport)  
+- 샘플 프로젝트(Objective-C) : [https://github.com/iamport/iamport-inicis-ios](https://github.com/iamport/iamport-inicis-ios)
 
 ### 3.2.1 URL Scheme  
 

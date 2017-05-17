@@ -226,7 +226,8 @@ if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 ```
 
 ## 3.2 iOS  
-- 샘플 프로젝트 : [https://github.com/iamport/iamport-nice-ios](https://github.com/iamport/iamport-nice-ios)  
+- 샘플 프로젝트(Swift) : [https://github.com/JosephNK/SwiftyIamport](https://github.com/JosephNK/SwiftyIamport)  
+- 샘플 프로젝트(Objective-C) : [https://github.com/iamport/iamport-nice-ios](https://github.com/iamport/iamport-nice-ios)  
 
 ### 3.2.1 URL Scheme  
 Xcode Build Info에 다음과 같이 `URL Scheme` 정의  
