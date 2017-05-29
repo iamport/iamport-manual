@@ -63,7 +63,7 @@ IMP.request_pay({
 | amount | number | 결제할 금액 | undefined | (필수항목) | 1.0.0부터 |
 | vat | number | amount 중 부가세 금액 | undefined | (선택항목) 부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다. | 1.0.0부터 |
 | currency | string | 화폐단위 | KRW<br>(페이팔의 경우에는 USD가 기본값) | (선택항목) KRW / USD / EUR / JPY<br>(참조)페이팔정책상 KRW는 지원되는 결제화폐가 아니므로 USD가 기본 적용됩니다. | 1.0.0부터 |
-| language | string | 결제창의 언어 설정 | ko | (선택항목) 구매자에게 제공되는 결제창 화면의 언어 설정 **en** 또는 **ko**<br>*KG이니시스와 나이스페이먼츠의 PC결제창만 사용 가능* | 1.0.0부터 |
+| language | string | 결제창의 언어 설정 | ko | (선택항목) 구매자에게 제공되는 결제창 화면의 언어 설정<br>*1. KG이니시스와 나이스페이먼츠의 PC결제창의 경우 아래 값으로 적용 가능*<br>**en** 또는 **ko**<br>*2. Paypal의 경우 2자리 코드 적용*<br>[Paypal 언어 설정 코드 참조](https://developer.paypal.com/docs/classic/api/locale_codes/) | 1.0.0부터 |
 | buyer_name | string | 주문자명 | undefined | (선택항목) | 1.0.0부터 |
 | buyer_tel | string | 주문자 연락처 | undefined | (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류 발생 | 1.0.0부터 |
 | buyer_email | string | 주문자 Email | undefined | (선택항목) | 1.0.0부터 |
