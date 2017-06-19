@@ -98,6 +98,6 @@ ELSE
 
  실제 아임포트 운영을 통해, 모바일 환경에서 일시적인 네트워크 불안정으로 `m_redirect_url`로의 GET요청이 끊어지는 경우가 간혹 존재하게 되며 이를 위해 Notification URL을 구현하는 것을 권장합니다. 
  
- 보다 자세한 내용은 [인증결제-2.3 Notification URL](https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C#23-notification-url가상계좌-입금통보-포함)을 참고해주세요.  
+ 보다 자세한 내용은 [인증결제-2.3 Notification URL](https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C#23-notification-url가상계좌-입금통보-포함)을 참고해주세요.  
  
  
