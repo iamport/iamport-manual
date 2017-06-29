@@ -46,7 +46,7 @@ IMP.request_pay({
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
     }
-    
+
     alert(msg);
 });
 ```
@@ -55,7 +55,7 @@ IMP.request_pay({
 ### 2.1.1 param 속성(공통 속성)
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
-| pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakao"**, **"html5\_inicis"**와 같이 **{PG사명}**만 지정, **"html5\_inicis.INIpayTest"**와 같이 **{PG사명}.{상점아이디}**로 지정<br><br>**html5_inicis**(이니시스웹표준)<br>**inicis**(이니시스ActiveX결제창)<br>**uplus**(LGU+)<br>**nice**(나이스페이)<br>**jtnet**(JTNet)<br>**kakao**(카카오페이)<br>**danal**(다날휴대폰소액결제)<br>**danal_tpay**(다날일반결제)<br>**mobilians**(모빌리언스 휴대폰소액결제)<br>**syrup**(시럽페이)<br>**payco**(페이코)<br>**paypal**(페이팔)<br>**eximbay**(엑심베이)<br> | 1.1.0 부터 |
+| pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakao"**, **"html5\_inicis"** 와 같이 **{PG사명}** 만 지정, **"html5\_inicis.INIpayTest"** 와 같이 **{PG사명}.{상점아이디}** 로 지정<br><br>**html5_inicis**(이니시스웹표준)<br>**inicis**(이니시스ActiveX결제창)<br>**uplus**(LGU+)<br>**nice**(나이스페이)<br>**jtnet**(JTNet)<br>**kakao**(카카오페이)<br>**danal**(다날휴대폰소액결제)<br>**danal_tpay**(다날일반결제)<br>**mobilians**(모빌리언스 휴대폰소액결제)<br>**syrup**(시럽페이)<br>**payco**(페이코)<br>**paypal**(페이팔)<br>**eximbay**(엑심베이)<br> | 1.1.0 부터 |
 | pay_method | string | 결제수단 | card | **card**(*신용카드*)<br>**trans**(*실시간계좌이체*)<br>**vbank**(*가상계좌*)<br>**phone**(*휴대폰소액결제*)<br>**samsung**(*삼성페이 / 이니시스 전용*)<br>**kpay**(*KPay앱 직접호출 / 이니시스 전용*)<br>**cultureland**(*문화상품권 / 이니시스 전용*)<br>**smartculture**(*스마트문상 / 이니시스 전용*)<br>**happymoney**(*해피머니 / 이니시스 전용*) | 1.0.0부터 |
 | escrow | boolean | 에스크로 결제여부 | false | (선택항목) 에스크로가 적용되는 결제창을 호출 | 1.0.0부터 |
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호  | random | (필수항목) 결제가 된 적이 있는 merchant_uid로는 재결제 불가  | 1.0.0부터 |
@@ -89,7 +89,7 @@ IMP.request_pay({
 | biz\_num | string | 계약된 사업자등록번호 10자리(기호를 포함하면 안됨) | undefined | (선택항목) 다날-가상계좌 결제시 반드시 설정되어야 합니다. | 1.0.0부터 |
 
 ### 2.1.3 m\_redirect\_url  
-`m_redirect_url`은 모바일 결제프로세스가 시작되면서 PG사의 페이지로 redirect되었다가, 완료 후 다시 사이트로 복귀하기 위해 사용되는 파라메터입니다. 
+`m_redirect_url`은 모바일 결제프로세스가 시작되면서 PG사의 페이지로 redirect되었다가, 완료 후 다시 사이트로 복귀하기 위해 사용되는 파라메터입니다.
 이 경우, `m_redirect_url`에 해당되는 서버 핸들러에서 결제여부 체크 및 금액 변조확인이 이루어져야 합니다. 이를 위해 결제완료 후 랜딩되는 URL은 다음과 같은 추가 파라메터를 가지게 됩니다.  
 
 - imp_uid
@@ -147,7 +147,7 @@ function(rsp) {
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
     }
-    
+
     alert(msg);
 }
 ```
@@ -184,7 +184,7 @@ function(rsp) {
 
 ## 2.2 결제완료 시 서버에 알려주기
 [2.1](#header_2_1)에서 호출된 결제창을 통해 구매자가 결제 프로세스를 완료하면, **아임포트 서버는 가맹점의 서버를 대신하여 PG사에 필요한 승인요청을 한 후 결과를 아임포트 서버에 저장**을 합니다.  
-대부분의 경우 가맹점에서도 해당 결제건에 대해 **"결제상태"** 혹은 **"결제완료여부"**를 비롯하여 결제정보를 데이터베이스에 기록할 필요가 있으므로, **가맹점 서버가 아임포트 서버로부터 관련 정보를 조회/확인할 수 있도록 결제 후 프로세스**가 구현되어야 합니다.
+대부분의 경우 가맹점에서도 해당 결제건에 대해 **"결제상태"** 혹은 **"결제완료여부"** 를 비롯하여 결제정보를 데이터베이스에 기록할 필요가 있으므로, **가맹점 서버가 아임포트 서버로부터 관련 정보를 조회/확인할 수 있도록 결제 후 프로세스**가 구현되어야 합니다.
 ### 2.2.a PC버전<a id="header_2_2_a"></a>
 PC결제의 경우, 결제프로세스가 종료된 후 `IMP.request_pay(param, callback)`의 callback함수가 실행이 됩니다. callback함수 내에서, 가맹점 서버로 결제정보 확인에 필요한 파라메터(imp_uid, merchant_uid)를 전달하여 가맹점 서버에서 REST API를 실행합니다.
 
@@ -227,7 +227,7 @@ IMP.request_pay({
     			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
     			msg += '\결제 금액 : ' + rsp.paid_amount;
     			msg += '카드 승인번호 : ' + rsp.apply_num;
-    			
+
     			alert(msg);
     		} else {
     			//[3] 아직 제대로 결제가 되지 않았습니다.
@@ -237,7 +237,7 @@ IMP.request_pay({
     } else {
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
-        
+
         alert(msg);
     }
 });
@@ -266,7 +266,7 @@ ELSE
 일부를 제외한 국내 대부분의 PG사들은 **모바일 결제가 시작되면 페이지를 이동(redirect)시켜버리는 특징이 있습니다. 이 과정에서 기존 페이지가 unload되고 `IMP.request_pay(param, callback)`의 callback함수가 메모리에서 해제**되어버려 결제 완료시 callback응답을 받을 수 없는 상태가 됩니다.  
 
 이와 같은 결제 프로세스에서는 결제를 위해 이동된 페이지(PG사 페이지, 카드사 페이지 등)가 끝나고 다시 원래 서비스로 원상복귀할 수 있는 기능이 제공됩니다.  
-`IMP.request_pay(param, callback)` param 중 `m_redirect_url`라는 파라메터가 그 역할을 하게 됩니다. 
+`IMP.request_pay(param, callback)` param 중 `m_redirect_url`라는 파라메터가 그 역할을 하게 됩니다.
 
 1. `IMP.request_pay(param, callback)` 호출로 결제창 호출
 2. PG사 페이지로 이동(redirect)하면서 결제 프로세스 시작
@@ -297,7 +297,7 @@ PC와 달리 `IMP.request_pay(param)`호출 시 callback함수를 지정하지 �
 실제 redirect되는 주소는 m\_redirect\_url에 2개의 query string이 추가되어있습니다.  
 
 - imp_uid(string)
-- merchant_uid(string) 
+- merchant_uid(string)
 
 즉, 위 예제의 경우 `https://www.myservice.com/payments/complete?imp_uid=xxxxxxx&merchant_uid=yyyyyyy`로 redirect됩니다.  
 
@@ -328,7 +328,7 @@ ELSE
 이 경우 PC버전과 모바일버전을 구분할 필요없이 동일한 코드로 처리가 가능합니다.  
 
 - 카카오페이
-- 다날 
+- 다날
 - 모빌리언스
 
 #### 모바일 결제 시, `m_redirect_url`을 사용해야하는 PG사
@@ -357,7 +357,7 @@ ELSE
 
 이런 경우를 대비한 Backup routine으로 제공되는 기능이 Notification입니다. Notification 은 [Webhook](https://en.wikipedia.org/wiki/Webhook) 방식으로써, **아임포트 서버와 가맹점 서버가 데이터 동기화를 할 필요가 있을 때** 호출됩니다.  
 
-- 매출이 발생했을 때(신용카드가 결제완료되었을 때, 가상계좌에 실제 입금이 되었을 때 등) 
+- 매출이 발생했을 때(신용카드가 결제완료되었을 때, 가상계좌에 실제 입금이 되었을 때 등)
 - 가상계좌가 발급이 되었을 때
 - 아임포트 관리자 페이지에서 결제 환불이 수행되었을 때
 
@@ -392,7 +392,7 @@ REST API는 가맹점 별로 부여된 아임포트 API Key / Secret정보를 �
 **(주의 : API Key / Secret이 노출되기때문에 클라이언트 사이드에서 REST API를 호출하시면 안됩니다. 어차피 cross-domain오류로 인증도 안될 것입니다. )**  
 
 [`https://api.iamport.kr/payments/{imp_uid}`](https://api.iamport.kr/#!/payments/getPaymentByImpUid)에 대한 응답으로 *merchant\_uid, pay\_method, pg\_provider, amount, cancel\_amount, status, paid\_at*  등 다양한 정보가 전달됩니다.  
-이 중에서, status와 amount값을 통해 실제 결제가 최종적으로 완료가 되었는지, 원하는 금액만큼 결제가 되었는지 확인할 필요가 있습니다. 
+이 중에서, status와 amount값을 통해 실제 결제가 최종적으로 완료가 되었는지, 원하는 금액만큼 결제가 되었는지 확인할 필요가 있습니다.
 
 ```
 payment_result = rest_api_to_find_payment(imp_uid) //imp_uid로 아임포트로부터 결제정보 조회
@@ -411,19 +411,19 @@ ELSE
 [github바로가기](https://github.com/iamport/iamport-rest-client)
 
 # 3. 모바일 브라우저와 모바일 WebView의 차이
-결제수단별 인증을 위해 3rd-party 앱(ISP앱, 앱카드, BankPay)과 연동을 할 때, 
+결제수단별 인증을 위해 3rd-party 앱(ISP앱, 앱카드, BankPay)과 연동을 할 때,
 
 1. My앱 -> 3rd-party앱으로 이동
 2. 3rd-party앱 -> My앱으로 이동
 
 처리를 위한 로직이 필요합니다.  
 
-###대표적인 3rd-party앱의 URL scheme
+### 대표적인 3rd-party앱의 URL scheme
 
 - ispmobile
 - kftc-bankpay
 - vguard
-- droidxantivirus 
+- droidxantivirus
 - ansimclick
 - cardusim
 - lottesmartpay
@@ -441,7 +441,7 @@ ELSE
 
 ## 3.1 My앱 -> 3rd-party앱으로 이동
 ### 3.1.a 안드로이드  
-URL scheme을 사용해 3rd-party앱으로 이동이 일어나므로 My앱의 WebView에서 해당 URL scheme에 맞는 동작을 처리할 수 있어야 합니다. 
+URL scheme을 사용해 3rd-party앱으로 이동이 일어나므로 My앱의 WebView에서 해당 URL scheme에 맞는 동작을 처리할 수 있어야 합니다.
 
 ```java
 
@@ -450,28 +450,28 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 	if (!url.startsWith("http://") && !url.startsWith("https://") && !url.startsWith("javascript:")) {
 		//3rd-party앱에 대한 URL scheme 대응
 		Intent intent = null;
-			
+
 		try {
 			intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME); //IntentURI처리
 			Uri uri = Uri.parse(intent.getDataString());
-			
+
 			activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
 			return true;
 		} catch (URISyntaxException ex) {
 			return false;
 		} catch (ActivityNotFoundException e) {
 			if ( intent == null )	return false;
-			
+
 			//설치되지 않은 앱에 대해 market이동 처리
 			if ( handleNotFoundPaymentScheme(intent.getScheme()) )	return true;
-			
+
 			//handleNotFoundPaymentScheme()에서 처리되지 않은 것 중, url로부터 package정보를 추출할 수 있는 경우 market이동 처리
 			String packageName = intent.getPackage();
 			if (packageName != null) {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
 				return true;
 			}
-			
+
 			return false;
 		}
 	}
@@ -501,15 +501,15 @@ IMP.request_pay({
 <activity
 	android:name=".MainActivity"
 	android:label="@string/app_name">
-	
+
 	<intent-filter>
 		<action android:name="android.intent.action.VIEW" />
 		<category android:name="android.intent.category.DEFAULT" />
 		<category android:name="android.intent.category.BROWSABLE" />
-		
+
 		<data android:scheme="iamporttest" /> <!-- 예시로 iamporttest로 설정. My앱의 특징을 나타내는 고유의 scheme을 사용하세요 -->
 	</intent-filter>
-	
+
 </activity>
 ```
 
@@ -527,15 +527,15 @@ private final String APP_SCHEME = "iamporttest://"; //AndroidManifest.xml에서 
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	/*...중략...*/
-	
+
 	Intent intent = getIntent();
 	Uri intentData = intent.getData();
-	
+
 	if ( intentData != null ) {
 		//isp 인증 후 복귀했을 때 결제 후속조치
 		String url = intentData.toString();
 		if ( url.startsWith(APP_SCHEME) ) {
-			//My앱의 WebView가 표시해야 할 웹 컨텐츠의 주소가 전달됩니다. 
+			//My앱의 WebView가 표시해야 할 웹 컨텐츠의 주소가 전달됩니다.
 			String redirectURL = url.substring(APP_SCHEME.length()+3);
 			mainWebView.loadUrl(redirectURL);
 		}
@@ -545,7 +545,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 #### 참고(예외사항)
 안드로이드는 Activity가 종료되면 Activity Stack(Task)에서 이전 Activity로 자동으로 이동하는 특성이 있습니다.  
-이러한 특성을 활용하여 KG이니시스의 경우, URL scheme을 사용하지 않아도 동작에 문제가 없도록 설계되어있습니다. 
+이러한 특성을 활용하여 KG이니시스의 경우, URL scheme을 사용하지 않아도 동작에 문제가 없도록 설계되어있습니다.
 
 ##### PG사별 샘플보기
 - [KG이니시스](https://github.com/iamport/iamport-inicis-android)
