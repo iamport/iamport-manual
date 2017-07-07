@@ -1,0 +1,115 @@
+```javascript
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Naver Product Set",
+	"description": "네이버-체크아웃 구매상품 정보",
+	"type": "array",
+	"items": {
+		"title": "Naver Product",
+		"type": "object",
+		"properties": {
+			"id": {
+				"description": "상품고유ID",
+				"type": "string"
+			},
+			"name": {
+				"description": "상품명",
+				"type": "string"
+			},
+			"basePrice": {
+				"description": "상품기본가격",
+				"type": "integer"
+			},
+			"taxType": {
+				"description": "부가세 부과 여부",
+				"enum": ["TAX", "FREE"]
+			},
+			"quantity": {
+				"description": "상품구매수량",
+				"type": "integer"
+			},
+			"infoUrl": {
+				"description": "상품상세페이지 URL",
+				"type": "string"
+			},
+			"imageUrl": {
+				"description": "상품 Thumbnail 이미지 URL",
+				"type": "string"
+			},
+			"option": {
+				"description": "구매자가 선택한 상품 옵션에 대한 상세 정보",
+				"$ref": "#/definitions/option"
+			},
+			"shipping": {
+				"description": "상품 배송관련 상세 정보",
+				"$ref": "#/definitions/shipping"
+			}
+		},
+		"required": ["id", "name", "basePrice", "quantity", "infoUrl", "imageUrl", "shipping"]
+	},
+	"definitions": {
+		"option": {
+			"properties": {
+				"optionPrice": {
+					"description": "구매자가 선택한 옵션에 대한 추가 금액(-기호 허용)",
+					"type": "string"
+				},
+				"selectionCode": {
+					"description": "구매자가 선택한 옵션 조합의 고유ID",
+					"type": "string"
+				},
+				"selections": {
+					"description": "구매자가 선택한 옵션 조합의 고유ID",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/optionItem"
+					}
+				}
+			},
+			"required": ["optionPrice"]
+		},
+		"optionItem": {
+			"properties": {
+				"code": {
+					"description": "",
+					"type": "string"
+				},
+				"label": {
+					"description": "",
+					"type": "string"
+				},
+				"value": {
+					"description": "",
+					"type": "string"
+				},
+			},
+			"required": ["code", "label", "value"]
+		},
+		"shipping": {
+			"properties": {
+				"groupId": {
+					"description": "묶음 배송을 구분하는 코드. groupId가 동일한 Naver Product들에 대해서 묶음 배송비정책이 적용됨",
+					"type": "string"
+				},
+				"method": {
+					"description": "배송방식(DELIVERY:택배·소포·등기, QUICK_SVC:퀵 서비스, DIRECT_DELIVERY:직접 전달, VISIT_RECEIPT:방문 수령, NOTHING:배송 없음)",
+					"enum": ["DELIVERY", "QUICK_SVC", "DIRECT_DELIVERY", "VISIT_RECEIPT", "NOTHING"]
+				},
+				"baseFee": {
+					"description": "기본 배송비",
+					"type": "integer"
+				},
+				"feeType": {
+					"description": "배송비 적용방식(FREE:무료, CHARGE:유료, CONDITIONAL_FREE:조건부 무료, CHARGE_BY_QUANTITY:수량별 부과)",
+					"enum": ["FREE", "CHARGE", "CONDITIONAL_FREE", "CHARGE_BY_QUANTITY"]
+				},
+				"feePayType": {
+					"description": "배송비 지불방식(FREE:무료, PREPAYED:선불, CASH_ON_DELIVERY:착불)",
+					"enum": ["FREE", "PREPAYED", "CASH_ON_DELIVERY"]
+				}
+			},
+			"required": ["baseFee", "feeType", "feePayType"]
+		}
+	}
+}
+```
