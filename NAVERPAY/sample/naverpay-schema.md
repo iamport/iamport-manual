@@ -63,7 +63,7 @@
 				},
 				"optionPrice": {
 					"description": "구매자가 선택한 옵션에 대한 추가 금액(-기호 허용)",
-					"type": "string"
+					"type": "integer"
 				},
 				"selectionCode": {
 					"description": "구매자가 선택한 옵션 조합의 고유ID",

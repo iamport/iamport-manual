@@ -146,7 +146,7 @@ Product는 `options`을 객체의 배열, `shipping` 을 객체로 관리합니�
 ```javascript
 {
 	optionQuantity : 2,     //해당 옵션이 선택된 상품의 구매수량
-	optionPrice : "200",    //옵션 선택에 따른 추가금액. Product.basePrice와 합산되며, 마이너스(-)일 수도 있어 string으로 타입을 정의
+	optionPrice : 200,      //옵션 선택에 따른 추가금액. Product.basePrice와 합산되며, 마이너스(-)기호를 포함할 수 있음
 	selectionCode : "R_L",     //구매자가 선택한 옵션조합에 대한 관리코드. RED옵션과 180옵션을 선택했기 때문에 이를 의미하는 R_L코드를 정의(가맹점별로 직접 자유롭게 결정하면 됩니다)
 	selections : [             //구매자가 선택한 옵션에 대한 상세 내용
 		{
