@@ -37,19 +37,30 @@
 				"type": "string"
 			},
 			"option": {
+				"deprecated" : true,
 				"description": "구매자가 선택한 상품 옵션에 대한 상세 정보",
 				"$ref": "#/definitions/option"
+			},
+			"options": {
+				"type": "array",
+				"items": {
+					"$ref": "#/definitions/option"
+				}
 			},
 			"shipping": {
 				"description": "상품 배송관련 상세 정보",
 				"$ref": "#/definitions/shipping"
 			}
 		},
-		"required": ["id", "name", "basePrice", "quantity", "infoUrl", "imageUrl", "shipping"]
+		"required": ["id", "name", "basePrice", "infoUrl", "imageUrl", "shipping"]
 	},
 	"definitions": {
 		"option": {
 			"properties": {
+				"optionQuantity": {
+					"description": "구매자가 선택한 옵션이 적용된 상품의 구매 수량",
+					"type": "integer"
+				},
 				"optionPrice": {
 					"description": "구매자가 선택한 옵션에 대한 추가 금액(-기호 허용)",
 					"type": "string"
@@ -66,7 +77,7 @@
 					}
 				}
 			},
-			"required": ["optionPrice"]
+			"required": ["optionQuantity", "optionPrice"]
 		},
 		"optionItem": {
 			"properties": {

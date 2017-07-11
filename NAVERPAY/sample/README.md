@@ -47,25 +47,44 @@ IMP.request_pay({
     		name : "네이버페이 상품2",
     		basePrice : 1000,
     		taxType : 'FREE', //TAX or FREE
-    		quantity : 2,
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
-    		option : {
-    			optionPrice : 200,
-    			selectionCode : "R_L",
-    			selections : [
-    				{
-    					code : "RED",
-						label : "색상",
-						value : "빨강"
-					},
-					{
-						code : "180",
-						label : "사이즈",
-						value : "180"
-					}
-				]
-			},
+    		options : [ //네이버페이 상품2에 대해서 빨강-170mm사이즈 3개와 빨강-180mm사이즈 2개: 총 5개 구매
+    			{
+    				optionQuantity : 3,
+    				optionPrice : 100,
+    				selectionCode : "R_M",
+    				selections : [
+    					{
+	      					code : "RED",
+	  						label : "색상",
+	  						value : "빨강"
+	  					},
+	  					{
+	  						code : "170",
+	  						label : "사이즈",
+	  						value : "170"
+	  					}
+					]
+				},
+    			{
+    				optionQuantity : 2,
+    				optionPrice : 200,
+    				selectionCode : "R_L",
+    				selections : [
+    					{
+	      					code : "RED",
+	  						label : "색상",
+	  						value : "빨강"
+	  					},
+	  					{
+	  						code : "180",
+	  						label : "사이즈",
+	  						value : "180"
+	  					}
+					]
+				}
+			],
 			shipping : {
 				groupId : "",
 				method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
@@ -89,7 +108,7 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 
 ### Product  
 
-구매할 개별 상품에 대한 상세 정보와 함께 구매자가 해당 상품에 대해 선택한 옵션(option) 및 적용될 배송비 정책(shipping)을 설정합니다.  
+구매할 개별 상품에 대한 상세 정보와 함께 구매자가 해당 상품에 대해 선택한 옵션들(options) 및 적용될 배송비 정책(shipping)을 설정합니다.  
 
 ```javascript
 {
@@ -100,11 +119,11 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 	"quantity" : 2,  //상품구매수량
 	"infoUrl" : "http://www.iamport.kr/product/detail",    //상품상세페이지 URL
 	"imageUrl" : "http://www.iamport.kr/product/detail/thumbnail",   //상품 Thumbnail 이미지 URL
-	"option" : "object",     //구매자가 선택한 상품 옵션에 대한 상세 정보
-	"shipping" : "object"    //상품 배송관련 상세 정보
+	"options" : "array(of option)",     //구매자가 선택한 상품 옵션에 대한 상세 정보
+	"shipping" : "object(of shipping)"    //상품 배송관련 상세 정보
 }
 ```
-Product는 `option`, `shipping` 을 객체로 관리합니다.  
+Product는 `options`을 객체의 배열, `shipping` 을 객체로 관리합니다.  
 
 ### Option  
 구매자가 **선택한 옵션**에 대한 상세 내용을 포함하고 있습니다.  
@@ -126,6 +145,7 @@ Product는 `option`, `shipping` 을 객체로 관리합니다.
   
 ```javascript
 {
+	optionQuantity : 2,     //해당 옵션이 선택된 상품의 구매수량
 	optionPrice : "200",    //옵션 선택에 따른 추가금액. Product.basePrice와 합산되며, 마이너스(-)일 수도 있어 string으로 타입을 정의
 	selectionCode : "R_L",     //구매자가 선택한 옵션조합에 대한 관리코드. RED옵션과 180옵션을 선택했기 때문에 이를 의미하는 R_L코드를 정의(가맹점별로 직접 자유롭게 결정하면 됩니다)
 	selections : [             //구매자가 선택한 옵션에 대한 상세 내용
