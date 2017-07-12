@@ -334,6 +334,7 @@ ELSE
 #### 모바일 결제 시, `m_redirect_url`을 사용해야하는 PG사
 - KG이니시스(웹표준결제, 일반결제 동일)
 - LGU+
+- NHN KCP
 - 나이스정보통신
 - JTNet
 
@@ -342,6 +343,7 @@ ELSE
 
 - [KG이니시스](sample/inicis.md)
 - [LGU+](sample/uplus.md)
+- [NHN KCP](sample/kcp.md)
 - [나이스정보통신](sample/nice.md)
 - [JTNet](sample/jtnet.md)
 - [카카오페이](sample/kakao.md)
