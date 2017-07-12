@@ -111,15 +111,67 @@
 					"type": "integer"
 				},
 				"feeType": {
+					"deprecated" : true,
 					"description": "배송비 적용방식(FREE:무료, CHARGE:유료, CONDITIONAL_FREE:조건부 무료, CHARGE_BY_QUANTITY:수량별 부과)",
 					"enum": ["FREE", "CHARGE", "CONDITIONAL_FREE", "CHARGE_BY_QUANTITY"]
 				},
 				"feePayType": {
-					"description": "배송비 지불방식(FREE:무료, PREPAYED:선불, CASH_ON_DELIVERY:착불)",
-					"enum": ["FREE", "PREPAYED", "CASH_ON_DELIVERY"]
+					"description": "배송비 지불방식(PREPAYED:선불, CASH_ON_DELIVERY:착불)",
+					"enum": ["PREPAYED", "CASH_ON_DELIVERY"]
+				},
+				"feeRule": {
+					"description": "조건별 배송비 규칙",
+					"$ref": "#/definitions/feeRule"
 				}
 			},
-			"required": ["baseFee", "feeType", "feePayType"]
+			"required": ["baseFee", "feePayType"]
+		},
+		"feeRule": {
+			"properties": {
+				"freeByThreshold": {
+					"description": "무료배송 최소 주문금액",
+					"type": "integer"
+				},
+				"repeatByQty": {
+					"description": "배송비 반복부과 기준 구매수량",
+					"type": "integer"
+				},
+				"rangesByQty": {
+					"description": "구매수량별 커스텀 추가배송비",
+					"type": "array",
+					"$ref": "#/definitions/feeRangeByQty"
+				},
+				"surchargesByArea": {
+					"description": "지역별 추가배송비",
+					"type": ["string", "array"],
+					"$ref": "#/definitions/feeAreaByQty"
+				}
+			}
+		},
+		"feeRangeByQty": {
+			"properties": {
+				"from": {
+					"description": "배송비 구간적용 최소 수량",
+					"type": "integer"
+				},
+				"surcharge": {
+					"description": "해당 구간에 적용되는 추가 배송비",
+					"type": "integer"
+				}
+			}
+		},
+		"feeAreaByQty": {
+			"properties": {
+				"area": {
+					"description": "지역별 배송비 구간명",
+					"type": "array",
+					"enum": ["island", "jeju"]
+				},
+				"surcharge": {
+					"description": "해당 지역에 적용되는 추가 배송비",
+					"type": "integer"
+				}
+			}
 		}
 	}
 }
