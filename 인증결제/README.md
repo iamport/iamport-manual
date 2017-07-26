@@ -61,7 +61,8 @@ IMP.request_pay({
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호  | random | (필수항목) 결제가 된 적이 있는 merchant_uid로는 재결제 불가  | 1.0.0부터 |
 | name | string | 주문명 | undefined | (선택항목) 원활한 결제정보 확인을 위해 입력 권장 (PG사마다 차이가 있지만) 16자이내로 작성하시길 권장 | 1.0.0부터 |
 | amount | number | 결제할 금액 | undefined | (필수항목) | 1.0.0부터 |
-| vat | number | amount 중 부가세 금액 | undefined | (선택항목) 부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다. | 1.0.0부터 |
+| tax_free | number | amount 중 면세공급가액 | undefined | (선택항목) 면세공급가액을 지정합니다. amount 중에서 면세공급가액에 해당하는 금액을 지정합니다. (부가세는 (amount - tax_free) / 11 로 계산됩니다) | 1.0.0부터 |
+| ~~vat~~ | ~~number~~ | ~~amount 중 부가세 금액~~ | undefined | (Deprecated) 복합과세 적용시 더 정확한 계산을 위해 tax_free파라메터 사용을 권장합니다.~~부가세금액을 지정합니다. vat와 무관하게 amount는 고객으로부터 결제될 금액을 의미합니다.~~ | 1.0.0부터 |
 | currency | string | 화폐단위 | KRW<br>(페이팔의 경우에는 USD가 기본값) | (선택항목) KRW / USD / EUR / JPY<br>(참조)페이팔정책상 KRW는 지원되는 결제화폐가 아니므로 USD가 기본 적용됩니다. | 1.0.0부터 |
 | language | string | 결제창의 언어 설정 | ko | (선택항목) 구매자에게 제공되는 결제창 화면의 언어 설정<br>*1. KG이니시스, LGU+, 나이스페이먼츠 : 아래 값으로 적용 가능(KG이니시스, 나이스페이먼츠는 PC결제창만 지원됨)*<br>**en** 또는 **ko**<br>*2. Paypal의 경우 2자리 코드 적용*<br>[Paypal 언어 설정 코드 참조](https://developer.paypal.com/docs/classic/api/locale_codes/) | 1.0.0부터 |
 | buyer_name | string | 주문자명 | undefined | (선택항목) | 1.0.0부터 |
