@@ -203,3 +203,68 @@ iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해�
 `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`에 지정한 것과 동일한 값으로 URL Scheme을 정의해야 합니다.  
 
 ![Xcode Capture](screenshot/nice_xcode_scheme.png)
+
+
+# 4. 에스크로 결제 연동  
+아임포트가 지원하는 모든 PG사는 `escrow : true`옵션을 주면 에스크로 결제 모드로 동작하게 되어있습니다.  
+
+```javascript
+IMP.request_pay({
+    pg : 'kcp', //웹표준 결제창 지원
+    escrow : true, //에스크로 결제인 경우 필요
+    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+})
+```
+
+단, KCP 의 경우에는 상품별 부분배송의 경우를 고려하여 상품관련 정보를 추가적으로 전달해야할 필요가 있습니다.  
+공통 매뉴얼에는 정의되어있지 않지만 `kcpProducts`라는 파라메터를 활용해 전달해주셔야 합니다.  
+
+```javascript
+IMP.request_pay({
+    pg : 'kcp', //웹표준 결제창 지원
+    escrow : true, //에스크로 결제인 경우 필요
+    kcpProducts : [
+    	{
+			"orderNumber" : "xxxx",
+			"name" : "상품A",
+			"quantity" : 3,
+			"amount" : 1000
+		},
+		{
+			"orderNumber" : "yyyy",
+			"name" : "상품B",
+			"quantity" : 2,
+			"amount" : 3000
+		}
+	],
+    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+})
+```
+
+`kcpProducts`는 array of object 형태이며, object는 다음과 같은 4개의 속성을 반드시 포함해야 합니다.  
+
+- orderNumber : 상품주문번호
+- name : 상품명
+- quantity : 수량
+- amount : 상품 가격
+
+위 정보는 다른 아임포트 결제 파라메터와 비교검증하지는 않지만 (kcpProducts.amount 의 합계와 IMP.request_pay()의 amount는 관련이 없습니다.) 누락되면 에스크로 결제가 진행되지 않습니다.  
+
+
+
