@@ -267,4 +267,24 @@ IMP.request_pay({
 위 정보는 다른 아임포트 결제 파라메터와 비교검증하지는 않지만 (kcpProducts.amount 의 합계와 IMP.request_pay()의 amount는 관련이 없습니다.) 누락되면 에스크로 결제가 진행되지 않습니다.  
 
 
+# 5. PAYCO 허브형 연동  
 
+KCP와 계약된 상태에서도 PAYCO결제창을 연동하는 것이 가능합니다.(영업적으로 사전 논의필요) 이 경우, 신용카드 / 계좌이체 등과 마찬가지로 KCP를 통해 정산받으시는 것은 동일하지만 결제단계에서 구매자에게 제공되는 결제창이 PAYCO 연동시 나타나는 결제창이 제공되도록 하는 방법입니다.(이를 PAYCO 허브형이라고 지칭합니다)  
+
+`pay_method : payco` 만 지정하면 PAYCO결제창이 나타나게 됩니다. (사전 협의된 후에 동작) 
+  
+```javascript
+IMP.request_pay({
+    pg : 'kcp', //웹표준 결제창 지원
+    escrow : true, //에스크로 결제인 경우 필요
+    pay_method : 'payco', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제), payco(허브형 PAYCO)
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+})
+```
