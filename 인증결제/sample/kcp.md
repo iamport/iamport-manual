@@ -3,7 +3,7 @@
 `IMP.request_pay(param, callback)`의 callback 함수를 활용하여 결제완료 통지를 받을 수 있습니다.  
 `param`에서 지원되는 속성에 대한 상세한 내용은 [공통매뉴얼-2.1.1](https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C#211-param-속성공통-속성) 에서 확인바랍니다.  
 
-- NHN KCP를 "기본PG사"로 설정해 하나만 사용하시는 경우에는 `pg`파라메터는 생략이 가능합니다. (관리자 페이지에 설정된 정보를 기본으로 사용합니다)  
+- NHN KCP 를 "기본PG사"로 설정해 하나만 사용하시는 경우에는 `pg`파라메터는 생략이 가능합니다. (관리자 페이지에 설정된 정보를 기본으로 사용합니다)  
 - 복수개의 PG설정을 해두신 경우 NHN KCP 결제창을 호출하시려면 `pg`파라메터를 `kcp`로 설정해주세요.  
 
 ```javascript
@@ -118,7 +118,9 @@ IMP.request_pay({
 
 ### 3.1.1 WebView에서 외부 앱 호출을 위한 Native Code  
 
-추후 샘플 소스코드 제공 예정  
+아래의 github repository에서 KCP 안드로이드 연동을 위한 샘플 프로젝트 확인이 가능합니다. 
+
+[KCP 안드로이드 연동 샘플](https://github.com/iamport/kcp-android-graddle)
 
 
 ### 3.1.2 app\_scheme에 해당하는 intent-filter 정의  
@@ -143,7 +145,10 @@ IMP.request_pay({
 
 # 3.2 iOS  
 
-추후 샘플 소스코드 제공 예정  
+아래의 github repository에서 KCP iOS 연동을 위한 샘플 프로젝트 확인이 가능합니다. 
+
+[Objective-c용 KCP iOS 샘플](https://github.com/iamport/iamport-kcp-ios)
+
 WebView내 웹페이지에서 호출되어야하는 javascript코드는 안드로이드와 동일합니다.  
 
 ```javascript
