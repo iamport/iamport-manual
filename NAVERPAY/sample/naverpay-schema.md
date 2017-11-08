@@ -22,7 +22,7 @@
 			},
 			"taxType": {
 				"description": "부가세 부과 여부",
-				"enum": ["TAX", "FREE"]
+				"enum": ["TAX", "TAX_FREE"]
 			},
 			"quantity": {
 				"description": "상품구매수량",

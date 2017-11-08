@@ -30,7 +30,7 @@ IMP.request_pay({
     		id : "singleProductId",
     		name : "네이버페이 상품1",
     		basePrice : 1000,
-    		taxType : 'FREE', //TAX or FREE
+    		taxType : 'TAX_FREE', //TAX or TAX_FREE
     		quantity : 2,
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
@@ -46,14 +46,14 @@ IMP.request_pay({
     		id : "optionProductId",
     		name : "네이버페이 상품2",
     		basePrice : 1000,
-    		taxType : 'FREE', //TAX or FREE
+    		taxType : 'TAX_FREE', //TAX or TAX_FREE
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
     		options : [ //네이버페이 상품2에 대해서 빨강-170mm사이즈 3개와 빨강-180mm사이즈 2개: 총 5개 구매
     			{
     				optionQuantity : 3,
     				optionPrice : 100,
-    				selectionCode : "R_M",
+    				selectionCode : "R_M",
     				selections : [
     					{
 	      					code : "RED",
@@ -115,7 +115,7 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 	"id" : "Shoe_ax82a",   //상품고유ID
 	"name" : "신발", //상품명
 	"basePrice" : 1000, //상품가격
-	"taxType" : "TAX",       //부가세 부과 여부(TAX or FREE)
+	"taxType" : "TAX",       //부가세 부과 여부(TAX or TAX_FREE)
 	"quantity" : 2,  //상품구매수량
 	"infoUrl" : "http://www.iamport.kr/product/detail",    //상품상세페이지 URL
 	"imageUrl" : "http://www.iamport.kr/product/detail/thumbnail",   //상품 Thumbnail 이미지 URL
