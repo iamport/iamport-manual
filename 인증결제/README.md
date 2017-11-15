@@ -551,10 +551,75 @@ protected void onCreate(Bundle savedInstanceState) {
 이러한 특성을 활용하여 KG이니시스의 경우, URL scheme을 사용하지 않아도 동작에 문제가 없도록 설계되어있습니다.
 
 ##### PG사별 샘플보기
+- [KCP](https://github.com/iamport/kcp-android-graddle)
 - [KG이니시스](https://github.com/iamport/iamport-inicis-android)
 - [나이스정보통신](https://github.com/iamport/iamport-nice-android)
 - [카카오페이](https://github.com/iamport/iamport-kakao-android)
+- [다날](https://github.com/iamport/iamport-danaltpay-android)
 
 ### 3.2.b iOS  
 
-현재 소스코드 정리 후 github에 공개하려고 준비 중입니다.
+WebView내 웹페이지에서 호출되어야하는 javascript코드는 안드로이드와 동일합니다.  
+
+```javascript
+IMP.init('imp33886024'); //아임포트 회원가입 후 발급된 가맹점 고유 코드를 사용해주세요. 예시는 KCP공식 아임포트 데모 계정입니다.
+
+IMP.request_pay({
+    pg : 'html5_inicis',
+    pay_method : 'card',
+    merchant_uid : 'merchant_' + new Date().getTime(),
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456',
+    m_redirect_url : 'https://www.my-service.com/payments/complete/mobile',
+    app_scheme : 'iamporttest' //개발 중인 앱에 정의된 URL scheme을 지정합니다. ://는 포함하지 않습니다.
+});
+```
+
+#### WebView에서 외부 앱 호출을 위한 white-list 정의  
+
+iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해야 외부 앱 실행을 묻는 dialog가 나타나게 됩니다.  
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+	<string>kftc-bankpay</string> <!-- 계좌이체 -->
+	<string>ispmobile</string> <!-- ISP모바일 -->
+	<string>itms-apps</string> <!-- 앱스토어 -->
+	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
+	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
+	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
+	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
+	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
+	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
+	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
+	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
+	<string>vguardstart</string> <!-- 삼성카드-백신 -->
+	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
+	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
+	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
+	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
+	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
+	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
+	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
+	<string>citispay</string> <!-- 씨티카드-앱카드 -->
+	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
+	<string>payco</string> <!-- 페이코 -->
+</array>
+```
+
+#### 앱에 대한 URL scheme 정의  
+
+외부앱을 통한 인증/결제 후 WebView가 실행되던 앱으로 복귀하기 위해서는 다음과 같이 앱에 대한 URL scheme을 정의해야 합니다.  
+`IMP.request_pay(param, callback)`호출 시 `param.app_scheme`에 지정한 것과 동일한 값으로 URL Scheme을 정의해야 합니다.  
+
+![Xcode Capture](sample/screenshot/nice_xcode_scheme.png)
+
+##### PG사별 샘플보기
+- [KCP](https://github.com/iamport/iamport-kcp-ios)
+- [KG이니시스](https://github.com/iamport/iamport-inicis-ios)
+- [나이스정보통신](https://github.com/iamport/iamport-nice-ios)
