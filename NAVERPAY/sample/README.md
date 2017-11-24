@@ -35,11 +35,13 @@ IMP.request_pay({
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
     		shipping : {
-    			groupId : "",
+    			groupId : "shipping-a",
     			method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
-    			baseFee : 0,
-    			feeType : "FREE", //FREE(무료), CHARGE(유료), CONDITIONAL_FREE(조건부 무료), CHARGE_BY_QUANTITY(수량별 부과)
-    			feePayType : "FREE" //FREE(무료), PREPAYED(선불), CASH_ON_DELIVERY(착불)
+    			baseFee : 2500,
+    			feeRule : {
+    				freeByThreshold : 20000
+    			},
+    			feePayType : "PREPAYED" //PREPAYED(선불), CASH_ON_DELIVERY(착불)
     		}
     	},
     	{
@@ -86,11 +88,13 @@ IMP.request_pay({
 				}
 			],
 			shipping : {
-				groupId : "",
+				groupId : "shipping-a",
 				method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
-				baseFee : 0,
-				feeType : "FREE", //FREE(무료), CHARGE(유료), CONDITIONAL_FREE(조건부 무료), CHARGE_BY_QUANTITY(수량별 부과)
-				feePayType : "FREE" //FREE(무료), PREPAYED(선불), CASH_ON_DELIVERY(착불)
+				baseFee : 2500,
+				feeRule : {
+    				freeByThreshold : 20000
+    			},
+				feePayType : "PREPAYED" //PREPAYED(선불), CASH_ON_DELIVERY(착불)
 			}
 		}
 	]
@@ -100,7 +104,9 @@ IMP.request_pay({
 # 2. 상품정보 연동  
 네이버페이 결제를 위해서는 구매할 상품정보 전달이 필수입니다. `IMP.request_pay(param, callback)` 호출 시 상품정보를 `param.naverProducts`파라메터로 전달해주셔야 합니다.  
 
-## param.naverProducts 의 구조  
+추가로 네이버페이 구매에 대한 유입경로 분석을 하기 위해서는 `IMP.request_pay(param, callback)` 호출 시 `param.naverInterface`파라메터로 관련 정보를 전달해주셔야 합니다.  
+
+## 2.1 param.naverProducts 의 구조  
 
 Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 
@@ -173,10 +179,39 @@ Product는 `options`을 객체의 배열, `shipping` 을 객체로 관리합니�
 	groupId : "GroupFopOrder",  //상품별 묶음배송구분을 위한 카테고리. groupId가 동일한 Product끼리 묶음배송 처리됩니다.
 	method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
 	baseFee : 2500,  //기본 배송비
-	feeType : "FREE", //FREE(무료), CHARGE(유료), CONDITIONAL_FREE(조건부 무료), CHARGE_BY_QUANTITY(수량별 부과)
-	feePayType : "FREE" //FREE(무료), PREPAYED(선불), CASH_ON_DELIVERY(착불)
+	feeRule : {
+		freeByThreshold : 20000
+	},
+	feePayType : "PREPAYED" //PREPAYED(선불), CASH_ON_DELIVERY(착불)
 }
 ```
+
+## 2.2 네이버페이 구매 유입경로 설정  
+### param.naverInterface   
+
+```javascript
+{
+	"cpaInflowCode" : {도메인의 cookie 중 "CPAValidator" cookie값},
+	"naverInflowCode" : {도메인의 cookie 중 "NA_CO" cookie값},
+	"saClickId" : {도메인의 cookie 중 "NVADID" cookie값}
+}
+```
+
+네이버페이 구매 유입경로 분석을 위해 네이버에서 제공되는 `//wcs.naver.net/wcslog.js` javascript를 설치하면 네이버검색 또는 네이버쇼핑 등을 통해 사이트에 진입한 구매자에 대해 도메인 쿠키영역에 `CPAValidator`, `NA_CO`, `NVADID` 값이 자동으로 설정됩니다.  
+
+이 값을 읽어 `IMP.request_pay(param)`호출 시 `param.naverInterface`파라메터로 전달해주시면 네이버에 전달되어 분석됩니다.  
+
+```javascript
+IMP.request_pay({
+	// 다른 파라메터는 생략
+	naverInterface : {
+		"cpaInflowCode" : {도메인의 cookie 중 "CPAValidator" cookie값},
+		"naverInflowCode" : {도메인의 cookie 중 "NA_CO" cookie값},
+		"saClickId" : {도메인의 cookie 중 "NVADID" cookie값}
+	}
+});
+```
+
 
 # 3. 네이버의 상품정보 체크  
 `naverProducts` 파라메터와 함께 `IMP.request_pay(param, callback)`함수가 호출되면 새창이 열리면서 네이버페이 결제화면으로 이동하게 됩니다. 이동 후 하단에 있는 네이버페이 "결제하기"버튼을 누르게 되면 네이버페이 서버는 지정된 URL로 상품정보가 올바른지(Validation), 구매 가능한 재고수량은 충분한지를 체크하기 위해 HTTP GET요청을 보내게 됩니다.  
@@ -552,20 +587,81 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 3. (아임포트 내에서는` 미결제` 상태로 주문정보가 생성된 상태)
 4. 구매자가 결제 프로세스를 완료(결제 성공)
 5. 아임포트 배치 서버가 결제완료여부를 체크(1분단위로 배치 수행)
-6. 아임포트 거래 건의 결제상태를 `paid`로 변경
+6. **아임포트 거래 건의 결제상태를 `paid`로 변경 및 주문 관련정보 동기화**
 7. 결제완료를 알리는 Notification URL통지
 
-### `amount` 파라메터의 중요성  
-사용자의 상품 옵션 선택, 배송비 정책 등에 따라 총 결제금액이 결정되는데, 아임포트가 가맹점의 가격 계산 방식 혹은 네이버의 계산 방식을 모두 동일하게 추적하여 합산금액을 추정해내는 것은 쉬운 일이 아니라고 판단됩니다.  
+### 주문 정보의 동기화    
+네이버페이의 경우 일반 PG결제수단과 달리 `주문자 이름`, `주문자 전화번호`, `배송주소` 등의 정보가 네이버페이 결제단계에서 입력 및 확정됩니다.  
+또한, 조건별 배송비 부과 정책에 따라 실제 결제되는 금액이 결제단계에서 달라질 수 있습니다.  
 
-때문에, `IMP.request_pay(param, callback)`호출 시 `amount`파라메터를 가맹점에서 계산한 실제 결제될 금액으로 지정해 넘겨주셔야 배치 서버가 결제여부를 정확하게 판단할 수 있게 됩니다.  
+때문에, `IMP.request_pay(param)` 호출 시점에 전달되는 아래 파라메터는 실제 결제완료 후 동기화 단계에서 `보정(overwrite)`됩니다. 
 
-앞의 순서에서 5번 단계에서 결제내역은 확인되었으나 네이버페이 서버로부터 응답된 결제금액 정보가 `amount`의 값과 다른 경우 아임포트 거래 건의 주문상태를 `paid`로 변경하지 않습니다.  
+- amount
+- buyer_name
+- buyer_email
+- buyer_tel
+- buyer_addr
+- buyer_postcode
 
-1. `IMP.request_pay(param, callback)`호출
-2. 네이버페이 결제창을 통해 결제 프로세스 진행
-3. (아임포트 내에서는` 미결제` 상태로 주문정보가 생성된 상태)
-4. 구매자가 결제 프로세스를 완료(결제 성공)
-5. 아임포트 배치 서버가 결제완료여부를 체크(1분단위로 배치 수행)
-6. 네이버페이에서 통지받은 결제금액과 `amount`가 다르면 결제상태 변경하지 않음(여전히 미결제)
-7. Notification URL통지는 진행됨(status=ready 상태로 통지)
+### 4.1 네이버페이 결제 시작  
+
+아래의 코드와 같이 네이버페이 결제창을 호출하면, [아임포트 관리자 페이지](https://admin.iamport.kr)의 결제승인내역 목록에 결제 정보가 아래와 같이 먼저 기록됩니다.  
+
+- amount : 14000
+- buyer_email : 'iamport@siot.do'
+- buyer_name : '구매자이름'
+- buyer_tel : '010-1234-5678'
+- buyer_addr : '서울특별시 강남구 삼성동'
+- buyer_postcode : '123-456'
+
+```javascript
+IMP.request_pay({
+    pg : 'naverco',
+    pay_method : 'card', //연동되지 않습니다. 네이버페이 결제창 내에서 결제수단을 구매자가 직접 선택하게 됩니다.
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678', //누락되면 이니시스 결제창에서 오류
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456',
+    naverProducts : [
+    	{
+    		id : "singleProductId",
+    		name : "네이버페이 상품1",
+    		basePrice : 14000,
+    		taxType : 'TAX_FREE', //TAX or TAX_FREE
+    		quantity : 1,
+    		infoUrl : "http://www.iamport.kr/product/detail",
+    		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
+    		shipping : {
+    			groupId : "shipping-a",
+    			method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
+    			baseFee : 2500,
+    			feeRule : {
+    				surchargesByArea : [ //array or string(API)
+    					{area:"island", surcharge:2000},
+    					{area:"jeju", surcharge:4500}
+    				]
+    			},
+    			feePayType : "PREPAYED" //PREPAYED(선불), CASH_ON_DELIVERY(착불)
+    		}
+    	}
+	]
+});
+```
+
+### 4.2 구매자가 배송받을 지역을 "제주"로 설정하여 결제한 경우   
+
+위 설정에 따라 실제 구매자가 결제한 금액은 상품금액 14000원 + 제주지역 추가배송비 4500원 = 18500원이 됩니다.  
+또한, 최초 전달된 "서울특별시 강남구 삼성동"이라는 주소 대신 "제주시 첨단로 123" 주소가 기입되었기 때문에 해당 정보도 변경이 필요합니다.  
+
+이에 따라 
+
+- amount : 14000 -> 18500
+- buyer_addr : "서울특별시 강남구 삼성동" -> "제주시 첨단로 123"
+
+으로 변경되며, [아임포트 관리자 페이지](https://admin.iamport.kr)의 결제 승인내역 및 REST API로 해당 건에 대해 상세정보 조회를 하면 변경된 정보가 응답됩니다.  
+
+네이버페이 결제단계에서 구매자의 이름, 전화번호 등이 변경되는 경우에도 동일하게 아임포트 거래내역에 변경되어 저장되며 변경이 가능한 필드 목록은 4.1에서 나열한 총 6가지 필드입니다.  
