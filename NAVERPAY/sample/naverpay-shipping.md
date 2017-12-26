@@ -223,3 +223,38 @@
 }
 ```
 
+### 5.2.1 지역배송비 정보 요청과 XML 응답   
+
+네이버페이는 주문서 작성 페이지에서 네이버페이 가입시 사전등록된 `도서산간비 정보요청 URL`로 HTTP 요청을 보내 지역배송비 정보를 XML형태로 받아갑니다.(네이버페이 주문서작성 페이지에서 구매자가 입력하는 주소에 따라 HTTP요청이 이뤄집니다.)  
+
+네이버페이로부터 전송되는 HTTP요청은 다음과 같은 형태를 띄고 있습니다. 
+
+```
+http://{도서산간비 정보요청 URL}?productId[0]=XXX&productId[1]=XXX&zipcode=463050&address1=6rK96riw64-EIOyEseuCqOyLnCDrtoTri7nqtawg7ISc7ZiE64-Z
+```
+
+요청시 전송되는 query string 파라메터는, 
+
+- productId[순번] : 배송비 조회하려는 상품의 상품번호
+- zipcode : 배송지 우편번호
+- address1 : 배송지 기본 주소(base64 url encoding된 값)
+
+위 요청에 대한 응답은 다음과 같은 형태의 XML이어야 합니다.(Content-Type: application/xml)
+
+```xml
+<additionalFees>
+   <additionalFee>
+          <id>P001</id>
+          <surprice>0</surprice>
+   </additionalFee>
+   <additionalFee>
+          <id>P002</id>
+          <surprice>1000</surprice>
+   </additionalFee>
+<additionalFees>
+```
+
+- /additionalFees/additionalFee[순번] : query 파라메터로 전달된 각 productId별로 node구성
+- /additionalFees/additionalFee[순번]/id : productId(상품번호)
+- /additionalFees/additionalFee[순번]/surprice : 추가되는 배송비
+
