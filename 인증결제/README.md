@@ -119,7 +119,7 @@ query string이 포함된 `m_redirect_url`도 사용하실 수 있습니다.
 으로 지정하셨다면, 실제 랜딩되는 주소는 다음과 같습니다.  
 
 ```
-http://www.iamport.kr/mobile/landing?utm_source=mobile&imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_uid={true/false}
+http://www.iamport.kr/mobile/landing?utm_source=mobile&imp_uid={imp_uid}&merchant_uid={merchant_uid}&imp_success={true/false}
 ```
 
 #### Since iamport.payment-1.1.5.js  
