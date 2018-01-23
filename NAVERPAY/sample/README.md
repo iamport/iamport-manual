@@ -101,6 +101,48 @@ IMP.request_pay({
 });
 ```
 
+## 1.1 네이버 디자인 가이드  
+네이버페이 구매하기 기능은 네이버페이가 제공하는 SDK를 통해 지정된 디자인을 그대로 사용해 구현하셔야 합니다. 
+![](screenshot/naver-button.png)
+
+**네이버페이 버튼 UI생성을 위한 SDK**  
+
+```html
+<!-- PC용 -->
+<script type="text/javascript" src="//pay.naver.com/customer/js/naverPayButton.js"></script>
+
+<!-- 모바일용 -->
+<script type="text/javascript" src="//pay.naver.com/customer/js/mobile/naverPayButton.js"></script>
+```
+위 스크립트 추가 후, 아래의 코드를 통해 지정된 HTML element에 네이버페이 버튼 UI가 생성되도록 호출할 수 있습니다. 
+아래 코드는 HTML element를 네이버페이 버튼 UI로 변환할 뿐 자체적인 동작기능은 없습니다. 때문에 `NPay구매버튼 클릭`, `찜버튼 클릭`에 해당되는 핸들러를 직접 구현해주어야 합니다.  
+
+핸들러는 각각 `BUY_BUTTON_HANDLER`, `WISHLIST_BUTTON_HANDLER` 속성으로 지정할 수 있으며, 핸들러 내에서 아임포트 javascript API를 호출하면 됩니다.  
+
+```javascript
+naver.NaverPayButton.apply({
+	BUTTON_KEY: "네이버에서 전달받은 버튼생성키",
+	TYPE: "C", //버튼 스타일
+	COLOR: 1, //버튼 색상타입
+	COUNT: 2, // 네이버페이버튼 + 찜하기버튼 모두 출력 여부
+	ENABLE: "Y", //네이버페이 활성여부(재고부족 등에는 N으로 비활성처리)
+	EMBED_ID: "iamport-naverpay-product-button", //네이버페이 버튼 UI가 부착될 HTML element의 ID
+	BUY_BUTTON_HANDLER : function() {
+		//중략
+		//핸들러 내에서 아임포트 네이버페이 결제 함수 호출
+		IMP.request_pay(param);
+	},
+	WISHLIST_BUTTON_HANDLER : function() {
+		//중략
+		
+		//핸들러 내에서 아임포트 네이버페이 찜하기 함수 호출(iamport.payment-1.1.6.js부터 지원됨)
+		IMP.naver_zzim(param);
+	}
+});
+```
+
+
+
 # 2. 상품정보 연동  
 네이버페이 결제를 위해서는 구매할 상품정보 전달이 필수입니다. `IMP.request_pay(param, callback)` 호출 시 상품정보를 `param.naverProducts`파라메터로 전달해주셔야 합니다.  
 
@@ -665,3 +707,34 @@ IMP.request_pay({
 으로 변경되며, [아임포트 관리자 페이지](https://admin.iamport.kr)의 결제 승인내역 및 REST API로 해당 건에 대해 상세정보 조회를 하면 변경된 정보가 응답됩니다.  
 
 네이버페이 결제단계에서 구매자의 이름, 전화번호 등이 변경되는 경우에도 동일하게 아임포트 거래내역에 변경되어 저장되며 변경이 가능한 필드 목록은 4.1에서 나열한 총 6가지 필드입니다.  
+
+
+# 5. 찜하기 동작  
+
+네이버페이 찜하기 버튼이 클릭되었을 때, 네이버페이에 상품과 관련된 정보가 전송되어야 합니다.  
+아임포트 javascript API를 통해 해당 기능을 쉽게 구현하실 수 있습니다. (iamport.payment-1.1.6.js부터 지원)
+
+```javascript
+IMP.naver_zzim({
+	naverProducts: [
+		{
+			"id" : "상품아이디",
+			"name" : "상품명",
+			"desc" : "상품상세설명",
+			"uprice" : 10000, //상품가격
+			"url" : "http://www.yourshop.com/product/123", //상품고유 URL
+			"image" : "http://www.yourshop.com/product/123/thumbnail" //상품 대표 썸네일이미지 URL
+		},
+		{
+			"id" : "상품아이디",
+			"name" : "상품명",
+			"desc" : "상품상세설명",
+			"uprice" : 10000, //상품가격
+			"url" : "http://www.yourshop.com/product/123", //상품고유 URL
+			"image" : "http://www.yourshop.com/product/123/thumbnail" //상품 대표 썸네일이미지 URL
+		}
+	]
+});
+```
+
+찜한 상품이 추후 결제로 이어질 수 있도록 `상품아이디(id)`는 네이버페이 결제 시 전달하는 `naverProduducts` 의 `상품아이디(id)` 와 일치시켜주는 것이 좋습니다.  
