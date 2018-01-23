@@ -59,6 +59,7 @@ IMP.certification({
 |---|---|---|---|---|---|
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호 | random | (선택항목) |1.1.4부터|  
 | min_age | number | 본인인증시 최소 나이를 필요로하는 경우 제할할 최소 나이  | undefined | (선택항목) 생년월일을 고려하여 만 나이로 기재. <br>ex) 1990년 3월 1일이 생일인 경우, 2017년 2월 1일에 본인인증 시도하면 min\_age:26(본인인증성공) / min\_age:27(본인인증실패) |1.1.4부터|  
+| popup | boolean | 본인인증창을 새창(window)에서 동작시킬지 여부  | false | 기존 화면에 상단 Layer로 본인인증창이 띄워지는 것이 기본이지만, 새창(window)를 열어 본인인증창을 띄우고 싶은 경우 true로 지정 |1.1.6부터|  
 
 ### 2.2 callback의 구성  
 ```javascript
