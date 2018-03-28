@@ -12,6 +12,14 @@
 				"description": "상품고유ID",
 				"type": "string"
 			},
+			"merchantProductId": {
+				"description": "상품관리ID",
+				"type": "string"
+			},
+			"ecMallProductId": {
+				"description": "지식쇼핑 상품관리ID",
+				"type": "string"
+			},
 			"name": {
 				"description": "상품명",
 				"type": "string"
