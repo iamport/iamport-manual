@@ -483,7 +483,13 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 ```
 
 ### 3.1.b iOS
-현재 소스코드 정리 후 github에 공개하려고 준비 중입니다.  
+PG사별로 동작 방식에 차이가 있어 아래의 PG사별 샘플 프로젝트를 참고해주세요.   
+
+- [KG이니시스 obj-c](https://github.com/iamport/iamport-inicis-ios)  
+- [KG이니시스 swift](https://github.com/JosephNK/SwiftyIamport)
+- [KCP](https://github.com/iamport/iamport-kcp-ios)
+- [나이스페이먼츠 obj-c](https://github.com/iamport/iamport-nice-ios)
+- [나이스페이먼츠 swift](https://github.com/JosephNK/SwiftyIamport)
 
 ## 3.2 3rd-party앱 -> My앱
 My앱에서 정의한 URL scheme을 결제가 완료된 시점에 PG사로부터 호출받음으로써 3rd-party앱으로부터 My앱으로 포커스를 이동시킵니다.
@@ -620,7 +626,9 @@ iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해�
 
 ![Xcode Capture](sample/screenshot/nice_xcode_scheme.png)
 
-##### PG사별 샘플보기
+##### PG사별 샘플프로젝트보기
+- [KG이니시스 obj-c](https://github.com/iamport/iamport-inicis-ios)  
+- [KG이니시스 swift](https://github.com/JosephNK/SwiftyIamport)
 - [KCP](https://github.com/iamport/iamport-kcp-ios)
-- [KG이니시스](https://github.com/iamport/iamport-inicis-ios)
-- [나이스정보통신](https://github.com/iamport/iamport-nice-ios)
+- [나이스페이먼츠 obj-c](https://github.com/iamport/iamport-nice-ios)
+- [나이스페이먼츠 swift](https://github.com/JosephNK/SwiftyIamport)
