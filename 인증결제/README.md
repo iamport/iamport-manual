@@ -483,13 +483,41 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 ```
 
 ### 3.1.b iOS
-PG사별로 동작 방식에 차이가 있어 아래의 PG사별 샘플 프로젝트를 참고해주세요.   
 
-- [KG이니시스 obj-c](https://github.com/iamport/iamport-inicis-ios)  
-- [KG이니시스 swift](https://github.com/JosephNK/SwiftyIamport)
-- [KCP](https://github.com/iamport/iamport-kcp-ios)
-- [나이스페이먼츠 obj-c](https://github.com/iamport/iamport-nice-ios)
-- [나이스페이먼츠 swift](https://github.com/JosephNK/SwiftyIamport)
+외부앱으로 이동 시 프로그램에 의한 동작은 없으며, 이동하려는 결제사의 앱이 white-list 에 등록되어있으면 confirm 창이 나타나며 자동 처리됩니다.  
+
+#### WebView에서 외부 앱 호출을 위한 white-list 정의  
+
+iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해야 외부 앱 실행을 묻는 dialog가 나타나게 됩니다.  
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+	<string>kftc-bankpay</string> <!-- 계좌이체 -->
+	<string>ispmobile</string> <!-- ISP모바일 -->
+	<string>itms-apps</string> <!-- 앱스토어 -->
+	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
+	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
+	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
+	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
+	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
+	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
+	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
+	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
+	<string>vguardstart</string> <!-- 삼성카드-백신 -->
+	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
+	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
+	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
+	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
+	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
+	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
+	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
+	<string>citispay</string> <!-- 씨티카드-앱카드 -->
+	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
+	<string>payco</string> <!-- 페이코 -->
+</array>
+```
+
 
 ## 3.2 3rd-party앱 -> My앱
 My앱에서 정의한 URL scheme을 결제가 완료된 시점에 PG사로부터 호출받음으로써 3rd-party앱으로부터 My앱으로 포커스를 이동시킵니다.
@@ -585,38 +613,6 @@ IMP.request_pay({
     m_redirect_url : 'https://www.my-service.com/payments/complete/mobile',
     app_scheme : 'iamporttest' //개발 중인 앱에 정의된 URL scheme을 지정합니다. ://는 포함하지 않습니다.
 });
-```
-
-#### WebView에서 외부 앱 호출을 위한 white-list 정의  
-
-iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해야 외부 앱 실행을 묻는 dialog가 나타나게 됩니다.  
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-	<string>kftc-bankpay</string> <!-- 계좌이체 -->
-	<string>ispmobile</string> <!-- ISP모바일 -->
-	<string>itms-apps</string> <!-- 앱스토어 -->
-	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
-	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
-	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
-	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
-	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
-	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
-	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
-	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
-	<string>vguardstart</string> <!-- 삼성카드-백신 -->
-	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
-	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
-	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
-	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
-	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
-	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
-	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
-	<string>citispay</string> <!-- 씨티카드-앱카드 -->
-	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
-	<string>payco</string> <!-- 페이코 -->
-</array>
 ```
 
 #### 앱에 대한 URL scheme 정의  
