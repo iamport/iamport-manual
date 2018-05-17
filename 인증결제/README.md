@@ -515,6 +515,7 @@ iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해�
 	<string>citispay</string> <!-- 씨티카드-앱카드 -->
 	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
 	<string>payco</string> <!-- 페이코 -->
+	<string>kakaotalk</string> <!-- 카카오페이 -->
 </array>
 ```
 
