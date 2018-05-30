@@ -60,20 +60,3 @@ IMP.request_pay({
 PAYCO결제는 PC/모바일에서 팝업창(새창)을 통해 진행되므로, 사용자의 브라우저 보안정책에 의해 팝업이 차단될 수 있습니다.  
 팝업이 차단되거나 사용자 Confirm을 회피하기 위해서는 `IMP.request_pay(param, callbak)`호출은 `onClick`과 같이 사용자 액션에 대한 핸들러에서 처리되어야 합니다.  
 
-~~PC에서 PAYCO결제창 호출을 위해 `IMP.request_pay(param, callback)`가 호출되었을 때, 브라우저에서 PAYCO도메인에 대한 팝업이 차단되어 팝업 허용 후 새로고침해야하는 문제점이 있었습니다.~~  
-
-~~### 1.1.1 PROXY페이지 준비~~  
-
-~~<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment.proxy.js"></script>~~  
-
-
-~~가 추가된 HTML페이지를 생성합니다(다른 js는 필요하지 않으며, 위 스크립트 태그만 추가되면 됩니다.)~~  
-~~**주의 : 만들어진 페이지는 결제를 진행하는 웹서비스와 동일한 도메인에서 접근이 가능해야 합니다.**~~  
-
-~~### 1.1.2 proxyPath 설정~~  
-~~1.1.1에서 만든 웹 페이지의 **path**을 파라메터로 전달하시면 됩니다.~~ 
-~~`IMP.request_pay(param, callback)` 호출 시 `param.proxyPath` 파라메터를 활용하면 되고, `/`로 시작하는 path정보만 포함되어야 합니다.~~  
-~~가령, 1.1.1에서 제작한 PROXY페이지의 URL이 `http://www.my-commerce.com/path1/path2` 라면 `param.proxyPath : '/path1/path2'` 를 지정하시면 됩니다.~~  
-
-~~*PROXY기능은 iamport.payment-1.1.4.js에서만 현재 제공되고 있습니다. (1.1.3, 1.1.2버전에도 조만간 적용될 예정입니다)*~~  
-
