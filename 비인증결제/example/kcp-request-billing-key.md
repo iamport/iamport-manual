@@ -27,6 +27,7 @@ KCP일반결제와 마찬가지로 PC의 경우 `IMP.request_pay(param, callback
 
 ```javascript
 IMP.request_pay({
+   pg : 'kcp_billing', //KCP일반결제는 kcp이며, KCP빌링결제는 kcp_billing 으로 구분됩니다.
 	pay_method : 'card', // 'card'만 지원됩니다.
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',

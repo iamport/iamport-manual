@@ -55,7 +55,7 @@ IMP.request_pay({
 ### 2.1.1 param 속성(공통 속성)
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
-| pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakao"**, **"html5\_inicis"** 와 같이 **{PG사명}** 만 지정, **"html5\_inicis.INIpayTest"** 와 같이 **{PG사명}.{상점아이디}** 로 지정<br><br>**html5_inicis**(이니시스웹표준)<br>**inicis**(이니시스ActiveX결제창)<br>**kcp**(NHN KCP)<br>**kcp_billing**(NHN KCP 정기결제)<br>**uplus**(LGU+)<br>**nice**(나이스페이)<br>**jtnet**(JTNet)<br>**kakao**(카카오페이)<br>**danal**(다날휴대폰소액결제)<br>**danal_tpay**(다날일반결제)<br>**mobilians**(모빌리언스 휴대폰소액결제)<br>**syrup**(시럽페이)<br>**payco**(페이코)<br>**paypal**(페이팔)<br>**eximbay**(엑심베이)<br>**naverco**(네이버페이)<br> | 1.1.0 부터 |
+| pg <sup>(*example*)</sup> | string | 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 | undefined | (선택항목) 누락되거나 매칭되지 않는 경우 아임포트 관리자페이지에서 설정한 "기본PG"가 호출됨<br>**"kakaopay"**, **"html5\_inicis"** 와 같이 **{PG사명}** 만 지정, **"html5\_inicis.INIpayTest"** 와 같이 **{PG사명}.{상점아이디}** 로 지정<br><br>**html5_inicis**(이니시스웹표준)<br>**inicis**(이니시스ActiveX결제창)<br>**kcp**(NHN KCP)<br>**kcp_billing**(NHN KCP 정기결제)<br>**uplus**(LGU+)<br>**nice**(나이스페이)<br>**jtnet**(JTNet)<br>**kakaopay**(카카오페이)<br>**danal**(다날휴대폰소액결제)<br>**danal_tpay**(다날일반결제)<br>**mobilians**(모빌리언스 휴대폰소액결제)<br>**syrup**(시럽페이)<br>**payco**(페이코)<br>**paypal**(페이팔)<br>**eximbay**(엑심베이)<br>**naverco**(네이버페이)<br> | 1.1.0 부터 |
 | pay_method | string | 결제수단 | card | **card**(*신용카드*)<br>**trans**(*실시간계좌이체*)<br>**vbank**(*가상계좌*)<br>**phone**(*휴대폰소액결제*)<br>**samsung**(*삼성페이 / 이니시스, KCP 전용*)<br>**kpay**(*KPay앱 직접호출 / 이니시스 전용*)<br>**cultureland**(*문화상품권 / 이니시스, LGU+ 전용*)<br>**smartculture**(*스마트문상 / 이니시스, LGU+ 전용*)<br>**happymoney**(*해피머니 / 이니시스 전용*)<br>**booknlife**(*도서문화상품권 / LGU+ 전용*) | 1.0.0부터 |
 | escrow | boolean | 에스크로 결제여부 | false | (선택항목) 에스크로가 적용되는 결제창을 호출 | 1.0.0부터 |
 | merchant_uid | string | 가맹점에서 생성/관리하는 고유 주문번호  | random | (필수항목) 결제가 된 적이 있는 merchant_uid로는 재결제 불가  | 1.0.0부터 |
@@ -79,7 +79,7 @@ IMP.request_pay({
 #### 2.1.1.a display 속성  
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
 |---|---|---|---|---|---|
-| card_quota | array of integer | 할부개월수 선택 UI제어옵션 | undefined | (선택항목) 50,000원 이상금액 결제 시 PG사 결제창에서 선택할 수 있는 할부개월목록 UI 제어. <br>1) undefined이면 PG사가 기본 제공하는 할부개월 수 목록을 출력 <br>2) []이면 일시불만 결제 가능 <br>3) [2,3,4,5,6]이면 일시불 + 2,3,4,5,6개월까지 할부개월 선택 가능<br><br>*현재, KG이니시스, KCP만 지원하는 옵션*  | 1.0.0부터 |
+| card_quota | array of integer | 할부개월수 선택 UI제어옵션 | undefined | (선택항목) 50,000원 이상금액 결제 시 PG사 결제창에서 선택할 수 있는 할부개월목록 UI 제어. <br>1) undefined이면 PG사가 기본 제공하는 할부개월 수 목록을 출력 <br>2) []이면 일시불만 결제 가능 <br>3) [2,3,4,5,6]이면 일시불 + 2,3,4,5,6개월까지 할부개월 선택 가능<br><br>*현재, KG이니시스, KCP, LGU+, 카카오페이, 나이스페이먼츠, 다날만 현재 구현 됨*  | 1.0.0부터 |
 
 ### 2.1.2 param 속성(특정 상황에만 필요한 속성)
 | 속성명 | 타입(typeof) | 설명 | 기본값  | 비고 | 지원버전 |
@@ -164,7 +164,7 @@ function(rsp) {
 |paid_amount|number|결제금액|실제 결제승인된 금액이나 가상계좌 입금예정 금액|
 |status|string|결제상태|**ready**(*미결제*), **paid**(*결제완료*), **cancelled**(*결제취소, 부분취소포함*), **failed**(*결제실패*)|
 |name|string|주문명||
-|pg_provider|string|결제승인/시도된 PG사|**html5_inicis**(*웹표준방식의 KG이니시스*), **inicis**(*일반 KG이니시스*), **kakao**(*카카오페이*), **uplus**(*LGU+*), **nice**(*나이스정보통신*), **jtnet**(*JTNet*), **danal**(*다날*)|
+|pg_provider|string|결제승인/시도된 PG사|**html5_inicis**(*웹표준방식의 KG이니시스*), **inicis**(*일반 KG이니시스*), **kakaopay**(카카오페이), **uplus**(*LGU+*), **nice**(*나이스정보통신*), **jtnet**(*JTNet*), **danal**(*다날*)|
 |pg_tid|string|PG사 거래고유번호||
 |buyer_name|string|주문자 이름||
 |buyer_email|string|주문자 Email||
@@ -483,7 +483,42 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 ```
 
 ### 3.1.b iOS
-현재 소스코드 정리 후 github에 공개하려고 준비 중입니다.  
+
+외부앱으로 이동 시 프로그램에 의한 동작은 없으며, 이동하려는 결제사의 앱이 white-list 에 등록되어있으면 confirm 창이 나타나며 자동 처리됩니다.  
+
+#### WebView에서 외부 앱 호출을 위한 white-list 정의  
+
+iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해야 외부 앱 실행을 묻는 dialog가 나타나게 됩니다.  
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+	<string>kftc-bankpay</string> <!-- 계좌이체 -->
+	<string>ispmobile</string> <!-- ISP모바일 -->
+	<string>itms-apps</string> <!-- 앱스토어 -->
+	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
+	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
+	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
+	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
+	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
+	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
+	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
+	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
+	<string>vguardstart</string> <!-- 삼성카드-백신 -->
+	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
+	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
+	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
+	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
+	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
+	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
+	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
+	<string>citispay</string> <!-- 씨티카드-앱카드 -->
+	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
+	<string>payco</string> <!-- 페이코 -->
+	<string>kakaotalk</string> <!-- 카카오페이 -->
+</array>
+```
+
 
 ## 3.2 3rd-party앱 -> My앱
 My앱에서 정의한 URL scheme을 결제가 완료된 시점에 PG사로부터 호출받음으로써 3rd-party앱으로부터 My앱으로 포커스를 이동시킵니다.
@@ -555,7 +590,6 @@ protected void onCreate(Bundle savedInstanceState) {
 - [KCP](https://github.com/iamport/kcp-android-graddle)
 - [KG이니시스](https://github.com/iamport/iamport-inicis-android)
 - [나이스정보통신](https://github.com/iamport/iamport-nice-android)
-- [카카오페이](https://github.com/iamport/iamport-kakao-android)
 - [다날](https://github.com/iamport/iamport-danaltpay-android)
 
 ### 3.2.b iOS  
@@ -581,38 +615,6 @@ IMP.request_pay({
 });
 ```
 
-#### WebView에서 외부 앱 호출을 위한 white-list 정의  
-
-iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해야 외부 앱 실행을 묻는 dialog가 나타나게 됩니다.  
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-	<string>kftc-bankpay</string> <!-- 계좌이체 -->
-	<string>ispmobile</string> <!-- ISP모바일 -->
-	<string>itms-apps</string> <!-- 앱스토어 -->
-	<string>hdcardappcardansimclick</string> <!-- 현대카드-앱카드 -->
-	<string>smhyundaiansimclick</string> <!-- 현대카드-공인인증서 -->
-	<string>shinhan-sr-ansimclick</string> <!-- 신한카드-앱카드 -->
-	<string>smshinhanansimclick</string> <!-- 신한카드-공인인증서 -->
-	<string>kb-acp</string> <!-- 국민카드-앱카드 -->
-	<string>mpocket.online.ansimclick</string> <!-- 삼성카드-앱카드 -->
-	<string>ansimclickscard</string> <!-- 삼성카드-온라인결제 -->
-	<string>ansimclickipcollect</string> <!-- 삼성카드-온라인결제 -->
-	<string>vguardstart</string> <!-- 삼성카드-백신 -->
-	<string>samsungpay</string> <!-- 삼성카드-삼성페이 -->
-	<string>scardcertiapp</string> <!-- 삼성카드-공인인증서 -->
-	<string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
-	<string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
-	<string>cloudpay</string> <!-- 하나카드-앱카드 -->
-	<string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
-	<string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
-	<string>citispay</string> <!-- 씨티카드-앱카드 -->
-	<string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
-	<string>payco</string> <!-- 페이코 -->
-</array>
-```
-
 #### 앱에 대한 URL scheme 정의  
 
 외부앱을 통한 인증/결제 후 WebView가 실행되던 앱으로 복귀하기 위해서는 다음과 같이 앱에 대한 URL scheme을 정의해야 합니다.  
@@ -620,7 +622,9 @@ iOS보안정책에 의해 외부 호출될 scheme 을 `info.plist`에 나열해�
 
 ![Xcode Capture](sample/screenshot/nice_xcode_scheme.png)
 
-##### PG사별 샘플보기
+##### PG사별 샘플프로젝트보기
+- [KG이니시스 obj-c](https://github.com/iamport/iamport-inicis-ios)  
+- [KG이니시스 swift](https://github.com/JosephNK/SwiftyIamport)
 - [KCP](https://github.com/iamport/iamport-kcp-ios)
-- [KG이니시스](https://github.com/iamport/iamport-inicis-ios)
-- [나이스정보통신](https://github.com/iamport/iamport-nice-ios)
+- [나이스페이먼츠 obj-c](https://github.com/iamport/iamport-nice-ios)
+- [나이스페이먼츠 swift](https://github.com/JosephNK/SwiftyIamport)

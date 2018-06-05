@@ -161,6 +161,8 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 ```javascript
 {
 	"id" : "Shoe_ax82a",   //상품고유ID
+	"merchantProductId" : "Shoe_ax82a", //상품관리ID(필요한 경우만 선언. 정의하지 않으면 id값과 동일한 값을 자동 적용합니다)
+	"ecMallProductId" : "Shoe_ax82a",   //지식쇼핑상품관리ID(필요한 경우만 선언. 정의하지 않으면 id값과 동일한 값을 자동 적용합니다)
 	"name" : "신발", //상품명
 	"basePrice" : 1000, //상품가격
 	"taxType" : "TAX",       //부가세 부과 여부(TAX or TAX_FREE)
