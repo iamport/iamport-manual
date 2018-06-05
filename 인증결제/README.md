@@ -73,7 +73,7 @@ IMP.request_pay({
 | custom_data | object | 가맹점 임의 지정 데이터  | undefined | (선택항목)주문건에 대해 부가정보를 저장할 공간이 필요할 때 사용. json notation(string)으로 저장됨 | 1.0.0부터 |
 | notice_url | string / array of string | Notification URL | undefined | (선택항목) 아임포트 관리자 페이지에서 설정하는 Notification URL을 overwrite할 수 있음. 주문마다 다른 Notification URL이 필요하거나 복수의 Notification URL이 필요한 경우 사용 | 1.0.0부터 |
 | display | object | 결제화면과 관련한 옵션 설정 | undefined | (선택항목) 구매자에게 제공되는 결제창 화면에 대한 UI옵션. 2.1.1.a참조 | 1.0.0부터 |
-| company | string | 가맹점 상호 | undefined | (선택항목) 일부 PG사(다날)에만 적용됨. 결제창 내에 회사 상호를 출력할 때 사용 | 1.0.0부터 |
+| company | string | 가맹점 상호 | undefined | (선택항목) 일부 PG사(KCP/다날)에 적용됨. 결제창 내에 회사 상호를 출력할 때 사용 | 1.0.0부터 |
 
 
 #### 2.1.1.a display 속성  
