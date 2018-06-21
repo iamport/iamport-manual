@@ -14,22 +14,12 @@
 
 1. PG사 : [간편결제] 카카오페이 선택 후, 테스트모드 설정 ON상태로 둡니다. 
 2. 가맹점코드(CID)에는, `TC0ONETIME` 를 입력합니다. 
-3. API 어드민 키는, [Kakao Developers](https://developers.kakao.com/)에서 API키를 발급받아 복사해넣습니다. 
-4. **API 어드민 키 발급시, 사이트 도메인은 `https://service.iamport.kr` 을 입력합니다.** 
-
-![카카오페이-Kakao Developers](screenshot/kakao-developers.png)
 
 ## 1.2 상용모드 설정  
 
 1. [아임포트 PG가입 페이지](http://www.iamport.kr)에서 카카오페이 가입 신청을 합니다. 
 2. PG사 : [간편결제] 카카오페이 선택 후, 테스트모드 설정 OFF상태로 둡니다. 
 3. 가맹점코드(CID)에는, 계약 후 발급받은 CID 를 입력합니다. 
-4. API 어드민 키는, [Kakao Developers](https://developers.kakao.com/)에서 API키를 발급받아 복사해넣습니다. (테스트모드에서 사용한 것과 구분하는 것을 권장합니다)
-5. **API 어드민 키 발급시, 사이트 도메인은 `https://service.iamport.kr` 을 입력합니다.** 
-
-![카카오페이-Kakao Developers](screenshot/kakao-developers.png)
-
-아임포트 플랫폼을 통해 결제가 이뤄지기 때문에, API 어드민 키 발급시 사이트 도메인은 `https://service.iamport.kr`를 반드시 입력해주셔야 합니다.  
 
 
 # 2. PC, 모바일 브라우저 연동  
