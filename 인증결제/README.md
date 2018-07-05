@@ -5,7 +5,7 @@
 
 ## 1.2 아임포트 javascript 설치
 ```html
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-x.y.z.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
 ```
 [**iamport.payment.js 버전별 차이점**](javascript-version.md)
 
