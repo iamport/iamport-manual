@@ -44,8 +44,7 @@ IMP.request_pay({
     buyer_name : '구매자이름',
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
-    buyer_postcode : '123-456',
-    kakaoOpenApp : true
+    buyer_postcode : '123-456'
 }, function(rsp) {
     if ( rsp.success ) {
     	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
