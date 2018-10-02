@@ -22,12 +22,12 @@ PC/모바일 모두 `IMP.request_pay(param, callback)`호출 후 callback으로 
 
 **amount필드는 결제창에 금액표시용으로만 사용되며 실제 해당 금액으로 승인이 이뤄지지는 않습니다. 빌링키 발급과 동시에 결제를 진행하려면 amount 필드에 금액 파라메터를 전달하여 결제창에 결제될 금액이 표시되도록하고 빌링키 발급과 동시에 `/subscribe/payments/again` API를 호출하여 결제승인처리를 하면 구매자로하여금 혼선이 없습니다.**  
 
-~~알려진 버그 : KG이니시스 웹표준 결제창 특성상, amount는 반드시 0보다 큰 숫자를 지정해야만 합니다. 이 때문에 빌링키 발급 결제창에 구매금액이 표시가 되나, 실제로 결제가 되지는 않으므로 1원 정도만 지정해주세요.~~  
 
 ### 빌링키 발급 결제창 호출  
 
 ```javascript
 IMP.request_pay({
+	pg : "html5_inicis.INIBillTst", // 실제 계약 후에는 실제 상점아이디로 변경
 	pay_method : 'card', // 'card'만 지원됩니다.
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',
