@@ -256,6 +256,24 @@ IMP.request_pay({
 });
 ```
 
+## 2.3 네이버페이 도서/공연비 추가 소득공제 주문 처리  
+### param.naverCultureBenefit  
+
+문화체육관광부에 도서/공연상품 판매 업체로 등록된 경우(사전에 네이버를 통해 등록되어야 합니다) 결제되는 주문 건이 도서/공연비 추가 공제 대상인지 여부를 지정할 수 있습니다.  
+
+`IMP.request_pay(param)` 호출 시 `param.naverCultureBenefit = true` 파라메터를 전달해주시면 도서/공연비 추가 공제 주문으로 간주됩니다.  
+
+```
+IMP.request_pay({
+    //다른 파라메터는 생략
+    naverCultureBenefit : true
+});
+```
+
+### 주의사항  
+`naverCultureBenefit` 파라메터는 주문 단위로 관리가 되며 주문 내 상품 단위로 적용은 불가능합니다. 때문에, 도서/공연비 추가 공제 대상 상품과 비대상 상품은 혼합하여 결제할 수 없도록 사전 차단해주셔야 합니다.  
+
+
 
 # 3. 네이버의 상품정보 체크  
 `naverProducts` 파라메터와 함께 `IMP.request_pay(param, callback)`함수가 호출되면 새창이 열리면서 네이버페이 결제화면으로 이동하게 됩니다. 이동 후 하단에 있는 네이버페이 "결제하기"버튼을 누르게 되면 네이버페이 서버는 지정된 URL로 상품정보가 올바른지(Validation), 구매 가능한 재고수량은 충분한지를 체크하기 위해 HTTP GET요청을 보내게 됩니다.  
