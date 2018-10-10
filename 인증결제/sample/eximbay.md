@@ -53,7 +53,7 @@ IMP.request_pay({
 });
 ```
 
-# 2. 변경 예정  
+# 2. 결제창 UX 변경  
 Eximbay 모듈 자체의 동작 변경으로 인하여, Eximbay 결제창이 나타나는 UX가 변경됩니다. ( 2018년 6월 1일부터 적용 )
 
 기존에는, `Iframe`을 통해 Eximbay 결제창이 나타나 결제진행이 되었지만 `Popup window` 를 통해 Eximbay 결제창이 나타나 결제진행되는 방식으로 변경됩니다. 
