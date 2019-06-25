@@ -92,3 +92,66 @@ ELSE IF payment_result.status == 'ready' AND payment.pay_method == 'vbank'
 ELSE
 	fail_post_process(payment_result) //결제실패 처리
 ```
+
+# 3. 에스크로 결제 연동  
+아임포트가 지원하는 모든 PG사는 `escrow : true`옵션을 주면 에스크로 결제 모드로 동작하게 되어있습니다.  
+KICC의 경우 현금성 결제수단(실시간계좌이체, 가상계좌)에 한하여 에스크로 결제모드가 지원되며, KICC의 에스크로 결제 정책상, `buyer_name`, `buyer_email`, `buyer_tel` 파라메터는 반드시 지정되어야 하며 빈 문자열이면 안됩니다.  
+
+```javascript
+IMP.request_pay({
+    pg : 'kicc', //웹표준 결제창 지원
+    escrow : true, //에스크로 결제인 경우 필요
+    pay_method : 'vbank', //trans(실시간계좌이체), vbank(가상계좌)
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+})
+```
+
+단, KICC 의 경우에는 상품별 부분배송의 경우를 고려하여 상품관련 정보를 추가적으로 전달해야할 필요가 있습니다.  
+공통 매뉴얼에는 정의되어있지 않지만 `kiccProducts`라는 파라메터를 활용해 전달해주셔야 합니다.  
+
+```javascript
+IMP.request_pay({
+    pg : 'kicc', //웹표준 결제창 지원
+    escrow : true, //에스크로 결제인 경우 필요
+    kiccProducts : [
+    	{
+			"orderNumber" : "xxxx",
+			"name" : "상품A",
+			"quantity" : 3,
+			"amount" : 1000
+		},
+		{
+			"orderNumber" : "yyyy",
+			"name" : "상품B",
+			"quantity" : 2,
+			"amount" : 3000
+		}
+	],
+    pay_method : 'vbank', //trans(실시간계좌이체), vbank(가상계좌)
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+})
+```
+
+`kiccProducts`는 array of object 형태이며, object는 다음과 같은 4개의 속성을 반드시 포함해야 합니다.  
+
+- orderNumber : 상품주문번호
+- name : 상품명
+- quantity : 수량
+- amount : 상품 가격
+
+위 정보는 다른 아임포트 결제 파라메터와 비교검증하지는 않지만 (kiccProducts.amount 의 합계와 IMP.request_pay()의 amount는 관련이 없습니다.) 
+kiccProducts 파라메터는 누락되면 에스크로 결제가 진행되지 않습니다.    
