@@ -68,17 +68,12 @@ IMP.request_pay({
 앱 내 WebView 연동
 ==================
 
-WebView를 통하여 웹 방식으로 결제가 진행되므로, 모바일 웹 결제 연동과 동일합니다. 결제를 위하여 차이(Terra) 앱으로 이동하는 경우 원래의 앱으로 복귀하기 위해 `app_scheme` 파라메터가 필요하다는 점만 다릅니다.
+WebView를 통하여 웹 방식으로 결제가 진행되므로, 모바일 웹 결제 연동과 동일합니다. 결제를 위하여 차이(Terra) 앱으로 이동하는 경우 원래의 앱으로 복귀하기 위해 `app_scheme` 파라메터가 필요하다는 점만 다릅니다.(타 PG사 연동 시 `app_scheme` 사용법과 동일합니다.)
 
-`app_scheme` 파라메터 역할
+`app_scheme` 파라메터 형식
 --------------------------
 
-다른 PG사 연동에서의 `app_scheme`파라메터 역할과 다소 차이가 있습니다.
+아래 2가지 형태를 모두 지원하고 있습니다.
 
--	타 PG사 : `app_scheme` 에 지정된 URL scheme 으로 복귀 호출
--	차이(Terra) : `app_scheme` 은 앱 결제임을 구분하는 Flag만 설정(차이-SDK문서의 isWeb : false 설정)하고, 실제 복귀 호출되는 URL scheme은 차이(Terra) 계약 시 등록하도록 되어있음
-
-앱 결제임을 구분하기 위한 flag 용도로 사용하므로 `app_scheme` 값은 실제 호출되는 URL scheme 과 관련없이 빈 값이 아니면 됩니다.
-
--	`app_scheme` is defined & not empty : 앱 결제로 인식
--	`app_scheme` is undefined or empty : 웹 결제로 인식
+-	iamporttest : URL scheme값만 지정하는 형태로 `://` 을 아임포트에서 지정하므로 `iamporttest://` 이 실제 호출됩니다.
+-	iamporttest://path?query : 앱을 통해 전달받을 파라메터를 함께 지정하는 형태로 지정된 `app_scheme` 그대로 호출이 이뤄집니다.
