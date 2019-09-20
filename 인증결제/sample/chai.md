@@ -77,3 +77,18 @@ WebView를 통하여 웹 방식으로 결제가 진행되므로, 모바일 웹 �
 
 -	iamporttest : URL scheme값만 지정하는 형태로 `://` 을 아임포트에서 지정하므로 `iamporttest://` 이 실제 호출됩니다.
 -	iamporttest://path?query : 앱을 통해 전달받을 파라메터를 함께 지정하는 형태로 지정된 `app_scheme` 그대로 호출이 이뤄집니다.
+
+차이(Terra) 앱 이동을 위한 whitelist 등록
+-----------------------------------------
+
+사용자의 선택에 따라 휴대폰에 설치된 차이(Terra) 앱으로 이동하여 결제프로세스를 진행할 수 있습니다. iOS의 경우 Info.plist 파일의 `LSApplicationQueriesSchemes` 에 아래의 URL scheme 을 추가해주어야 차이(Terra) 앱으로 이동이 이뤄질 수 있습니다.
+
+-	chaipayment
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <!-- 그 외 기타 필요한 scheme 추가 -->
+	<string>chaipayment</string>
+</array>
+```
