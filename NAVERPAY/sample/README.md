@@ -42,7 +42,21 @@ IMP.request_pay({
     				freeByThreshold : 20000
     			},
     			feePayType : "PREPAYED" //PREPAYED(선불), CASH_ON_DELIVERY(착불)
-    		}
+            },
+            supplements : [
+                {
+                    id : "supplement-a",
+                    name : "추가구성품 A",
+                    price : 1000,
+                    quantity : 1
+                },
+                {
+                    id : "supplement-b",
+                    name : "추가구성품 B",
+                    price : 1200,
+                    quantity : 2
+                }
+            ]
     	},
     	{
     		id : "optionProductId",
@@ -173,7 +187,7 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 	"shipping" : "object(of shipping)"    //상품 배송관련 상세 정보
 }
 ```
-Product는 `options`을 객체의 배열, `shipping` 을 객체로 관리합니다.  
+Product는 `options` 과 `supplements`를 객체의 배열, `shipping` 을 객체로 관리합니다.  
 
 ### Option  
 구매자가 **선택한 옵션**에 대한 상세 내용을 포함하고 있습니다.  
@@ -212,6 +226,20 @@ Product는 `options`을 객체의 배열, `shipping` 을 객체로 관리합니�
 	]
 }
 ```
+
+### Supplement  
+상품과 연관된 추가구성품를 포함하여 구매하는 경우, 추가구성품에 대한 상세 정보를 포함하고 있습니다.  
+하나의 상품에 여러 종류의 추가구성품이 포함될 수 있으므로 배열로 관리가 되며, 각각의 추가구성품 정보는 다음과 같은 구조를 가집니다.   
+
+```javascript
+{
+    id : "supplement-a",    //추가구성품의 ID
+    name : "추가구성품 A",    //추가구성품 상품명
+    price : 1000,           //추가구성품 가격
+    quantity : 1            //추가구성품 수량
+}
+```
+
 
 ### Shipping  
 
@@ -427,6 +455,15 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 ## 3.3 option 이해하기  
 구매자가 선택할 옵션이 있는 상품(예시의 optionProductId)의 경우, xml 응답을 통해 상품정보를 확인하는 과정에서 "구매불가"처리되어 중단되는 경우를 연동하는 단계에서 자주 확인할 수 있었습니다. 예시를 통해 대표적인 사례를 확인해보도록 하겠습니다.  
 
+옵션이 포함된 상품의 경우, XML 응답에서 아래와 같이 `optionSupport : true` 가 추가되어야 합니다.  
+
+```xml
+<product>
+    <optionSupport>true</optionSupport>
+    <!-- 다른 Node는 생략 -->
+</product>
+```
+
 ### 3.3.1 선택가능한 옵션이 2가지 이상인 경우  
 앞의 예시처럼, 신발 구매를 위해 색상-옵션과 사이즈-옵션을 모두 선택해야 구매가 가능한 상품의 경우 `옵션조합`에 대한 정보가 필수로 제공되어야 합니다.  
 
@@ -635,6 +672,72 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 		</options>
 	</combination>
 </option>
+```
+
+## 3.4 supplement 이해하기  
+
+구매상품에 추가구성품이 포함되어 구매되는 경우, XML 응답에서 아래와 같이 `supplementSupport : true` 가 추가되어야 합니다.  
+
+```xml
+<product>
+    <supplementSupport>true</supplementSupport>
+    <!-- 다른 Node는 생략 -->
+</product>
+```
+
+### 3.4.1 `IMP.request_pay()` 예시  
+
+아래와 같이 `naverProducts` 속성으로 상품에 대한 object 가 전달되었다고 하면, `singleProductId` 상품 1개와 추가구성품 2개 `supplement-a`, `supplement-b`를 함께 구매하는 경우입니다.  
+
+```javascript
+{
+    id : "singleProductId",
+    name : "네이버페이 상품1",
+    basePrice : 1000,
+    //다른 프로퍼티 생략
+    supplements : [
+        {
+            id : "supplement-a",
+            name : "추가구성품 A",
+            price : 1000, //1개당 구매 가격
+            quantity : 1
+        },
+        {
+            id : "supplement-b",
+            name : "추가구성품 B",
+            price : 1200, //1개당 구매 가격
+            quantity : 2
+        }
+    ]
+}
+```
+
+### 3.4.2 xml 응답 예시  
+
+`IMP.request_pay()` 호출 시 3.4.1과 같이 호출하였다면, 네이버페이 서버로부터 요청된 상품정보 XML 응답에는 아래와 같이 supplement node가 2개 추가된 상태로 응답을 하시면 됩니다.   
+
+```xml
+<product>
+    <id>singleProductId</id>
+    <name>상품singleProduct</name>
+    <basePrice>1000</basePrice>
+    <!-- 다른 Node는 생략 -->
+    <supplementSupport>true</supplementSupport>
+    <supplement>
+        <id>supplement-a</id>
+        <name>추가구성품 A</name>
+        <price>1000</price> <!-- 1개당 구매 가격 -->
+        <stockQuantity>24</stockQuantity> <!-- 현재 남아있는 구매가능 수량 재고 -->
+        <status>true</status> <!-- 추가구성품 판매 가능상태이면 true -->
+    </supplement>
+    <supplement>
+        <id>supplement-b</id>
+        <name>추가구성품 B</name>
+        <price>1200</price> <!-- 1개당 구매 가격 -->
+        <stockQuantity>24</stockQuantity> <!-- 현재 남아있는 구매가능 수량 재고 -->
+        <status>true</status> <!-- 추가구성품 판매 가능상태이면 true -->
+    </supplement>
+</product>
 ```
 
 
