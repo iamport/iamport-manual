@@ -1,10 +1,11 @@
-현재 제공되는 네이버페이 결제는, 구매자가 주문하는 상품정보가 연동되어야하는 (주문형)네이버페이 방식입니다. 상품정보 연동없이 결제기능만 제공되는 (결제형)네이버페이 방식은 추후 별도 지원될 수 있습니다.(시기는 미정)  
+현재 제공되는 네이버페이 결제는, 구매자가 주문하는 상품정보가 연동되어야하는 (주문형)네이버페이 방식입니다.   
+신규 서비스되는 (결제형)네이버페이 방식 사용에 대해서는 아임포트 고객센터(1670-5176 / cs@iamport.kr)로 문의주시면 입점가능심사 후 안내드리고 있습니다.  
 
 # 1. PC, 모바일 연동 공통  
 
 네이버페이 결제는 그 특성상 결제 완료 여부를 곧바로 전달받을 수 없어, 결제가 완료된 시점에 `IMP.request_pay(param, callback)`의 callback 함수가 호출되지 않습니다.  
 (단, 네이버페이 결제프로세스가 시작되기 전까지 데이터 검증 등에 실패하는 경우에는 callback 함수가 호출됩니다.)  
-같은 이유로 `m_redirect_url`파라메터도 동작하지 않습니다. 
+같은 이유로 `m_redirect_url`파라메터도 동작하지 않습니다.
 
 결제완료여부 연동에 대한 내용은 [4. 결제정보 동기화](#4-결제정보-동기화) 섹션을 참고해주세요.  
 
@@ -116,7 +117,7 @@ IMP.request_pay({
 ```
 
 ## 1.1 네이버 디자인 가이드  
-네이버페이 구매하기 기능은 네이버페이가 제공하는 SDK를 통해 지정된 디자인을 그대로 사용해 구현하셔야 합니다. 
+네이버페이 구매하기 기능은 네이버페이가 제공하는 SDK를 통해 지정된 디자인을 그대로 사용해 구현하셔야 합니다.
 ![](screenshot/naver-button.png)
 
 **네이버페이 버튼 UI생성을 위한 SDK**  
@@ -128,7 +129,7 @@ IMP.request_pay({
 <!-- 모바일용 -->
 <script type="text/javascript" src="//pay.naver.com/customer/js/mobile/naverPayButton.js"></script>
 ```
-위 스크립트 추가 후, 아래의 코드를 통해 지정된 HTML element에 네이버페이 버튼 UI가 생성되도록 호출할 수 있습니다. 
+위 스크립트 추가 후, 아래의 코드를 통해 지정된 HTML element에 네이버페이 버튼 UI가 생성되도록 호출할 수 있습니다.
 아래 코드는 HTML element를 네이버페이 버튼 UI로 변환할 뿐 자체적인 동작기능은 없습니다. 때문에 `NPay구매버튼 클릭`, `찜버튼 클릭`에 해당되는 핸들러를 직접 구현해주어야 합니다.  
 
 핸들러는 각각 `BUY_BUTTON_HANDLER`, `WISHLIST_BUTTON_HANDLER` 속성으로 지정할 수 있으며, 핸들러 내에서 아임포트 javascript API를 호출하면 됩니다.  
@@ -148,7 +149,7 @@ naver.NaverPayButton.apply({
 	},
 	WISHLIST_BUTTON_HANDLER : function() {
 		//중략
-		
+
 		//핸들러 내에서 아임포트 네이버페이 찜하기 함수 호출(iamport.payment-1.1.6.js부터 지원됨)
 		IMP.naver_zzim(param);
 	}
@@ -206,7 +207,7 @@ Product는 `options` 과 `supplements`를 객체의 배열, `shipping` 을 객�
 - 160mm
 - 170mm
 - 180mm(구매자가 선택함)
-  
+
 ```javascript
 {
 	optionQuantity : 2,     //해당 옵션이 선택된 상품의 구매수량
@@ -353,7 +354,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
          <feePrice>0</feePrice>
       </shippingPolicy>
    </product>
-   
+
    <!-- 옵션이 선택된 상품 -->
    <product>
       <id>optionProductId</id>
@@ -409,7 +410,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
                <text>180</text>
             </value>
          </optionItem>
-         
+
          <!-- 옵션 타입(optionItem)이 2가지 이상인 경우, 조합될 수 있는 경우의 수를 모두 나열 -->
          <!-- 옵션 타입(optionItem)이 1가지더라도, 옵션별로 가격이 달라질 수 있으면 모두 나열 -->
          <combination>
@@ -471,7 +472,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 
 `naverProducts.Product.option` 객체는 다음과 같은 값을 가집니다. **이 경우, 반드시 특정 옵션조합을 의미하는 `selectionCode`를 지정해야 합니다.(이 값은 `3.3.1.b`에서 `combination/manageCode`와 연결됩니다.)**    
 
-색상은 빨강, 사이즈는 180mm 옵션을 각각 선택한 것을 의미하며 
+색상은 빨강, 사이즈는 180mm 옵션을 각각 선택한 것을 의미하며
 
 ```javascript
 {
@@ -537,7 +538,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
            <text>180</text>
         </value>
      </optionItem>
-     
+
      <!-- 이하 combination 생략 -->
 </option>
 ```
@@ -625,7 +626,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
            <text>180</text>
         </value>
      </optionItem>
-     
+
      <!-- 이하 combination 생략 -->
 </option>
 ```
@@ -759,7 +760,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 네이버페이의 경우 일반 PG결제수단과 달리 `주문자 이름`, `주문자 전화번호`, `배송주소` 등의 정보가 네이버페이 결제단계에서 입력 및 확정됩니다.  
 또한, 조건별 배송비 부과 정책에 따라 실제 결제되는 금액이 결제단계에서 달라질 수 있습니다.  
 
-때문에, `IMP.request_pay(param)` 호출 시점에 전달되는 아래 파라메터는 실제 결제완료 후 동기화 단계에서 `보정(overwrite)`됩니다. 
+때문에, `IMP.request_pay(param)` 호출 시점에 전달되는 아래 파라메터는 실제 결제완료 후 동기화 단계에서 `보정(overwrite)`됩니다.
 
 - amount
 - buyer_name
@@ -822,7 +823,7 @@ IMP.request_pay({
 위 설정에 따라 실제 구매자가 결제한 금액은 상품금액 14000원 + 제주지역 추가배송비 4500원 = 18500원이 됩니다.  
 또한, 최초 전달된 "서울특별시 강남구 삼성동"이라는 주소 대신 "제주시 첨단로 123" 주소가 기입되었기 때문에 해당 정보도 변경이 필요합니다.  
 
-이에 따라 
+이에 따라
 
 - amount : 14000 -> 18500
 - buyer_addr : "서울특별시 강남구 삼성동" -> "제주시 첨단로 123"
