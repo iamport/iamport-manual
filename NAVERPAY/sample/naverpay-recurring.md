@@ -184,3 +184,31 @@ javascript 를 통해 결제고객 등록이 완료되더라도 승인처리는 
 ```
 customer_uid={가맹점의 결제 고객을 특정하는 Unique Key}&merchant_uid={가맹점 주문번호}&amount=10000&name=Slim 요금제(최초과금)
 ```
+
+
+# 3. 이용완료일 처리  
+
+결제하는 상품의 유형에 따라, 결제요청 시 이용완료일을 반드시 지정하도록 네이버페이-가맹점 간 계약되는 경우가 있습니다.  
+승인을 위한 아임포트 REST API 호출 시, `naverUseCfm` 라는 파라메터를 `extra` 필드로 전송해주셔야 합니다.(yyyyMMdd 형식의 문자열)  
+
+- 승인 요청 API : [/subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)
+- 일반 상품 대비 추가되는 파라메터 : extra.naverUseCfm
+- 형식 : yyyyMMdd 형식의 문자열. 결제 당일 또는 미래의 일자여야 함
+
+**예시(json)**
+```javascript
+{
+  "customer_uid" : "가맹점의 결제 고객을 특정하는 Unique Key", //결제고객 등록 시 사용된 customer_uid 와 같은 값
+  "merchant_uid" : "가맹점 주문번호",
+  "amount" : 10000,
+  "name" : "Slim 요금제(최초과금)",
+  "extra" : {
+    "naverUseCfm" : "20201001"
+  }
+}
+```
+
+**예시(form-urlencoded)**
+```
+customer_uid={가맹점의 결제 고객을 특정하는 Unique Key}&merchant_uid={가맹점 주문번호}&amount=10000&name=Slim 요금제(최초과금)&extra[naverUseCfm]=20201001
+```
