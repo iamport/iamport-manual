@@ -201,3 +201,44 @@ IMP.request_pay({
 ```
 imp_uid=imp_123412341234&amount=3000&extra[requester]=customer
 ```
+
+## 3.3 이용완료일 처리  
+
+결제하는 상품의 유형에 따라, 결제요청 시 이용완료일을 반드시 지정하도록 네이버페이-가맹점 간 계약되는 경우가 있습니다.  
+결제창 호출을 위한 아임포트 javascript 호출 시, `naverUseCfm` 라는 파라메터를 추가해주셔야 합니다.(yyyyMMdd 형식의 문자열)  
+
+- 형식 : yyyyMMdd 형식의 문자열. 결제 당일 또는 미래의 일자여야 함
+
+**예시(javascript)**
+```javascript
+IMP.request_pay({
+    pg : 'naverpay',
+    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    name : '주문명:결제테스트',
+    amount : 14000,
+    tax_free : 4000, //면세공급가액(누락되면 0원으로 처리)
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자이름',
+    buyer_tel : '010-1234-5678', //누락되면 이니시스 결제창에서 오류
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456',
+    naverUseCfm : '20201001', //이용완료일자 지정
+    naverPopupMode : true, //리디렉션모드 vs 팝업모드
+    naverProducts : [{ //상품정보(필수전달사항) 네이버페이 매뉴얼의 productItems 파라메터와 동일합니다.
+      "categoryType": "BOOK",
+            "categoryId": "GENERAL",
+            "uid": "107922211",
+            "name": "한국사",
+            "payReferrer": "NAVER_BOOK",
+            "count": 10
+        },
+        {
+            "categoryType": "MUSIC",
+            "categoryId": "CD",
+            "uid": "299911002",
+            "name": "러블리즈",
+            "payReferrer": "NAVER_BOOK",
+            "count": 1
+        }]
+}
+```
