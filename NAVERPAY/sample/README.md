@@ -35,6 +35,7 @@ IMP.request_pay({
     		quantity : 2,
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
+        giftName : "사은품A",
     		shipping : {
     			groupId : "shipping-a",
     			method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
@@ -66,6 +67,7 @@ IMP.request_pay({
     		taxType : 'TAX_FREE', //TAX or TAX_FREE
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
+        giftName : "사은품B",
     		options : [ //네이버페이 상품2에 대해서 빨강-170mm사이즈 3개와 빨강-180mm사이즈 2개: 총 5개 구매
     			{
     				optionQuantity : 3,
@@ -184,6 +186,7 @@ Full JSON schema 구조 : [naverProducts JSON Schema](naverpay-schema.md)
 	"quantity" : 2,  //상품구매수량
 	"infoUrl" : "http://www.iamport.kr/product/detail",    //상품상세페이지 URL
 	"imageUrl" : "http://www.iamport.kr/product/detail/thumbnail",   //상품 Thumbnail 이미지 URL
+  "giftName" : "사은품A", //해당상품 구매시 제공되는 사은품 명칭(없으면 정의하지 않음)
 	"options" : "array(of option)",     //구매자가 선택한 상품 옵션에 대한 상세 정보
 	"shipping" : "object(of shipping)"    //상품 배송관련 상세 정보
 }
@@ -345,6 +348,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
       <taxType />
       <infoUrl>http://www.iamport.kr/product/detail</infoUrl>
       <imageUrl>http://www.iamport.kr/product/detail/thumbnail</imageUrl>
+      <giftName>사은품A</giftName>
       <status>ON_SALE</status>
       <shippingPolicy>
          <groupId />
@@ -363,6 +367,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
       <taxType />
       <infoUrl>http://www.iamport.kr/product/detail</infoUrl>
       <imageUrl>http://www.iamport.kr/product/detail/thumbnail</imageUrl>
+      <giftName>사은품B</giftName>
       <status>ON_SALE</status>
       <shippingPolicy>
          <groupId />
@@ -801,6 +806,7 @@ IMP.request_pay({
     		quantity : 1,
     		infoUrl : "http://www.iamport.kr/product/detail",
     		imageUrl : "http://www.iamport.kr/product/detail/thumbnail",
+        giftName : "사은품A",
     		shipping : {
     			groupId : "shipping-a",
     			method : "DELIVERY", //DELIVERY(택배·소포·등기), QUICK_SVC(퀵 서비스), DIRECT_DELIVERY(직접 전달), VISIT_RECEIPT(방문 수령), NOTHING(배송 없음)
