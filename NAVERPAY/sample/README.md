@@ -846,24 +846,26 @@ IMP.request_pay({
 
 ```javascript
 IMP.naver_zzim({
-	naverProducts: [
-		{
-			"id" : "상품아이디",
-			"name" : "상품명",
-			"desc" : "상품상세설명",
-			"uprice" : 10000, //상품가격
-			"url" : "http://www.yourshop.com/product/123", //상품고유 URL
-			"image" : "http://www.yourshop.com/product/123/thumbnail" //상품 대표 썸네일이미지 URL
-		},
-		{
-			"id" : "상품아이디",
-			"name" : "상품명",
-			"desc" : "상품상세설명",
-			"uprice" : 10000, //상품가격
-			"url" : "http://www.yourshop.com/product/123", //상품고유 URL
-			"image" : "http://www.yourshop.com/product/123/thumbnail" //상품 대표 썸네일이미지 URL
-		}
-	]
+  naverProducts: [
+    {
+      "id" : "상품아이디",
+      "name" : "상품명",
+      "desc" : "상품상세설명",
+      "uprice" : 10000, //상품가격
+      "url" : "http://www.yourshop.com/product/123", //상품고유 URL
+      "thumb" : "http://www.yourshop.com/product/123/thumbnail", //상품 대표 썸네일이미지 URL
+      "image" : "http://www.yourshop.com/product/123/image" //상품 대표 메인이미지 URL
+    },
+    {
+      "id" : "상품아이디",
+      "name" : "상품명",
+      "desc" : "상품상세설명",
+      "uprice" : 10000, //상품가격
+      "url" : "http://www.yourshop.com/product/123", //상품고유 URL
+      "thumb" : "http://www.yourshop.com/product/123/thumbnail", //상품 대표 썸네일이미지 URL
+      "image" : "http://www.yourshop.com/product/123/image" //상품 대표 메인이미지 URL
+    }
+  ]
 });
 ```
 
