@@ -126,10 +126,10 @@ IMP.request_pay({
 
 ```html
 <!-- PC용 -->
-<script type="text/javascript" src="//pay.naver.com/customer/js/naverPayButton.js"></script>
+<script type="text/javascript" src="https://pay.naver.com/customer/js/naverPayButton.js"></script>
 
 <!-- 모바일용 -->
-<script type="text/javascript" src="//pay.naver.com/customer/js/mobile/naverPayButton.js"></script>
+<script type="text/javascript" src="https://pay.naver.com/customer/js/mobile/naverPayButton.js"></script>
 ```
 위 스크립트 추가 후, 아래의 코드를 통해 지정된 HTML element에 네이버페이 버튼 UI가 생성되도록 호출할 수 있습니다.
 아래 코드는 HTML element를 네이버페이 버튼 UI로 변환할 뿐 자체적인 동작기능은 없습니다. 때문에 `NPay구매버튼 클릭`, `찜버튼 클릭`에 해당되는 핸들러를 직접 구현해주어야 합니다.  
