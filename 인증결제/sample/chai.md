@@ -6,7 +6,7 @@
 테스트용 차이 앱
 ----------------
 
--	iOS : [다운로드-TestFlight](https://testflight.apple.com/join/BbNKLjl5)
+-	iOS : [다운로드-TestFlight](https://testflight.apple.com/join/ZgQIFce5)
 -	Android : [다운로드](https://static.chai.finance/app_build/app-dev-1.0.999+1100033.apk)
 
 테스트용 FAKE계좌
