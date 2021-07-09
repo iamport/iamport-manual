@@ -14,7 +14,7 @@ KG이니시스 웹표준 결제창을 통해 빌링키 발급이 진행되어야
 - 빌링용 merchantKey에 `b09LVzhuTGZVaEY1WmJoQnZzdXpRdz09` 입력  
 
 `param.customer_uid`를 지정하셔서 기존처럼 결제창 호출하시면 이니시스 빌링결제창이 나타납니다. 
-PC/모바일 모두 `IMP.request_pay(param, callback)`호출 후 callback으로 실행되니 이 점 참고부탁드립니다.(`m_redirect_url`이 사용되지 않음)
+PC의 경우 `IMP.request_pay(param, callback)`호출 후 callback으로 실행되고 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
 
 ## 2. 빌링키 발급을 위한 결제창 호출
 인증방식의 결제를 위해 `iamport.payment.js`의 `IMP.request_pay(param, callback)` 와 동일한 인터페이스를 사용합니다.  
