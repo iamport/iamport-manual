@@ -7,7 +7,7 @@
 ----------------
 
 -	iOS : [다운로드-TestFlight](https://testflight.apple.com/join/ZgQIFce5)
--	Android : [다운로드](https://static.chai.finance/app_build/app-dev-1.0.999+1100033.apk)
+-	Android : [다운로드](https://appdistribution.firebase.google.com/pub/i/8fef29de1f667252)
 
 테스트용 FAKE계좌
 -----------------
