@@ -9,7 +9,7 @@
 1. **카드사 심사 전 개발용 계정 설정** 버튼을 누르면 개발 계정 정보가 자동으로 입력됩니다.
 1. **저장** 버튼을 눌러 설정을 저장합니다.
 
-![아임포트 관리자 콘솔에서 PG설정](screenshot/settlebank-setting.png)
+![아임포트 관리자 콘솔에서 PG설정](../screenshot/settlebank-setting.png)
 
 
 ## 2. 일회성 결제 요청하기
