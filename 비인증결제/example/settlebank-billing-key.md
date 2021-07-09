@@ -14,7 +14,7 @@
 
 ## 2. 일회성 결제 요청하기
 
-REST API [/subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)을 호출하여 일회성 결제를 요청합니다. 이 경우에 카드 정보가 아임포트에 저장되지 않습니다.
+REST API [/subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)을 호출하여 일회성 결제를 요청합니다. 요청 시 전달된 카드는 아임포트에 등록되지 않습니다.
 
 ```
 curl -H "Content-Type: application/json" \   
