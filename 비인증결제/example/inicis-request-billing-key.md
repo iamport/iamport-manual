@@ -7,7 +7,7 @@ KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키
 1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
 1. **PG사 추가**를 누르면 나타나는 PG설정 탭의 **PG사**에 `KG이니시스(웹표준결제창)`를 선택합니다.
 1. **테스트모드(Sandbox)** 옵션을 `OFF`로 설정합니다.
-1. **PG상점아이디 (MID)**에 `INIBillTst`를 입력합니다.
+1. <b>PG상점아이디 (MID)</b>에 `INIBillTst`를 입력합니다.
 1. **웹표준결제 signKey**에 `SU5JTElURV9UUklQTEVERVNfS0VZU1RS`를 입력합니다.
 1. **빌링용 merchantKey**에 `b09LVzhuTGZVaEY1WmJoQnZzdXpRdz09`를 입력합니다.
 1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
