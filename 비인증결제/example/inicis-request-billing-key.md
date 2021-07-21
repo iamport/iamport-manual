@@ -1,8 +1,16 @@
 # KG이니시스 비인증 결제 연동 가이드
 
-KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다. REST API `/subscribe/payments/onetime`과 `/subscribe/customers/{customer_uid}`는 지원하지 않습니다.
+KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다. KG이니시스와 별도 협의된 가맹점은 키인결제([/subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime))와 빌링키 발급([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST API를 사용할 수 있습니다.
+<Br />
+
+자세한 내용은 다음의 정기결제 연동 가이드를 참고하세요.
+
+- [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)
+- [REST API로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-a)
 
 ## 1. PG 설정하기
+
+### 1.1 일반결제창 사용을 위한 PG 설정
 
 1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
 1. **PG사 추가**를 누르면 나타나는 PG설정 탭의 **PG사**에 `KG이니시스(웹표준결제창)`를 선택합니다.
@@ -14,11 +22,20 @@ KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키
 
 ![아임포트 관리자 콘솔에서 PG설정](../screenshot/inicis-setting.png)
 
+### 1.2 REST API 사용을 위한 PG 설정
+
+1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(정기결제 및 키인결제)](https://admin.iamport.kr/settings#tab_sbcr) 탭으로 이동합니다.
+1. **PG사 추가**를 누르면 나타나는 PG설정 탭의 **PG사**에 `KG이니시스(폼페이방식)`를 선택합니다.
+1. **카드사 심사 전 개발용 계정 설정** 버튼을 누르면 개발 계정 정보가 자동으로 입력됩니다.
+1. **저장** 버튼을 눌러 설정을 저장합니다.
+
+![아임포트 관리자 콘솔에서 PG설정](../screenshot/inicis-api-setting.png)
+
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다. 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요. PC의 경우 `IMP.request_pay(param, callback)`호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다. 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요. PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
 
-- `amount` : 빌링키 발급과 결제를 같이 하려면 실제 결제할 금액을 입력하고 [발급받은 빌링키로 결제 요청](#request-pay)을 합니다.
+- `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다.
 
 ```javascript
 IMP.request_pay({
