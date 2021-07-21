@@ -1,6 +1,10 @@
 # 차이(CHAI) 비인증 결제 연동 가이드
 
-비인증 결제 연동에 대한 자세한 내용은 [정기결제 연동 가이드](https://docs.iamport.kr/implementation/subscription?lang=ko#request-payment)를 참고하세요.
+차이의 간편결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.<Br />
+
+자세한 내용은 다음의 정기결제 연동 가이드를 참고하세요.
+
+- [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)
 
 ## 1. 준비하기
 

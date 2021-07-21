@@ -1,6 +1,11 @@
 # 세틀뱅크 비인증 결제 연동 가이드
 
 세틀뱅크는 아임포트 키인결제 REST API [/subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)를 사용하여 일회성 결제를 요청하거나 빌링키 발급과 최초 결제를 같이 요청할 수 있습니다. REST API `/subscribe/customers/{customer_uid}`를 사용하여 **별도로 빌링키 발급을 요청 할 수 없습니다**.
+<Br />
+
+자세한 내용은 다음의 정기결제 연동 가이드를 참고하세요.
+
+- [REST API로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-a)
 
 ## 1. PG 설정하기  
 
