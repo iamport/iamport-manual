@@ -94,6 +94,11 @@ ELSE
 ```
 
 # 3. 모바일 WebView 연동  
+
+> 아임포트에서 제공하는 네이티브 sdk 를 통해 아래 내용을 편리하게 연동하실 수 있습니다.  
+> - 아임포트 android SDK : [https://github.com/iamport/iamport-android](https://github.com/iamport/iamport-android)    
+> - 아임포트 iOS SDK : [https://github.com/iamport/iamport-ios](https://github.com/iamport/iamport-ios)
+
 ## 3.1 안드로이드  
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 거의 동일한 프로세스를 가지게 됩니다. 다만, 앱 간 이동을 위해 URL Scheme처리를 위한 Native Code가 추가로 필요하며, `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`파라메터를 통해 AndroidManifest.xml에 선언된 나의 scheme값을 지정해야 합니다.  
 
@@ -167,12 +172,10 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 </activity>
 ```
 
-보다 상세한 내용은 [KG이니시스용 안드로이드 샘플소스](http://www.github.com/iamport/iamport-inicis-android) 를 참고해주세요.  
+보다 상세한 내용은 [안드로이드 샘플소스](https://github.com/iamport/iamport-android) 를 참고해주세요.  
 
 ## 3.2 iOS  
-- 샘플 프로젝트(Swift) : [https://github.com/JosephNK/SwiftyIamport](https://github.com/JosephNK/SwiftyIamport)  
-- 샘플 프로젝트(Objective-C) : [https://github.com/iamport/iamport-inicis-ios](https://github.com/iamport/iamport-inicis-ios)
-
+- 샘플 프로젝트(Swift) : [https://github.com/iamport/iamport-ios](https://github.com/iamport/iamport-ios)  
 ### 3.2.1 URL Scheme  
 
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 거의 동일한 프로세스를 가지게 됩니다. 다만, 앱 간 이동을 위해 URL Scheme처리를 위한 Native Code가 추가로 필요하며, `IMP.request_pay(param, callback)`호출 시 `param.app_scheme`파라메터를 통해 `info.plist` 에 선언된 나의 `CFBundleURLSchemes` 값을 지정해야 합니다.(javascript는 안드로이드와 동일)  

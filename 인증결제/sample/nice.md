@@ -117,6 +117,10 @@ IMP.request_pay({
 
 # 3. 모바일 WebView 연동  
 
+> 아임포트에서 제공하는 네이티브 sdk 를 통해 아래 내용을 편리하게 연동하실 수 있습니다.  
+> - 아임포트 android SDK : [https://github.com/iamport/iamport-android](https://github.com/iamport/iamport-android)    
+> - 아임포트 iOS SDK : [https://github.com/iamport/iamport-ios](https://github.com/iamport/iamport-ios)
+
 앱간 연동을 위해 아래와 같이 `app_scheme`파라메터를 추가합니다. (그 외에는 모바일 브라우저 결제연동과 동일합니다)  
 
 ```javascript
@@ -138,7 +142,7 @@ IMP.request_pay({
 
 
 ## 3.1 안드로이드  
-- 샘플 프로젝트 : [https://github.com/iamport/iamport-nice-android](https://github.com/iamport/iamport-nice-android)  
+- 샘플 프로젝트 : [https://github.com/iamport/iamport-android](https://github.com/iamport/iamport-android)  
 
 앱 내 결제의 경우 WebView를 활용해 결제가 이뤄지기 때문에 모바일 브라우저와 동일한 프로세스를 가지게 됩니다. 다만, 다음과 같은 추가 처리가 필요합니다. 
 
@@ -226,8 +230,7 @@ if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 ```
 
 ## 3.2 iOS  
-- 샘플 프로젝트(Swift) : [https://github.com/JosephNK/SwiftyIamport](https://github.com/JosephNK/SwiftyIamport)  
-- 샘플 프로젝트(Objective-C) : [https://github.com/iamport/iamport-nice-ios](https://github.com/iamport/iamport-nice-ios)  
+- 샘플 프로젝트(Swift) : [https://github.com/iamport/iamport-ios](https://github.com/iamport/iamport-ios) 
 
 ### 3.2.1 URL Scheme  
 Xcode Build Info에 다음과 같이 `URL Scheme` 정의  
