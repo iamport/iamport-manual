@@ -1,29 +1,37 @@
-# 다날-휴대폰 빌링키 발급
-다날-휴대폰 결제창을 통해 최초 결제가 이루어짐과 동시에 빌링키가 발급됩니다.  
-(`/subscribe/customers/{customer_uid}` API 및 `/subscribe/payments/onetime`를 사용할 수 없음)  
-휴대폰 정기결제의 특성상 최초 결제된 금액과 동일한 날짜에 매월 재결제가 이루어져야 합니다(날짜 오차 5일 이내)  
+# 다날-휴대폰 정기결제(빌링) 연동 가이드 `결제창`
+ 
+다날-휴대폰 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청해야 합니다. 이후의 결제에 대해서는 발급받은 빌링키로 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.<Br />
 
+ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
 
-## 1. PG설정  
-다날-휴대폰 결제창을 통해 결제와 빌링키 발급이 진행되어야 하므로 아임포트 관리자 페이지의 시스템 설정 > PG설정(인증방식결제)에서 설정합니다.  
+## 1. PG 설정하기
 
-- 다날-휴대폰소액결제 선택
-- Sandbox를 On으로 변경
+1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
+1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `다날-휴대폰소액결제`를 선택합니다.
+1. <b>테스트모드(Sandbox)</b>를 `ON`으로 설정합니다.
+1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
 
+![아임포트 관리자 콘솔에서 PG설정](../screenshot/danal-phone-setting.png)
 
+## 2. 빌링키 발급 및 최초 결제 요청하기
 
-## 2. 빌링키 발급을 위한 결제창 호출
-인증방식의 결제를 위해 `iamport.payment.js`의 `IMP.request_pay(param, callback)` 와 동일한 인터페이스를 사용합니다.  
-*(다날 결제모듈은 PC와 모바일의 차이점이 없으므로 아래의 코드를 PC/모바일에서 모두 사용 가능합니다.)*  
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
+ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
+
+PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행됩니다.
+
+- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `danal`로 지정합니다.
+- `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
+- `amount` : 빌링키 발급과 최초 결제 승인이 되며 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.
 
 ```javascript
 IMP.request_pay({
 	pay_method : 'phone', // 'phone'만 지원됩니다.
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',
-	amount : 10000, // 빌링키 발급과 동시에 10,000원 결제승인이 이루어집니다. 다음 정기결제부터 10,000원 결제가 이뤄져야합니다. 
-	customer_uid : 'your-customer-unique-id', //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.
+	amount : 10000, // 빌링키 발급과 함께 10,000원 결제승인이 이루어집니다. 다음 정기결제부터 10,000원 결제가 이뤄져야합니다. 
+	customer_uid : 'your-customer-unique-id', // 필수 입력.
 	buyer_email : 'iamport@siot.do',
 	buyer_name : '아임포트',
 	buyer_tel : '02-1234-1234'
@@ -36,13 +44,12 @@ IMP.request_pay({
 });
 ```
 
+## 3. 빌링키로 결제 요청하기  
 
-## 3. 발급된 빌링키로 결제요청  
-빌링키 발급이 성공적으로 이루어지면, 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 보관됩니다.
-때문에, `customer_uid`를 전달하면 발급된 빌링키를 찾아 결제승인 요청을 진행하게 됩니다.
+빌링키 발급이 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
 
 ```
 curl -H "Content-Type: application/json" \   
-     -X POST -d '{"customer_uid":"your-customer-unique-id", "merchant_uid":"order_id_8237352", "amount":3000}' \
+     -X POST -d '{"customer_uid":"your-customer-unique-id", "merchant_uid":"order_id_8237352", "amount":10000}' \
      https://api.iamport.kr/subscribe/payments/again
 ```
