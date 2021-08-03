@@ -1,24 +1,34 @@
-# 다날-신용카드 빌링키 발급
-빌링키 발급을 위해 카드사에 카드정보를 전달할 때, 다날-신용카드의 결제창을 통해 직접 PG사로 전달하는 방식만 제공합니다.  
-(`/subscribe/customers/{customer_uid}` API 및 `/subscribe/payments/onetime`를 사용할 수 없음)
+# 다날-신용카드 정기결제(빌링) 연동 가이드 `결제창`
+
+다날-신용카드 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청하거나, 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.<Br />
+
+ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
 
 
-## 1. PG설정  
-다날-신용카드 빌링키 결제창을 통해 빌링키 발급이 진행되어야 하므로 아임포트 관리자 페이지의 시스템 설정 > PG설정(인증방식결제)에서 설정합니다.  
+## 1. PG 설정하기  
 
-![다날-신용카드 빌링 설정](../screenshot/danal-card-setting.png)
+1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
+1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `다날-신용카드/계좌이체/가상계좌`를 선택합니다.
+1. **테스트모드(Sandbox)** 옵션을 `ON`로 설정합니다.
+1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
 
-- 다날-신용카드/계좌이체/가상계좌 선택
-- Sandbox를 On으로 변경
+![아임포트 관리자 콘솔에서 PG설정](../screenshot/danal-card-setting.png)
 
+## 2. 빌링키 발급 요청하기
 
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
-## 2. 빌링키 발급을 위한 결제창 호출
-인증방식의 결제를 위해 `iamport.payment.js`의 `IMP.request_pay(param, callback)` 와 동일한 인터페이스를 사용합니다.  
-*(다날 결제모듈은 PC와 모바일의 차이점이 없으므로 아래의 코드를 PC/모바일에서 모두 사용 가능합니다.)*  
+ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
-### 2.1 빌링키 발급만 진행하는 경우(amount : 0)  
-amount는 0으로 지정하더라도, 다날 측에서 최초 10원을 테스트 성격으로 결제를 했다가 30분 쯤 후 자동 취소하게 됩니다. 
+PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행됩니다.
+
+- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `danal_tpay`로 지정합니다.
+- `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
+- `amount` : 빌링키 발급만 하는 경우 "0"으로 지정하고, 빌링키 발급과 최초 결제를 같이 요청하는 경우 가격을 지정합니다. 
+
+### 2.1 빌링키 발급만 요청하기(amount : 0)  
+
+amount를 0으로 지정한 경우, 다날에서 최초 10원 테스트 결제를 하고 30분 쯤 후 자동 취소됩니다.
 
 ```javascript
 IMP.request_pay({
@@ -26,7 +36,7 @@ IMP.request_pay({
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',
 	amount : 0, // 빌링키 발급만 진행하며 결제승인을 하지 않습니다.
-	customer_uid : 'your-customer-unique-id', //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.
+	customer_uid : 'your-customer-unique-id', // 필수 입력.
 	buyer_email : 'iamport@siot.do',
 	buyer_name : '아임포트',
 	buyer_tel : '02-1234-1234'
@@ -39,16 +49,17 @@ IMP.request_pay({
 });
 ```
 
-### 2.2 빌링키 발급 & 최초 결제를 동시에 진행하는 경우(amount : 가격지정)  
-다날 측에서 별도로 테스트결제(10원)를 수행하지 않으며, 실제 구매자로부터 지정된 금액을 결제받음과 동시에 빌링키 발급을 진행합니다.  
+### 2.2 빌링키 발급 및 최초 결제 요청하기(amount : 가격지정)  
+
+amount에 가격을 지정한 경우, 다날에서 테스트 결제(10원)를 수행하지 않습니다.
 
 ```javascript
 IMP.request_pay({
 	pay_method : 'card', // 'card'만 지원됩니다.
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',
-	amount : 1004, // 빌링키 발급과 동시에 1,004원 결제승인을 시도합니다.
-	customer_uid : 'your-customer-unique-id', //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.
+	amount : 1004, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.
+	customer_uid : 'your-customer-unique-id', // 필수 입력.
 	buyer_email : 'iamport@siot.do',
 	buyer_name : '아임포트',
 	buyer_tel : '02-1234-1234'
@@ -61,10 +72,9 @@ IMP.request_pay({
 });
 ```
 
+## 3. 빌링키로 결제 요청하기
 
-## 3. 발급된 빌링키로 결제요청  
-빌링키 발급이 성공적으로 이루어지면, 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 보관됩니다.
-때문에, `customer_uid`를 전달하면 발급된 빌링키를 찾아 결제승인 요청을 진행하게 됩니다.
+빌링키 발급이 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
 
 ```
 curl -H "Content-Type: application/json" \   

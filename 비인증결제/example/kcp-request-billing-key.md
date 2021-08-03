@@ -1,29 +1,31 @@
-# KCP 빌링키 발급
-빌링키 발급을 위해 카드사에 카드정보를 전달할 때, KCP의 웹표준 결제창/모바일 결제창을 통해 직접 PG사로 전달하는 방식만 제공합니다.  
-(`/subscribe/payments/onetime`, `/subscribe/customers/{customer_uid}` API를 사용할 수 없음)
+# NHN KCP 정기결제(빌링) 연동 가이드 `결제창`
 
+KCP의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다. 
 
-## 1. PG설정  
-KCP 웹표준 결제창을 통해 빌링키 발급이 진행되어야 하므로 아임포트 관리자 페이지의 시스템 설정 > PG설정(인증방식결제)에서 설정합니다.  
-![KCP 빌링 설정](../screenshot/kcp-setting.png)
+ℹ️  자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
 
-- KCP 빌링결제 선택  
-- Sandbox를 Off로 변경  
-- 사이트코드에 KCP에서 발급받으신 사이트코드 입력  
-- 사이트키에 KCP에서 발급받으신 사이트키 입력  
-- 배치결제그룹아이디는 [설정 매뉴얼](http://www.iamport.kr/download/kcp-billing.pdf)에 따라 생성 후 입력  
+ℹ️  KCP와 별도 협의된 가맹점은 REST API를 사용하여 정기결제(빌링)를 연동할 수 있습니다. 해당 내용은 [KCP 정기결제(빌링) 연동 가이드 (REST API 방식)](/비인증결제/example/kcp-api-billing-key.md)을 참고하세요.
 
-`param.customer_uid`를 지정하셔서 KCP일반결제와 같이 결제창 호출하시면 KCP 빌링결제창이 나타납니다.   
-KCP일반결제와 마찬가지로 PC의 경우 `IMP.request_pay(param, callback)`호출 후 callback으로 실행되나 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.  
+## 1. PG 설정하기
 
-## 2. 빌링키 발급을 위한 결제창 호출
-인증방식의 결제를 위해 `iamport.payment.js`의 `IMP.request_pay(param, callback)` 와 동일한 인터페이스를 사용합니다.  
-*(파라메터 등의 정보는 [인증결제](https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C) 매뉴얼 내용을 참고해주세요.)*  
+1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
+1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `NHN KCP 빌링결제(엔에이치엔한국사이버결제)`를 선택합니다.
+1. **테스트모드(Sandbox)** 옵션을 `ON`로 설정합니다.
+1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
 
-**amount필드는 결제창에 금액표시용으로만 사용되며 실제 해당 금액으로 승인이 이뤄지지는 않습니다. 빌링키 발급과 동시에 결제를 진행하려면 amount 필드에 금액 파라메터를 전달하여 결제창에 결제될 금액이 표시되도록하고 빌링키 발급과 동시에 `/subscribe/payments/again` API를 호출하여 결제승인처리를 하면 구매자로하여금 혼선이 없습니다.**  
+![아임포트 관리자 콘솔에서 PG설정](../screenshot/kcp-setting.png)
 
+## 2. 빌링키 발급 요청하기
 
-### 빌링키 발급 결제창 호출  
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+
+ℹ️  자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
+
+PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
+
+- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `kcp`로 지정합니다.
+- `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
+- `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다. 빌링키 발급과 함께 최초 결제를 하려면, 결제창에 금액이 표시되도록 금액을 지정하고 발급받은 [빌링키로 결제 요청](#request-pay)을 합니다.
 
 ```javascript
 IMP.request_pay({
@@ -32,10 +34,11 @@ IMP.request_pay({
 	merchant_uid : 'merchant_' + new Date().getTime(),
 	name : '최초인증결제',
 	amount : 0, // 결제창에 표시될 금액. 실제 승인이 이뤄지지는 않습니다. (PC에서는 가격이 표시되지 않음)
-	customer_uid : 'your-customer-unique-id', //customer_uid 파라메터가 있어야 빌링키 발급을 시도합니다.
+	customer_uid : 'your-customer-unique-id', // 필수 입력.
 	buyer_email : 'iamport@siot.do',
 	buyer_name : '아임포트',
-	buyer_tel : '02-1234-1234'
+	buyer_tel : '02-1234-1234',
+	m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 }, function(rsp) {
 	if ( rsp.success ) {
 		alert('빌링키 발급 성공');
@@ -45,10 +48,11 @@ IMP.request_pay({
 });
 ```
 
+<a name="request-pay" />
 
-## 3. 발급된 빌링키로 결제요청  
-빌링키 발급이 성공적으로 이루어지면, 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 보관됩니다.  
-때문에, `customer_uid`를 전달하면 발급된 빌링키를 찾아 결제승인 요청을 진행하게 됩니다.  
+## 3. 빌링키로 결제 요청하기  
+
+빌링키 발급이 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
 
 ```
 curl -H "Content-Type: application/json" \   
