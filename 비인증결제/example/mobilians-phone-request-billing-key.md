@@ -6,13 +6,7 @@ KG모빌리언스-휴대폰 결제창을 통해서 빌링키 발급과 최초 �
 
 ## 1. PG 설정하기
 
-1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
-1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `모빌리언스`를 선택합니다.
-1. <b>테스트모드(Sandbox)</b>를 `ON`으로 설정합니다.
-1. **서비스 ID**에 `170622040674`를 입력합니다.
-1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
-
-![아임포트 관리자 콘솔에서 PG설정](../screenshot/mobilians-phone-setting.png)
+<a href="https://guide.iamport.kr/1e4b6360-ba3e-4715-ac63-f9dc7bb103d9" target="_blank">KG모빌리언스 정기결제 테스트 모드 설정</a> 페이지를 참고하여 PG 설정을 합니다.
 
 ## 2. 빌링키 발급 및 최초 결제 요청하기
 [IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.

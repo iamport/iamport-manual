@@ -8,13 +8,7 @@ KG이니시스와 별도 협의된 가맹점은 키인결제([POST /subscribe/pa
 
 ## 1. PG 설정하기
 
-1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(정기결제 및 키인결제)](https://admin.iamport.kr/settings#tab_sbcr) 탭으로 이동합니다.
-1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `KG이니시스(폼페이방식)`를 선택합니다.
-1. **카드사 심사 전 개발용 계정 설정** 버튼을 누르면 개발 계정 정보가 자동으로 입력됩니다.
-1. 하단에 **저장** 버튼을 눌러 설정을 저장합니다.
-
-![아임포트 관리자 콘솔에서 PG설정](../screenshot/inicis-api-setting.png) 
-
+<a href="https://guide.iamport.kr/005331e6-be5d-4cc1-a547-9e78416b77e9" target="_blank">KG이니시스 정기결제 테스트 모드 설정</a> 페이지의 **2) REST API 방식**의 내용를 참고하여 PG 설정을 합니다.
 
 ## 2. 일회성 결제 요청하기
 
