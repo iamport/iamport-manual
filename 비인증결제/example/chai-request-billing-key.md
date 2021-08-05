@@ -4,35 +4,9 @@
 
 ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
 
-## 1. 준비하기
+## 1. PG 설정하기
 
-### 1.1 테스트용 CHAI 앱 설치하기
-
-차이에서 제공하는 테스트용 앱을 설치합니다.
-
-- Android : [https://appdistribution.firebase.dev/i/8fef29de1f667252](https://appdistribution.firebase.dev/i/8fef29de1f667252)
-  - staging 앱을 설치
-- iOS : [https://testflight.apple.com/join/ZgQIFce5](https://testflight.apple.com/join/ZgQIFce5)
-  - 앱의 오른쪽 엣지에서 왼쪽으로 swipe 후, staging 설정
-
-### 1.2 테스트용 Fake 계좌 등록하기
-
-CHAI 앱에 테스트용 fake 계좌를 등록합니다.<Br />
-
-여러명의 사용자가 하나의 fake 계좌를 중복으로 등록할 수 있습니다.
-
-![테스트용 fake 계좌 리스트](../screenshot/fake-accounts.png)  
-
-### 1.3 PG 설정하기
-
-1. [아임포트 관리자 콘솔 > 시스템 설정 > PG설정(일반결제 및 정기결제)](https://admin.iamport.kr/settings#tab_pg) 탭으로 이동합니다.
-1. 기본 PG사 탭 또는 **PG사 추가**를 누르면 나타나는 추가 PG사 탭의 **PG사**에 `[간편결제] 차이`를 선택합니다.
-1. <b>테스트모드(Sandbox)</b>를 `ON`으로 설정합니다.
-1. **public_api_key**에 차이에서 발급받은 `public API 키`를 입력합니다.
-1. **private_api_key**에 차이에서 발급받은 `private API 키`를 입력합니다.
-1. 하단에 **전체 저장** 버튼을 눌러 설정을 저장합니다.
-
-![아임포트 관리자 콘솔에서 PG설정](../screenshot/chai-setting.png)
+<a href="https://guide.iamport.kr/195ae9aa-d862-4fb6-a637-3065c3dae1e7" target="_blank">차이 정기결제 테스트 모드 설정</a> 페이지를 참고하여 PG 설정을 합니다.
 
 ## 2. 빌링키 발급 요청하기
 
