@@ -7,7 +7,7 @@
 
 ## 1. PG 설정하기  
 
-<a href="https://guide.iamport.kr/4b665e59-9e49-4759-9515-e18288f0ba9d" target="_blank">다날 정기결제 테스트 모드 설정</a> 페이지의 **1) 카드 정기결제**의 내용을 참고하여 PG 설정을 합니다.
+<a href="https://guide.iamport.kr/4b665e59-9e49-4759-9515-e18288f0ba9d" target="_blank">다날 정기결제 테스트 모드 설정</a> 페이지의 **1) 일반결제**의 내용을 참고하여 PG 설정을 합니다.
 
 ## 2. 빌링키 발급 요청하기
 
