@@ -1,6 +1,6 @@
 # Kakao Pay Subscription (Billing) Integration Guide `Payment Window`
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/kakaopay-request-billing-key.md">KO</a>
+:globe_with_meridians: [KO](../kakaopay-request-billing-key.md)
 
 You can either request for a billing key or billing key + initial payment through the Kakao Pay payment window and then request subsequent payments with the billing key.<Br />
 

@@ -1,6 +1,6 @@
 # Payco Subscription (Billing) Integration Guide `Payment Window`
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/payco-request-billing-key.md">KO</a>
+:globe_with_meridians: [KO](../payco-request-billing-key.md)
 
 You can request for a billing key through the Payco simple payment window and then request subsequent paymentsayment with the billing key.<Br />
 

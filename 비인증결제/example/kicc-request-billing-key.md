@@ -10,7 +10,7 @@ KICC의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을
 
 ## 2. 빌링키 발급 요청하기
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/en/kicc-request-billing-key.md">EN</a>
+:globe_with_meridians: [EN](./en/kicc-request-billing-key.md)
 
 [IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 

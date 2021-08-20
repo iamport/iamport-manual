@@ -1,6 +1,6 @@
 # JTNet 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/en/jtnet-request-billing-key.md">EN</a>
+:globe_with_meridians: [EN](./en/jtnet-request-billing-key.md)
 
 JTNet의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청하거나, 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.
 

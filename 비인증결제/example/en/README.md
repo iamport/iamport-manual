@@ -1,6 +1,6 @@
 # Subscription Payment (Billing) Integration by PG
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/README.md">KO</a>
+:globe_with_meridians: [KO](../../README.md)
 
 To make a payment at a desired time, such as subscriptions, recurring payments or pay-as-you-go billing, the customer's card information must be submitted to the credit card company. Using the card information, the credit card company issues a billing key, a payment encryption key that maps to the card information, to enable subsequent payments.<Br />
 

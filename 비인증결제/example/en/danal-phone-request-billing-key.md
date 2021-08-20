@@ -1,6 +1,6 @@
 # Danal-Mobile Subscription (Billing) Integration Guide `Payment Window`
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/danal-phone-request-billing-key.md">KO</a>
+:globe_with_meridians: [KO](../danal-phone-request-billing-key.md)
 
 You can request for a billing key and initial payment together through the Danal-Mobile payment window. Subsequent payments using the billing key must be for the same amount and within 5 days of the day of the initial payment on monthly basis.<Br />
 

@@ -1,6 +1,6 @@
 # NICE Payments Subscription (Billing) Integration Guide `REST API`
 
-:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/nice-api-billing-key.md">KO</a>
+:globe_with_meridians: [KO](../nice-api-billing-key.md)
 
 NICE Payments supports key-in payment ([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)) and billing key request ([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST APIs for subscription (billing) payment integration. NICE Payments does not support payment window method for subscription payment integration.<Br />
 
