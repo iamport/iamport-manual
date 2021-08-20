@@ -28,7 +28,7 @@ As each PG supports different subscription integration methods and settings, ple
 - [Kakao Pay](./kakaopay-request-billing-key.md)
 - [CHAI](./chai-request-billing-key.md)
 - [KG Mobilians](./mobilians-phone-request-billing-key.md)
-- [Naver Pay](/NAVERPAY/sample/naverpay-recurring.md)
+<!--- - [Naver Pay](/NAVERPAY/sample/naverpay-recurring.md) -->
 
 ### REST API Method
 
