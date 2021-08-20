@@ -18,24 +18,24 @@ As each PG supports different subscription integration methods and settings, ple
 
 ### Payment Window Method
 
-- [Danal (Credit Card)](./example/en/danal-card-request-billing-key.md)
-- [Danal (Mobile)](./example/en/danal-phone-request-billing-key.md)
-- [NHN KCP](./example/en/kcp-request-billing-key.md)
-- [KG INICIS](./example/en/inicis-request-billing-key.md)
-- [JTNet](./example/en/jtnet-request-billing-key.md)
-- [KICC](./example/en/kicc-request-billing-key.md)
-- [Payco](./example/en/payco-request-billing-key.md)
-- [Kakao Pay](./example/en/kakaopay-request-billing-key.md)
-- [CHAI](./example/en/chai-request-billing-key.md)
-- [KG Mobilians](./example/en/mobilians-phone-request-billing-key.md)
+- [Danal (Credit Card)](./danal-card-request-billing-key.md)
+- [Danal (Mobile)](./danal-phone-request-billing-key.md)
+- [NHN KCP](./kcp-request-billing-key.md)
+- [KG INICIS](./inicis-request-billing-key.md)
+- [JTNet](./jtnet-request-billing-key.md)
+- [KICC](./kicc-request-billing-key.md)
+- [Payco](./payco-request-billing-key.md)
+- [Kakao Pay](./kakaopay-request-billing-key.md)
+- [CHAI](./chai-request-billing-key.md)
+- [KG Mobilians](./mobilians-phone-request-billing-key.md)
 - [Naver Pay](/NAVERPAY/sample/naverpay-recurring.md)
 
 ### REST API Method
 
-- [NICE Payments](./example/en/nice-api-billing-key.md)
-- [NHN KCP](./example/en/kcp-api-billing-key.md)
-- [KG INICIS](./example/en/inicis-api-billing-key.md)
-- [JTNet](./example/en/jtnet-api-billing-key.md)
-- [Settlebank](./example/en/settlebank-api-billing-key.md)
+- [NICE Payments](./nice-api-billing-key.md)
+- [NHN KCP](./kcp-api-billing-key.md)
+- [KG INICIS](./inicis-api-billing-key.md)
+- [JTNet](./jtnet-api-billing-key.md)
+- [Settlebank](./settlebank-api-billing-key.md)
 
 
