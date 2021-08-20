@@ -1,47 +1,53 @@
-# 다날-휴대폰 정기결제(빌링) 연동 가이드 `결제창`
- 
-다날-휴대폰 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청해야 합니다. 이후의 결제에 대해서는 발급받은 빌링키로 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.<Br />
+# Danal-Mobile Subscription (Billing) Integration Guide `Payment Window`
 
-ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
+:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/danal-phone-request-billing-key.md">KO</a>
 
-## 1. PG 설정하기
+You can request for a billing key and initial payment together through the Danal-Mobile payment window. Subsequent payments using the billing key must be for the same amount and within 5 days of the day of the initial payment on monthly basis.<Br />
 
-<a href="https://guide.iamport.kr/4b665e59-9e49-4759-9515-e18288f0ba9d" target="_blank">다날 정기결제 테스트 모드 설정</a> 페이지의 **2) 휴대폰 소액결제**의 내용을 참고하여 PG 설정을 합니다.
+ℹ️ For more information, refer to the [Register card and get billing key > Payment window](https://docs.iamport.kr/en-US/implementation/subscription#issue-billing-b) section of the Subscription Payments guide.
 
-## 2. 빌링키 발급 및 최초 결제 요청하기
+## 1. Set up PG
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+Use the **2) Mobile Micropayments** section of the following guide to set up Danal-Mobile as PG in test mode:
+- <a href="https://guide.iamport.kr/4b665e59-9e49-4759-9515-e18288f0ba9d" target="_blank">Danal Subscription Test Mode Configuration</a>
 
-ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
+## 2. Request billing key
 
-PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행됩니다.
+To open the payment window for billing key request, call [IMP.request_pay(param, callback)](https://docs.iamport.kr/en-US/tech/imp#request_pay).
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `danal`로 지정합니다.
-- `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
-- `amount` : 빌링키 발급과 최초 결제 승인이 되며 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.
+In both PC and mobile browsers, callback is invoked after calling `IMP.request_pay(param, callback)`.
+
+- `pg` : 
+	- If not specified and this is the only PG setting that exists, `default PG` is automatically set. 
+	- If there are multiple PG settings, set to `danal`.
+- `customer_uid` : must be specified for billing key registration.
+- `amount` : must be specified.
+	- Requests both billing key + initial payment.
+	- Subsequent payments using the billing key must be for the same amount and within 5 days of the day of the initial payment on monthly basis.
 
 ```javascript
 IMP.request_pay({
-	pay_method : 'phone', // 'phone'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
-	name : '최초인증결제',
-	amount : 10000, // 빌링키 발급과 함께 10,000원 결제승인이 이루어집니다. 다음 정기결제부터 10,000원 결제가 이뤄져야합니다. 
-	customer_uid : 'your-customer-unique-id', // 필수 입력.
-	buyer_email : 'iamport@siot.do',
-	buyer_name : '아임포트',
+	pg : 'danal',
+	pay_method : 'phone', // only 'phone' supported.
+	merchant_uid : '{Order ID}', // Example: issue_billingkey_monthly_0001
+	name : 'Order name: Billing key request test',
+	amount : 10000,
+	customer_uid : '{Unique ID for the card (billing key)}', // Required (Example: gildong_0001_1234)
+	buyer_email: "johndoe@gmail.com",
+    buyer_name: "John Doe",
 	buyer_tel : '02-1234-1234'
 }, function(rsp) {
 	if ( rsp.success ) {
-		alert('빌링키 발급 성공');
+		alert('Success');
 	} else {
-		alert('빌링키 발급 실패');
+		alert('Failed');
 	}
 });
 ```
 
-## 3. 빌링키로 결제 요청하기  
+## 3. Request payment with billing key
 
-빌링키 발급이 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
+After successfully getting the billing key, the billing key is stored on the i'mport server using the specified `customer_uid` as the unique key. For security reasons, the server cannot directly access the billing key. Subsequent payments can be requested by calling the REST API([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) with the `customer_uid` as follows:
 
 ```
 curl -H "Content-Type: application/json" \   

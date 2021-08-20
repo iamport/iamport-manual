@@ -1,51 +1,55 @@
-# KICC 정기결제(빌링) 연동 가이드 `결제창`
+# KICC Subscription (Billing) Integration Guide `Payment Window`
 
-KICC의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.
+:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/kicc-request-billing-key.md">KO</a>
 
-ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
+You can request for a billing key through the KICC payment window and then request subsequent paymentsayment with the billing key.<Br />
 
-## 1. PG 설정하기
+ℹ️ For more information, refer to the [Register card and get billing key > Payment window](https://docs.iamport.kr/en-US/implementation/subscription#issue-billing-b) section of the Subscription Payments guide.
 
-<a href="https://guide.iamport.kr/98b6d582-0dd2-43e0-95bd-037c5e05b416" target="_blank">KICC 정기결제 테스트 모드 설정</a> 페이지를 참고하여 PG 설정을 합니다.
+## 1. Set up PG
 
-## 2. 빌링키 발급 요청하기
+Use the following guide to set up KICC as PG in test mode:
+- <a href="https://guide.iamport.kr/98b6d582-0dd2-43e0-95bd-037c5e05b416"  target="_blank">KICC Subscription Test Mode Configuration</a>
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+## 2. Request billing key
 
-ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
+To open the payment window for billing key request, call [IMP.request_pay(param, callback)](https://docs.iamport.kr/en-US/tech/imp#request_pay).
 
-PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
+In PC browsers, callback is invoked after calling `IMP.request_pay(param, callback)`. In mobile browsers, the page is redirected to  `m_redirect_url`.
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `kicc`로 지정합니다.
-- `customer_uid`: 빌링키 등록을 위해서 지정해야 합니다.
-- `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다. 빌링키 발급과 함께 최초 결제를 하려면, 결제창에 금액이 표시되도록 금액을 지정하고 발급받은 [빌링키로 결제 요청](#request-pay)을 합니다.
+- `pg` : 
+	- If not specified and this is the only PG setting that exists, `default PG` is automatically set. 
+	- If there are multiple PG settings, set to `kicc`.
+    - If you have multiple merchant IDs (each for general and subscription) issued by KICC, set to `kicc.{Merchant ID}`
+- `customer_uid` : must be specified for billing key registration.
+- `amount` : amount to display in the payment window without processing payment approval. To make the initial payment after getting the billing key, specify the amount to display in the payment window and then [request payment using the billing key](#request-pay).
 
 ```javascript
 IMP.request_pay({
-   pg : 'kicc.{빌링상점아이디}', // 각각의 상점아이디로 일반결제와 빌링결제를 동시에 이용할 경우 빌링상점아이디를 지정해야 합니다.
-	pay_method : 'card', // 'card'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
-	name : '최초인증결제',
-	amount : 1000, // 결제창에 표시될 금액. 실제 승인이 이뤄지지는 않습니다.
-	customer_uid : 'your-customer-unique-id', // 필수 입력.
-	buyer_email : 'iamport@siot.do',
-	buyer_name : '아임포트',
+	pg : 'kicc',
+	pay_method : 'card', // only 'card' supported.
+	merchant_uid : '{Order ID}', // Example: issue_billingkey_monthly_0001
+	name : 'Order name: Billing key request test',
+	amount : 0, // For display purpose only (no payment approval).
+	customer_uid : '{Unique ID for the card (billing key)}', // Required (Example: gildong_0001_1234)
+	buyer_email: "johndoe@gmail.com",
+    buyer_name: "John Doe",
 	buyer_tel : '02-1234-1234',
-	m_redirect_url : "https://yourservice.com/mobile/billing/landing" //모바일에서 빌링키 발급 후 이동할 URL
+	m_redirect_url : '{redirect URL}' // Example: https://www.my-service.com/payments/complete/mobile (for mobile only)
 }, function(rsp) {
 	if ( rsp.success ) {
-		alert('빌링키 발급 성공');
+		alert('Success');
 	} else {
-		alert('빌링키 발급 실패');
+		alert('Failed');
 	}
 });
 ```
 
 <a name="request-pay" />
 
-## 3. 빌링키로 결제 요청하기
+## 3. Request payment with billing key
 
-빌링키 발급이 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
+After successfully getting the billing key, the billing key is stored on the i'mport server using the specified `customer_uid` as the unique key. For security reasons, the server cannot directly access the billing key. Subsequent payments can be requested by calling the REST API([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) with the `customer_uid` as follows:
 
 ```
 curl -H "Content-Type: application/json" \   

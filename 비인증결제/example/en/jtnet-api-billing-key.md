@@ -1,27 +1,31 @@
-# JTNet 정기결제(빌링) 연동 가이드 `REST API`
+# JTNet Subscription (Billing) Integration Guide `REST API`
 
-JTNet는 아임포트 키인결제([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime))와 빌링키 발급([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST API를 사용할 수 있습니다<Br />
+:globe_with_meridians: <a href="https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/jtnet-api-billing-key.md">KO</a>
 
-ℹ️ 자세한 내용은 [REST API 방식으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
+JTNet supports key-in payment ([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)) and billing key request ([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST APIs for subscription (billing) payment integration.<Br />
 
-ℹ️ 결제창을 통한 정기결제(빌링) 연동에 대한 내용은 [JTNet 정기결제(빌링) 연동 가이드 (결제창 방식)](/비인증결제/example/jtnet-request-billing-key.md)을 참고하세요.
+ℹ️ For more information, refer to the [Register card and get billing key > REST API](https://docs.iamport.kr/en-US/implementation/subscription#issue-billing-a) section of the Subscription Payments guide.
 
-## 1. PG 설정하기
+ℹ️ For information about integrating subscription payment (billing) using payment window, refer to the [JTNet Subscription (Billing) Integration Guide (Payment Window)](./jtnet-request-billing-key.md).
 
-<a href="https://guide.iamport.kr/84ffdcba-3a54-47a7-be49-c04593977e22" target="_blank">JTNet 정기결제 테스트 모드 설정</a> 페이지의 **2) REST API 방식**의 내용를 참고하여 PG 설정을 합니다.
+## 1. Set up PG
 
-## 2. 일회성 결제 요청하기
+Use the **2) REST API** section of the following guide to set up JTNet as PG in test mode:
+- <a href="https://guide.iamport.kr/84ffdcba-3a54-47a7-be49-c04593977e22" target="_blank">JTNet Subscription Test Mode Configuration</a>
 
-REST API [POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)을 호출하여 일회성 결제를 요청합니다. 요청 시 전달된 카드는 아임포트에 등록되지 않습니다.
+## 2. Request one-time payment
+
+To request a one-time payment, use the key-in REST API [POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime). The card information is not saved during this process.
 
 ```
 curl -H "Content-Type: application/json" \   
      -X POST -d '{"merchant_uid":"order_id_8237352", "card_number":"1234-1234-1234-1234", "expiry":"2019-01", "birth":"123456", "amount":3000}' \
      https://api.iamport.kr/subscribe/payments/onetime
 ```
-## 3. 빌링키 발급 요청하기
 
-REST API [POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)를 호출하여 빌링키 발급을 요청합니다.
+## 3. Request billing key
+
+To request a billing key, use the billing key request REST API [POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save).
 
 ```
 curl -H "Content-Type: application/json" \   
@@ -29,22 +33,21 @@ curl -H "Content-Type: application/json" \
      https://api.iamport.kr/subscribe/customers/your-customer-unique-id
 ```     
 
-## 4. 빌링키 발급 및 최초 결제 요청하기  
+## 4. Request billing key + initial payment  
 
-REST API [POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime)을 호출하여 빌링키 발급과 최초 결제를 요청합니다.
+To request a billing key and initial payment, use the key-in REST API [POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime) with the following parameter specified.
 
-- `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
+- `customer_uid` : Unique ID for the card (billing key)
 
 ```
 curl -H "Content-Type: application/json" \   
-     -X POST -d '{"customer_uid":"your-customer-unique-id", "merchant_uid":"order_id_8237352", "card_number":"1234-1234-1234-1234", "expiry":"2019-01", "birth":"123456", "amount":3000}' \
+     -X POST -d '{"customer_uid":"your-customer-unique-id", "merchant_uid":"order_id_8237352", "card_number":"1234-1234-1234-1234", "expiry":"2019-01", "birth":"123456", "amount":3000, "pwd_2digit":"00"}' \
      https://api.iamport.kr/subscribe/payments/onetime
 ```
 
+## 5. Request payment with billing key
 
-## 5. 빌링키로 결제 요청하기
-
-빌링키 발급과 최초 결제가 성공하면 빌링키는 전달된 `customer_uid` 와 1:1 매칭되어 아임포트에 저장됩니다. 보안상의 이유로 서버는 빌링키에 직접 접근할 수 없기 때문에 `customer_uid`를 이용해서 재결제([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) REST API를 다음과 같이 호출합니다.
+After successfully getting the billing key, the billing key is stored on the i'mport server using the specified `customer_uid` as the unique key. For security reasons, the server cannot directly access the billing key. Subsequent payments can be requested by calling the REST API([POST /subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again)) with the `customer_uid` as follows:
 
 ```
 curl -H "Content-Type: application/json" \   
