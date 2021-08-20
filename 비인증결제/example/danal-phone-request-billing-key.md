@@ -1,5 +1,7 @@
 # 다날-휴대폰 정기결제(빌링) 연동 가이드 `결제창`
- 
+
+:globe_with_meridians: [EN](./en/danal-phone-request-billing-key.md)
+
 다날-휴대폰 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청해야 합니다. 이후의 결제에 대해서는 발급받은 빌링키로 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.<Br />
 
 ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
