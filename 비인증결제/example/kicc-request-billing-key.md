@@ -1,5 +1,7 @@
 # KICC 정기결제(빌링) 연동 가이드 `결제창`
 
+:globe_with_meridians: [EN](./en/kicc-request-billing-key.md)
+
 KICC의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.
 
 ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
@@ -9,8 +11,6 @@ KICC의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을
 <a href="https://guide.iamport.kr/98b6d582-0dd2-43e0-95bd-037c5e05b416" target="_blank">KICC 정기결제 테스트 모드 설정</a> 페이지를 참고하여 PG 설정을 합니다.
 
 ## 2. 빌링키 발급 요청하기
-
-:globe_with_meridians: [EN](./en/kicc-request-billing-key.md)
 
 [IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
