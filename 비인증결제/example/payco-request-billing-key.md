@@ -10,7 +10,7 @@
 
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다. 
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다. 
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
@@ -24,7 +24,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 IMP.request_pay({
     pg : 'payco', 
 	pay_method : 'card', // 결제창에서 선택된 값은 무시되며, 결제 완료 시점에 설정됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : 'PAYCO 자동결제 등록',
 	amount : 1000, // 결제창에 표시될 금액. 실제 승인이 이뤄지지는 않습니다.
 	customer_uid : 'your-customer-unique-id', // 필수 입력.

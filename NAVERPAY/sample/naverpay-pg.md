@@ -9,7 +9,7 @@ PC버전의 경우 Chrome80이슈(SameSite=Lax기본값 적용)에 대응하기 
 ```javascript
 IMP.request_pay({
     pg : 'naverpay',
-    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     tax_free : 4000, //면세공급가액(누락되면 0원으로 처리)
@@ -213,7 +213,7 @@ imp_uid=imp_123412341234&amount=3000&extra[requester]=customer
 ```javascript
 IMP.request_pay({
     pg : 'naverpay',
-    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     tax_free : 4000, //면세공급가액(누락되면 0원으로 처리)

@@ -18,7 +18,7 @@
 IMP.request_pay({
     pg : 'naverco',
     pay_method : 'card', //연동되지 않습니다. 네이버페이 결제창 내에서 결제수단을 구매자가 직접 선택하게 됩니다.
-    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',
@@ -789,7 +789,7 @@ http://{지정된 URL}?product[0][id]=singleProductId&product[1][id]=optionProdu
 IMP.request_pay({
     pg : 'naverco',
     pay_method : 'card', //연동되지 않습니다. 네이버페이 결제창 내에서 결제수단을 구매자가 직접 선택하게 됩니다.
-    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',

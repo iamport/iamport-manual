@@ -10,7 +10,7 @@ KICC의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을
 
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
@@ -24,7 +24,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 IMP.request_pay({
    pg : 'kicc.빌링상점아이디', // 각각의 상점아이디로 일반결제와 빌링결제를 동시에 이용할 경우 빌링상점아이디를 지정해야 합니다.
 	pay_method : 'card', // 'card'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',
 	amount : 1000, // 결제창에 표시될 금액. 실제 승인이 이뤄지지는 않습니다.
 	customer_uid : 'your-customer-unique-id', // 필수 입력.
