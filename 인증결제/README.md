@@ -31,14 +31,14 @@
 	- [1.2 리디렉션 방식](#redirect)
 - [2. 모바일 앱 WebView에서 PG 연동하기](#webview)
 	- [2.1 가맹점 앱 -> 외부 앱](#my-to-3rd)
-		- [안드로이드](#my-to-3rd-android)
-		- [iOS](#my-to-3rd-ios)
+		- [2.1.a 안드로이드](#my-to-3rd-android)
+		- [2.1.b iOS](#my-to-3rd-ios)
 	- [2.2 외부 앱 -> 가맹점 앱](#3rd-to-my)
-		- [안드로이드](#3rd-to-my-android)
-		- [iOS](#3rd-to-my-ios)
+		- [2.2.a 안드로이드](#3rd-to-my-android)
+		- [2.2.b iOS](#3rd-to-my-ios)
 	- [2.3 쿠키 설정](#cookie)	
-		- [안드로이드](#cookie-android)
-		- [iOS](#cookie-ios)
+		- [2.3.a 안드로이드](#cookie-android)
+		- [2.3.b iOS](#cookie-ios)
 
 <a id="pc-mobile"></a>
 
@@ -367,11 +367,11 @@ XCode의 Build Info 탭에 [app_scheme](#app_scheme)에 지정한 가맹점 앱 
 </array>
 ```
 
-## 3. 쿠키 설정하기 <a id="cookie"></a>
+## 2.3 쿠키 설정하기 <a id="cookie"></a>
 
 PG사 모듈과 카드사 모듈 간 연동과정에서 쿠키가 사용될 수 있으므로 원할한 결제를 위해 WebView에 다음과 같이 설정합니다.
 
-## 3.1 Android
+### 2.3.a Android
 
 관려 Git commit : [3a3abff](https://github.com/iamport/iamport-nice-android/commit/3a3abff1f084c8d4da31c3f8edb36c278f45121c)
 
@@ -387,9 +387,9 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 ```
 
 
-### 3.2 iOS  
+### 2.3.b iOS  
 
-```
+```java
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //iOS6에서 세션끊김 방지를 위한 쿠키 설정.
