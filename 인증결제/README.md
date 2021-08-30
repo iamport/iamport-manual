@@ -371,7 +371,7 @@ XCode의 Build Info 탭에 [app_scheme](#app_scheme)에 지정한 가맹점 앱 
 
 PG사 모듈과 카드사 모듈 간 연동과정에서 쿠키가 사용될 수 있으므로 원할한 결제를 위해 WebView에 다음과 같이 설정합니다.
 
-### 2.3.a Android
+### 2.3.a Android <a id="cookie-android"></a>
 
 관려 Git commit : [3a3abff](https://github.com/iamport/iamport-nice-android/commit/3a3abff1f084c8d4da31c3f8edb36c278f45121c)
 
@@ -387,7 +387,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 ```
 
 
-### 2.3.b iOS  
+### 2.3.b iOS  <a id="cookie-ios"></a>
 
 ```java
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
