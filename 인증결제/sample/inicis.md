@@ -23,7 +23,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 IMP.request_pay({
     pg : 'html5_inicis',
     pay_method : 'card',
-    merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호를 전달
+    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호를 전달
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',

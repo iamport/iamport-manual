@@ -24,7 +24,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
 IMP.request_pay({
     pg : 'chai',
     pay_method : 'trans',
-    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
+    merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',

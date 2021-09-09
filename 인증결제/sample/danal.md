@@ -27,7 +27,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 IMP.request_pay({
     pg : 'danal_tpay',
     pay_method : 'card',
-    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
+    merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',
@@ -47,7 +47,7 @@ IMP.request_pay({
 IMP.request_pay({
     pg : 'danal_tpay',
     pay_method : 'vbank',
-    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
+    merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
     /* ...중략... */
     biz_num : '1234567890'   //필수 입력
 }, function(rsp) { // callback 로직

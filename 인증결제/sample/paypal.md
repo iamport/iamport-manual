@@ -25,7 +25,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
 IMP.request_pay({
     pg : 'paypal',
     pay_method : 'card',
-    merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
+    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
     name : '주문명:결제테스트',
     amount : 14.20,
     currency : 'USD',

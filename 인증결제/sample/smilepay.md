@@ -22,7 +22,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 IMP.request_pay({
     pg : 'smilepay',
     pay_method : 'card', //생략 가능
-    merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
+    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',

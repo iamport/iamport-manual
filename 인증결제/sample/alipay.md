@@ -26,7 +26,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
 IMP.request_pay({
     pg : 'alipay',
     pay_method : 'card', // 생략 가능
-    merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
+    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
     name : '주문명:결제테스트',
     amount : 1.2, //USD 1.2 달러 결제
     buyer_email : 'iamport@siot.do',
