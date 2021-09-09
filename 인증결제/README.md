@@ -11,7 +11,7 @@
 - [차이](./sample/chai.md)
 - [다날](./sample/danal.md)
 - [엑심베이](./sample/eximbay.md)
-- [나이스페이먼츠](./sample/inicis.md)
+- [KG이니시스](./sample/inicis.md)
 - [JTNet](./sample/jtnet.md)
 - [카카오페이](./sample/kakao.md)
 - [NHN KCP](./sample/kcp.md)
@@ -39,6 +39,10 @@
 	- [2.3 쿠키 설정](#cookie)	
 		- [2.3.a 안드로이드](#cookie-android)
 		- [2.3.b iOS](#cookie-ios)
+	- [2.4 Alert/Confirm 창 뛰우기](#alert)	
+		- [2.4.a 안드로이드](#alert-android)
+		- [2.4.b iOS](#alert-ios)
+
 
 <a id="pc-mobile"></a>
 
@@ -178,17 +182,25 @@ ELSE
 - 아임포트 Android SDK : https://github.com/iamport/iamport-android
 - 아임포트 iOS SDK : https://github.com/iamport/iamport-ios
 
+PC/모바일 웹 연동의 [리디렉션 방식](#redirect)과 동일하게 앱내 WebView에서 각 PG사의 결제창을 호출하고 결제 승인 후처리를 합니다.  
+
 <a id="app_scheme"></a>
-PC/모바일 웹 연동의 [리디렉션 방식](#redirect)과 동일하게 앱내 WebView에서 각 PG사의 결제창을 호출하고 결제 승인 후처리를 합니다. 단, 결제 승인 후 가맹점 앱으로 복귀하기 위해 `IMP.request_pay(param, callback)` 함수의 `param.app_scheme`파라미터에 다음과 같이 **가맹점 앱의 scheme**값을 지정해야 합니다.
+**iOS의 경우**, 결제 승인 후 가맹점 앱으로 복귀하기 위해 `IMP.request_pay(param, callback)` 함수의 `param.app_scheme`파라미터에 **가맹점 앱의 scheme**값을 지정해야 합니다.  
+
+`app_scheme`은 다음의 두가지 형식을 지원합니다.
+
+-	`iamporttest` : URL scheme 값만 지정. 아임포트에서는 `iamporttest://`로 호출됩니다.
+-	`iamporttest://path?query` : 앱을 통해 전달받을 파라메터를 함께 지정. 지정한 값으로 호출됩니다.
+
 
 ```javascript
 IMP.request_pay({
 	/*...중략... */
-	app_scheme: 'iamporttest' // 가맹점 앱의 URL scheme, '://'는 포함하지 않습니다.
+	app_scheme: 'iamporttest' // 가맹점 앱의 URL scheme
 })
 ```
 
-결제 수단별 인증은 다음과 같이 앱간 이동을 위한 설정 및 로직을 구성해야 합니다. 
+결제 수단별 인증은 다음과 같이 앱간 이동을 위한 설정 및 로직을 구성해야 합니다.  
 
 1. 가맹점 앱 -> 외부 앱으로 이동
 2. 외부 앱 -> 가맹점 앱으로 이동
@@ -205,11 +217,10 @@ IMP.request_pay({
 | ansimclick | 삼성카드-온라인결제 |
 | ansimclickipcollect | 삼성카드-온라인결제 |
 | ansimclickscard | 삼성카드-온라인결제 |
-| cardusim |  |
+| chaipayment | 차이앱 |
 | citicardappkr | 씨티카드-공인인증 앱 |
 | citispay | 씨티카드-앱카드 |
 | cloudpay | 하나카드-앱카드 |
-| droidxantivirus | |
 | hdcardappcardansimclick | 현대카드-앱카드 |
 | ispmobile | ISP모바일 |
 | itms-apps | 앱스토어 |
@@ -229,7 +240,6 @@ IMP.request_pay({
 | shinhan-sr-ansimclick | 신한카드-앱카드 |
 | smhyundaiansimclick | 현대카드-공인인증 앱 |
 | smshinhanansimclick | 신한카드-공인인증 앱 |
-| vguard | |
 | vguardstart | 삼성카드-백신 |
 | Wooripay | 우리카드-앱카드 |
 
@@ -279,8 +289,8 @@ public class MyViewClient extends WebViewClient {
 
 ### 2.1.b iOS <a id="my-to-3rd-ios"></a>
 
-외부 앱으로 이동 시 별도 처리과정이 필요 없으며 해당 앱을 **white-list에 등록**하면 확인 팝업창을 통해 외부 앱으로 이동합니다.  
-<Br />
+외부 앱으로 이동 시 별도 처리과정이 필요 없으며 해당 앱을 **white-list에 등록**하면 확인 팝업창을 통해 외부 앱으로 이동합니다.   
+
 iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSApplicationQueriesSchemes`에 추가해야 외부 앱 실행 확인창이 열립니다.
 
 ```xml
@@ -299,57 +309,7 @@ iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSAp
 
 ### 2.2.a 안드로이드 <a id="3rd-to-my-android"></a>
 
-ℹ️ 안드로이드는 Activity가 종료되면 Activity Stack(Task)에서 이전 Activity로 자동으로 이동하는 특성이 있습니다. 이러한 특성을 활용하여 KG이니시스의 경우, URL scheme을 사용하지 않아도 동작에 문제가 없도록 설계되었습니다.
-
-#### 가맹점 앱의 URL scheme 정의하기
-
-`AndroidManifest.xml` 파일의 `intent-filter`에 [app_scheme](#app_scheme)에 지정한 가맹점 앱 URL scheme을 다음과 같이 추가합니다.
-
-```xml
-<activity
-	android:name=".MainActivity"
-	android:label="@string/app_name">
-
-	<intent-filter>
-		<action android:name="android.intent.action.VIEW" />
-		<category android:name="android.intent.category.DEFAULT" />
-		<category android:name="android.intent.category.BROWSABLE" />
-
-		<data android:scheme="iamporttest" /> <!-- 예시로 iamporttest로 설정. 가맹점 앱의 특징을 나타내는 고유의 scheme을 사용하세요 -->
-	</intent-filter>
-
-</activity>
-```
-
-#### URL scheme에 의해 실행된 Activity에서 Intent 처리하기
-
-결제 인증 후 외부 앱이 URL scheme에 해당하는 Intent를 호출하면 가맹점 앱의 지정된 Activity가 실행됩니다. Activity의 `OnCreate` 메소드를 재정의하고 **URL scheme과 함께 전달된 가맹점 앱 URL**을 호출하여 가맹점 앱으로 복귀합니다.
-
-URL scheme 예시: `iamporttest://://https://web.nicepay.co.kr/smart/card/isp/ispResult.jsp?tid=nictest00m01011604160159435894`
-
-
-```java
-private final String APP_SCHEME = "iamporttest://"; //AndroidManifest.xml에서 정의한 것과 동일한 URL scheme사용(redirect URL 추출을 위한 용도)
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	/*...중략...*/
-
-	Intent intent = getIntent();
-	Uri intentData = intent.getData();
-
-	if ( intentData != null ) {
-		//isp 인증 후 복귀했을 때 결제 후속조치
-		String url = intentData.toString();
-		if ( url.startsWith(APP_SCHEME) ) {
-			//가맹점 앱의 WebView가 표시해야 할 웹 컨텐츠의 주소가 전달됩니다.
-			String redirectURL = url.substring(APP_SCHEME.length()+3);
-			mainWebView.loadUrl(redirectURL);
-		}
-	}
-}
-```
+안드로이드는 Activity가 종료되면 Activity Stack(Task)에서 이전 Activity로 자동으로 이동하는 특성이 있어서 가맹점 앱의 URL scheme 정의 및 별도 처리가 필요하지 않습니다.
 
 ### 2.2.b iOS <a id="3rd-to-my-ios"></a>
 
@@ -371,31 +331,46 @@ XCode의 Build Info 탭에 [app_scheme](#app_scheme)에 지정한 가맹점 앱 
 
 PG사 모듈과 카드사 모듈 간 연동과정에서 쿠키가 사용될 수 있으므로 원할한 결제를 위해 WebView에 다음과 같이 설정합니다.
 
-### 2.3.a Android <a id="cookie-android"></a>
+### 2.3.a 안드로이드 <a id="cookie-android"></a>
 
-관려 Git commit : [3a3abff](https://github.com/iamport/iamport-nice-android/commit/3a3abff1f084c8d4da31c3f8edb36c278f45121c)
+ [참고 샘플코드](https://github.com/iamport/iamport-android/blob/ef0dfc7c096fa614fc6d2a94dfcea6c0e441b3bd/sdk/src/main/java/com/iamport/sdk/presentation/activity/BaseMain.kt#L33)
 
 ```java
-WebSettings settings = webView.getSettings();
-
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-	settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-	CookieManager cookieManager = CookieManager.getInstance();
-	cookieManager.setAcceptCookie(true);
-	cookieManager.setAcceptThirdPartyCookies(mainWebView, true);
+	mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+	val cookieManager = CookieManager.getInstance()
+	cookieManager.setAcceptCookie(true)
+	cookieManager.setAcceptThirdPartyCookies(webView, true)
 }
 ```
 
 
 ### 2.3.b iOS  <a id="cookie-ios"></a>
 
-```java
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    //iOS6에서 세션끊김 방지를 위한 쿠키 설정.
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    
-    return YES;
-}
+[참고 샘플코드](https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Domain/Iamport.swift#L22)
 
+```java
+HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
 ```
+
+## 2.4 Alert/Confirm 창 뛰우기 <a id="alert"></a>
+
+WebView의 웹페이지에서 발생하는 alert/confirm 창을 Android 또는 iOS 팝업으로 표시하는 로직을 구현해야 각 창이 열립니다.
+
+### 2.4.a 안드로이드 <a id="alert-android"></a>
+
+[WebChromeClient](https://developer.android.com/reference/android/webkit/WebChromeClient) 클래스의 다음 메소드를 재정의하여 alert과 confirm 창을 표시합니다.
+
+- Alert : `onJsAlert`
+- Confirm : `onJsConfirm`
+
+[참고 샘플코드](https://github.com/iamport/iamport-android/blob/main/sdk/src/main/java/com/iamport/sdk/domain/IamportWebChromeClient.kt)
+
+### 2.4.b iOS <a id="alert-ios"></a>
+
+웹페이지에서 alert과 confirm 창 발생 시 호출되는 **WKUIDelegate**의 다음 메소드에 해당 로직을 구현합니다.
+
+- Alert : `webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage:, initiatedByFrame:, completionHandler:)`
+- Confirm : `webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage:, initiatedByFrame:, completionHandler:)`
+
+[참고 샘플코드](https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Presentation/WebViewController.swift#L479https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Presentation/WebViewController.swift#L504)
