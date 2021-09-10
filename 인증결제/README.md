@@ -39,7 +39,7 @@
 	- [2.3 쿠키 설정](#cookie)	
 		- [2.3.a 안드로이드](#cookie-android)
 		- [2.3.b iOS](#cookie-ios)
-	- [2.4 Alert/Confirm 창 뛰우기](#alert)	
+	- [2.4 Alert/Confirm 창 띄우기](#alert)	
 		- [2.4.a 안드로이드](#alert-android)
 		- [2.4.b iOS](#alert-ios)
 
@@ -144,7 +144,7 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+    m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 }, function(rsp) {
     if ( !rsp.success ) {
     	//결제 시작 페이지로 리디렉션되기 전에 오류가 난 경우
@@ -177,10 +177,7 @@ ELSE
 
 ## 2. 모바일 앱 WebView에서 PG 연동하기
 
-아임포트에서 제공하는 **모바일 네이티브 SDK**를 사용하면 Android/iOS 네이티브 앱에서 편리하게 결제 연동을 할 수 있습니다.
-
-- 아임포트 Android SDK : https://github.com/iamport/iamport-android
-- 아임포트 iOS SDK : https://github.com/iamport/iamport-ios
+ℹ️ 아임포트에서 제공하는 [모바일 네이티브 SDK](https://docs.iamport.kr/sdk/mobile-sdk)를 사용하면 Android/iOS 네이티브 앱에서 편리하게 결제 연동을 할 수 있습니다.  
 
 PC/모바일 웹 연동의 [리디렉션 방식](#redirect)과 동일하게 앱내 WebView에서 각 PG사의 결제창을 호출하고 결제 승인 후처리를 합니다.  
 
@@ -210,7 +207,8 @@ IMP.request_pay({
 
 ## 2.1 가맹점 앱 -> 외부 앱
 
-### 대표 외부 앱의 URL Scheme
+<details>
+<summary>대표 외부 앱의 URL Scheme 펼쳐보기</summary>
 
 | URL Scheme | App |
 | ---------- | - |
@@ -219,18 +217,28 @@ IMP.request_pay({
 | ansimclickscard | 삼성카드-온라인결제 |
 | chaipayment | 차이앱 |
 | citicardappkr | 씨티카드-공인인증 앱 |
+| citimobileapp | 씨티카드-간편결제 |
 | citispay | 씨티카드-앱카드 |
 | cloudpay | 하나카드-앱카드 |
+| com.wooricard.wcard | 우리WON페이 |
+| hanamopmoasign | 하나카드-공인인증 앱 |
+| hanawalletmembers | 하나카드-하나멤버스 월렛 |
 | hdcardappcardansimclick | 현대카드-앱카드 |
+| hyundaicardappcardid | 현대카드 |
 | ispmobile | ISP모바일 |
 | itms-apps | 앱스토어 |
 | kakaotalk | 카카오페이 |
 | kb-acp | 국민카드-앱카드 |
+| kb-auth | 국민 |
 | kftc-bankpay | 계좌이체 |
+| lguthepay-xpay | 페이나우 |
+| liivbank | 국민 Liiv M(리브모바일) |
+| lmslpay | 롯데 L.pay 앱 |
 | lotteappcard | 롯데카드-앱카드 |
 | lottesmartpay | 롯데카드-모바일결제 |
-| Lpayapp | L.pay 앱 |
+| Lpayapp | (구)롯데 L.pay 앱 |
 | mpocket.online.ansimclick | 삼성카드-앱카드 |
+| NewSmartPib | 우리WON뱅킹 |
 | nhallonepayansimclick | 농협-올원페이 |
 | nhappcardansimclick | 농협-앱카드 |
 | nonghyupcardansimclick | 농협카드-공인인증 앱 |
@@ -240,8 +248,10 @@ IMP.request_pay({
 | shinhan-sr-ansimclick | 신한카드-앱카드 |
 | smhyundaiansimclick | 현대카드-공인인증 앱 |
 | smshinhanansimclick | 신한카드-공인인증 앱 |
+| supertoss | 토스 |
 | vguardstart | 삼성카드-백신 |
-| Wooripay | 우리카드-앱카드 |
+| wooripay | 우리카드-앱카드 |
+</details>
 
 ### 2.1.a 안드로이드 <a id="my-to-3rd-android"></a>
 
@@ -353,7 +363,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
 ```
 
-## 2.4 Alert/Confirm 창 뛰우기 <a id="alert"></a>
+## 2.4 Alert/Confirm 창 띄우기 <a id="alert"></a>
 
 WebView의 웹페이지에서 발생하는 alert/confirm 창을 Android 또는 iOS 팝업으로 표시하는 로직을 구현해야 각 창이 열립니다.
 
@@ -373,4 +383,6 @@ WebView의 웹페이지에서 발생하는 alert/confirm 창을 Android 또는 i
 - Alert : `webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage:, initiatedByFrame:, completionHandler:)`
 - Confirm : `webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage:, initiatedByFrame:, completionHandler:)`
 
-[참고 샘플코드](https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Presentation/WebViewController.swift#L479https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Presentation/WebViewController.swift#L504)
+[Alert 참고 샘플코드](https://github.com/iamport/iamport-ios/blob/main/iamport-ios/Classes/Presentation/WebViewController.swift#L479)
+
+[Confirm 참고 샘플코드](https://github.com/iamport/iamport-ios/blob/8b2780b286e2f94595e51584e9b3fe25a4f7a630/iamport-ios/Classes/Presentation/WebViewController.swift#L491)
