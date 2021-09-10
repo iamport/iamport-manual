@@ -15,7 +15,8 @@
 
 PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다. 
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `uplus`으로 지정합니다.
+- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `uplus`으로 지정합니다.  
+*토스페이먼츠는 LG유플러스의 PG 부문을 토스가 인수해서 설립되었으며 기존 `pg` 값을 유지합니다.*
 - `pay_method` : card(신용카드), trans(실시간계좌이체), vbank(가상계좌), 또는 phone(휴대폰소액결제)
 
 ```javascript
