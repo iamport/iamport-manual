@@ -182,6 +182,7 @@ IMP.request_pay({
 때문에, 아임포트 환불 API인 POST /payments/cancel 에 추가 필드가 정의되어있습니다.
 
 환불 요청 시, `extra.requester` 필드가 추가되면 되며 다음과 같은 값을 전달주시면 됩니다.  
+또한 reason 파라미터에 취소 사유를 입력하셔야 합니다.
 
 - customer : 구매자에 의한 요청
 - admin(기본값) : 어드민에 의한 요청
@@ -191,6 +192,7 @@ IMP.request_pay({
 {
   "imp_uid" : "imp_123412341234", //환불처리할 아임포트 거래번호
   "amount" : 3000, //환불할 금액
+  "reason": 결제 취소 사유, 실제 사유와 같아야 함
   "extra" : {
     "requester" : "customer"
   }
