@@ -19,7 +19,7 @@
 PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect_url`로 리디렉션됩니다.
 
 - `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `alipay`로 지정합니다.
-- `pay_method` : 호출 시 선택된 값은 무시되며, 페이코 결제창에서 선택한 옵션으로 설정됩니다.
+- `pay_method` : 호출 시 선택된 값은 무시되며, 알리페이 결제창에서 선택한 옵션으로 설정됩니다.
 - `currency` : 기본값으로 `USD`가 적용됩니다. (USD / KRW 지원)
 
 ```javascript
@@ -34,7 +34,7 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 });
 ```
 
