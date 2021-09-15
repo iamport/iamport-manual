@@ -13,12 +13,13 @@
 
 ## 2. 결제 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 세틀뱅크 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 세틀뱅크 결제창을 호출합니다.  
 
 PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.  
 
 - `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `settle`로 지정합니다.
 - `pay_method` : card(신용카드), trans(실시간계좌이체), vbank(가상계좌), 또는 phone(휴대폰소액결제)
+- `company`: 가상계좌 결제 시, 예금주명, 회사명 혹은 서비스명을 입력합니다(은행 측 권고 사항).
 - `buyer_tel`: 필수 입력 (미설정 시 세틀뱅크 결제창에서 오류 발생 가능)
 
 ```javascript
@@ -32,6 +33,7 @@ IMP.request_pay({
     buyer_name : '구매자이름',
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
+    company : '아임포트', // 가상계좌 발급시 권고사항
     buyer_postcode : '123-456'
     m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 }, function(rsp) { // callback 로직

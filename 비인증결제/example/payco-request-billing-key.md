@@ -1,5 +1,7 @@
 # 페이코 정기결제(빌링) 연동 가이드 `결제창`
 
+:globe_with_meridians: [EN](./en/payco-request-billing-key.md)
+
 페이코의 간편결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.<Br />
 
 ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.

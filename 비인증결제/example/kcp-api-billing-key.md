@@ -1,5 +1,7 @@
 # NHN KCP 정기결제(빌링) 연동 가이드 `REST API`
 
+:globe_with_meridians: [EN](./en/kcp-api-billing-key.md)
+
 KCP와 별도 협의된 가맹점은 키인결제([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime))와 빌링키 발급([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST API를 사용할 수 있습니다.
 
 ℹ️ 자세한 내용은 [REST API 방식으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
