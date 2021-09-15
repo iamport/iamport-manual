@@ -48,8 +48,7 @@
 
 ## 1. PC/모바일 웹에서 PG 연동하기
 
-각 PG사별로 결제창을 호출하고 결제 프로세스가 완료되면 결제정보 수신 등 처리 로직이 다음과 같이 **callback 또는 리디렉션**으로 실행됩니다.
-
+각 PG사별로 결제창을 호출하고 결제 프로세스가 완료되면 결제정보 수신 등 처리 로직이 다음과 같이 **callback 또는 리디렉션**으로 실행됩니다. *결제창이 팝업창으로 열리는 경우, 팝업 차단 또는 사용자 확인창을 회피하기 위해 [IMP.request_pay(param, callbak)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay) 호출은 `onClick`과 같이 사용자 액션에 대한 핸들러에서 처리되어야 합니다.*  
 
 ℹ️ 자세한 내용은 [일반결제 연동하기](https://docs.iamport.kr/implementation/payment#start-payment)를 참고하세요.
 
@@ -182,7 +181,7 @@ ELSE
 PC/모바일 웹 연동의 [리디렉션 방식](#redirect)과 동일하게 앱내 WebView에서 각 PG사의 결제창을 호출하고 결제 승인 후처리를 합니다.  
 
 <a id="app_scheme"></a>
-**iOS의 경우**, 결제 승인 후 가맹점 앱으로 복귀하기 위해 `IMP.request_pay(param, callback)` 함수의 `param.app_scheme`파라미터에 **가맹점 앱의 scheme**값을 지정해야 합니다.  
+**iOS의 경우**, 결제 승인 후 가맹점 앱으로 복귀하기 위해 [IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay) 함수의 `param.app_scheme`파라미터에 **가맹점 앱의 scheme**값을 지정해야 합니다.  
 
 `app_scheme`은 다음의 두가지 형식을 지원합니다.
 
@@ -378,7 +377,7 @@ WebView의 웹페이지에서 발생하는 alert/confirm 창을 Android 또는 i
 
 ### 2.4.b iOS <a id="alert-ios"></a>
 
-웹페이지에서 alert과 confirm 창 발생 시 호출되는 **WKUIDelegate**의 다음 메소드에 해당 로직을 구현합니다.
+웹페이지에서 alert과 confirm 창 발생 시 호출되는 [WKUIDelegate](https://developer.apple.com/documentation/webkit/wkuidelegate) 프로토콜의 다음 함수에 해당 로직을 구현합니다.
 
 - Alert : `webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage:, initiatedByFrame:, completionHandler:)`
 - Confirm : `webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage:, initiatedByFrame:, completionHandler:)`
