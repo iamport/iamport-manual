@@ -12,13 +12,15 @@
 
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
 PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect_url`로 리디렉션됩니다.
 
-- `pg` : 차이에서 발급받은 상점아이디가 하나인 경우에는 `pg: 'chai'`를, 여러개인 경우에는 `pg: 'chai.{public_key}'`를 입력합니다.
+- `pg` : 
+    - 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
+	- 차이에서 발급받은 상점아이디가 하나인 경우에는 `chai`를, 여러개인 경우에는 `chai.{public_key}`를 입력합니다.
 - `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다. 빌링키 발급과 함께 최초 결제를 하려면, 결제창에 금액이 표시되도록 금액을 지정하고 발급받은 [빌링키로 결제 요청](#request-pay)을 합니다.
 
 ```javascript

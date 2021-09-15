@@ -13,7 +13,7 @@
 
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
@@ -30,7 +30,7 @@ amount를 0으로 지정한 경우, 다날에서 최초 10원 테스트 결제�
 ```javascript
 IMP.request_pay({
 	pay_method : 'card', // 'card'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',
 	amount : 0, // 빌링키 발급만 진행하며 결제승인을 하지 않습니다.
 	customer_uid : 'your-customer-unique-id', // 필수 입력.
@@ -53,7 +53,7 @@ amount에 가격을 지정한 경우, 다날에서 테스트 결제(10원)를 �
 ```javascript
 IMP.request_pay({
 	pay_method : 'card', // 'card'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',
 	amount : 1004, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.
 	customer_uid : 'your-customer-unique-id', // 필수 입력.

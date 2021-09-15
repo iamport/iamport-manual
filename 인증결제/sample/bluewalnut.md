@@ -1,33 +1,31 @@
-# 1. PG 설정  
+# 블루월넛 일반결제 연동 가이드
 
-## 1.1 테스트모드 설정  
-![블루월넛-아임포트 시스템 설정](screenshot/bluewalnut.png)
+본 문서는 블루월넛 관련 내용만 기술하므로 README 파일에서 다음 일반결제 연동 정보를 확인하세요.
 
-- PG사 : 블루월넛 선택 후, 테스트모드 설정 ON상태로 두고 저장합니다.
+- [PC/모바일 웹에서 PG 연동하기 > Callback 방식](../README.md#callback)
+- [모바일 앱 WebView에서 PG 연동하기](../README.md#webview)
 
-## 1.2 상용모드 설정  
+## 1. PG 설정하기
 
-1. [아임포트 PG가입 페이지](http://www.iamport.kr/pg)에서 블루월넛 가입 신청을 합니다. 
-2. PG사 : 블루월넛 선택 후, 테스트모드 설정 OFF상태로 둡니다. 
-3. 계약 후 블루월넛에서 발급받은 PG상점아이디(MID) / KEY 를 입력 후 저장합니다. 
+<a href="https://guide.iamport.kr/642be4d3-47e3-45c8-9454-b4272247c6b5" target="_blank">블루월넛 일반결제 테스트 모드 설정</a> 페이지의 내용를 참고하여 PG 설정을 합니다.
 
+## 2. 결제 요청하기
 
-# 2. PC, 모바일 브라우저 연동  
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 블루월넛 결제창을 호출합니다.
 
-블루월넛의 경우 레이어를 통해 결제창이 제공되며 페이지 리디렉션이 없어 PC, 모바일 브라우저 환경에서 동일한 소스코드를 적용할 수 있습니다.  
+PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행됩니다.
 
-페이지 리디렉션이 없기 때문에 PC, 모바일 모두 `IMP.request_pay(param, callback)`의 callback 함수를 활용할 수 있습니다.  
-
-- 블루월넛을 의미하는 `pg` 구분자는 `bluewalnut` 입니다. 
-- 블루월넛을 "기본PG사"로 하나만 사용하시는 경우에는 `pg`파라메터는 생략이 가능합니다. 
-- 블루월넛을 "추가PG사"로 사용하시는 경우에는 `pg`파라메터를 `bluewalnut` 또는 `bluewalnut.{블루월넛 상점아이디}` 로 설정하시면 됩니다. [pg파라메터 사용 상세 가이드](https://docs.iamport.kr/tech/pg-parameter)    
+- `pg` : 
+	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
+	- 블루월넛에서 발급받은 상점아이디가 하나인 경우에는 `bluewalnut`을, 여러개인 경우에는 `bluewalnut.{블루월넛 상점아이디}`를 입력합니다.
+- `pay_method` : card(신용카드), trans(실시간계좌이체), vbank(가상계좌), 또는 phone(휴대폰소액결제)
 
 
 ```javascript
 IMP.request_pay({
     pg : 'bluewalnut',
     pay_method : 'card',
-    merchant_uid : 'merchant_' + new Date().getTime(),
+    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',
@@ -35,37 +33,7 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456'
-}, function(rsp) {
-    if ( rsp.success ) {
-    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-    	jQuery.ajax({
-    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-    		type: 'POST',
-    		dataType: 'json',
-    		data: {
-	    		imp_uid : rsp.imp_uid
-	    		//기타 필요한 데이터가 있으면 추가 전달
-    		}
-    	}).done(function(data) {
-    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-    		if ( everythings_fine ) {
-    			var msg = '결제가 완료되었습니다.';
-    			msg += '\n고유ID : ' + rsp.imp_uid;
-    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-    			msg += '\결제 금액 : ' + rsp.paid_amount;
-    			msg += '카드 승인번호 : ' + rsp.apply_num;
-    			
-    			alert(msg);
-    		} else {
-    			//[3] 아직 제대로 결제가 되지 않았습니다.
-    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-    		}
-    	});
-    } else {
-        var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-        
-        alert(msg);
-    }
+}, function(rsp) { // callback 로직
+	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
 });
 ```  

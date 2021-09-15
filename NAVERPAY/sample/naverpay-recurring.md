@@ -27,7 +27,7 @@ PC버전의 경우 Chrome80이슈(SameSite=Lax기본값 적용)에 대응하기 
 IMP.request_pay({
     pg : 'naverpay',
     customer_uid : '가맹점의 결제 고객을 특정하는 Unique Key', //customer_uid 를 활용해 실제 반복결제(승인요청)를 진행하게 됩니다.
-    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+    merchant_uid: "order_monthly_0001", //상점에서 생성한 고유 주문번호
     name : 'Slim 요금제(1개월 단위)',
     amount : 14000, //실제 결제되지는 않으며, 향후 해당 금액으로 반복결제될 예정이라는 의미로 결제창에 표시될 금액만 전달합니다.
     buyer_email : 'iamport@siot.do',

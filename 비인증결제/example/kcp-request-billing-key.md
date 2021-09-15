@@ -14,7 +14,7 @@ KCP의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 
 
 ## 2. 빌링키 발급 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
 ℹ️  자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
@@ -28,14 +28,14 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 IMP.request_pay({
    pg : 'kcp_billing', //KCP일반결제는 kcp이며, KCP빌링결제는 kcp_billing 으로 구분됩니다.
 	pay_method : 'card', // 'card'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',
 	amount : 0, // 결제창에 표시될 금액. 실제 승인이 이뤄지지는 않습니다. (PC에서는 가격이 표시되지 않음)
 	customer_uid : 'your-customer-unique-id', // 필수 입력.
 	buyer_email : 'iamport@siot.do',
 	buyer_name : '아임포트',
 	buyer_tel : '02-1234-1234',
-	m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+	m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 }, function(rsp) {
 	if ( rsp.success ) {
 		alert('빌링키 발급 성공');

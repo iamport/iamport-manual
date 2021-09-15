@@ -12,7 +12,7 @@
 
 ## 2. 빌링키 발급 및 최초 결제 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/tech/imp#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 빌링키 발급을 위한 결제창을 호출합니다.
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
@@ -25,7 +25,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 ```javascript
 IMP.request_pay({
 	pay_method : 'phone', // 'phone'만 지원됩니다.
-	merchant_uid : 'merchant_' + new Date().getTime(),
+	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',
 	amount : 10000, // 빌링키 발급과 함께 10,000원 결제승인이 이루어집니다. 다음 정기결제부터 10,000원 결제가 이뤄져야합니다. 
 	customer_uid : 'your-customer-unique-id', // 필수 입력.
