@@ -37,5 +37,5 @@ PG사별 지원하는 방식 및 설정이 다르기 때문에 다음의 각 PG�
 - [KG이니시스](./example/inicis-api-billing-key.md)
 - [JTNet](./example/jtnet-api-billing-key.md)
 - [세틀뱅크](./example/settlebank-api-billing-key.md)
-
+- [페이조아(다우데이타)](./example/payjoa-api-billing-key.md)
 
