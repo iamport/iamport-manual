@@ -132,7 +132,7 @@ IMP.request_pay({
 {
   "imp_uid" : "imp_123412341234", //환불처리할 아임포트 거래번호
   "amount" : 3000, //환불할 금액
-  "reason": 결제 취소 사유, 실제 사유와 같아야 함
+  "reason": "결제 취소 사유", //실제 사유와 같아야 함
   "extra" : {
     "requester" : "customer"
   }
