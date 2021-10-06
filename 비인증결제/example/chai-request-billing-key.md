@@ -1,6 +1,6 @@
 # 차이 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: [EN](./en/chai-request-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/chai-request-billing-key.md)
 
 차이의 간편결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.<Br />
 

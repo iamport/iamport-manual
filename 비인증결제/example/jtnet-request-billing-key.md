@@ -1,6 +1,6 @@
 # JTNet 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: [EN](./en/jtnet-request-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/jtnet-request-billing-key.md)
 
 JTNet의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청하거나, 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.
 
@@ -20,7 +20,9 @@ JTNet의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급�
 
 PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `jtnet`으로 지정합니다.
+- `pg` : 
+	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
+	- JTNet에서 발급받은 상점아이디가 하나인 경우에는 `jtnet`을, 여러개(각각 일반 및 정기)인 경우에는 `jtnet.{상점아이디}`를 입력합니다.
 - `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
 - `amount` : 빌링키 발급만 하는 경우 "0"으로 지정하고, 빌링키 발급과 최초 결제를 같이 요청하는 경우 가격을 지정합니다.  
 
@@ -28,6 +30,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 
 ```javascript
 IMP.request_pay({
+	pg : 'jtnet',
 	pay_method : 'card', // 'card'만 지원됩니다.
 	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',

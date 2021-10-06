@@ -1,5 +1,7 @@
 # 세틀뱅크 일반결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/General/sample/settle.md)  
+
 본 문서는 세틀뱅크 관련 내용만 기술하므로 README 파일에서 다음 일반결제 연동 정보를 확인하세요.
 
 - [PC/모바일 웹에서 PG 연동하기](../README.md#pc-mobile)

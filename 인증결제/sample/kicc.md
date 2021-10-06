@@ -1,5 +1,7 @@
 # KICC 일반결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/General/sample/kicc.md)  
+
 본 문서는 KICC 관련 내용만 기술하므로 README 파일에서 다음 일반결제 연동 정보를 확인하세요.
 
 - [PC/모바일 웹에서 PG 연동하기](../README.md#pc-mobile)
@@ -29,7 +31,7 @@ IMP.request_pay({
     buyer_name : '구매자이름',
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
-    buyer_postcode : '123-456'
+    buyer_postcode : '123-456',
     m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
 }, function(rsp) { // callback 로직
 	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
@@ -41,6 +43,7 @@ IMP.request_pay({
 KICC는 현금성 결제수단(실시간계좌이체, 가상계좌)에 한하여 에스크로 결제수단을 지원합니다.  
 
 에스크로 결제 시 다음 필수 파라미터를 입력해야 합니다.
+
  - `buyer_name` : 구매자 이름
  - `buyer_email` : 구매자 이메일
  - `buyer_tel` : 구매자 전화번호
@@ -77,8 +80,10 @@ IMP.request_pay({
 			"amount" : 3000
 		}
 	],
-    //* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
-})
+    m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+}, function(rsp) { // callback 로직
+	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
+});
 ```
 
   

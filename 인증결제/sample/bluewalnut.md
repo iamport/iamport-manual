@@ -1,5 +1,7 @@
 # 블루월넛 일반결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/General/sample/bluewalnut.md)  
+
 본 문서는 블루월넛 관련 내용만 기술하므로 README 파일에서 다음 일반결제 연동 정보를 확인하세요.
 
 - [PC/모바일 웹에서 PG 연동하기 > Callback 방식](../README.md#callback)
@@ -17,7 +19,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 
 - `pg` : 
 	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
-	- 블루월넛에서 발급받은 상점아이디가 하나인 경우에는 `bluewalnut`을, 여러개인 경우에는 `bluewalnut.{블루월넛 상점아이디}`를 입력합니다.
+	- 블루월넛에서 발급받은 상점아이디가 하나인 경우에는 `bluewalnut`을, 여러개(각각 일반 및 정기)인 경우에는 `bluewalnut.{상점아이디}`를 입력합니다.
 - `pay_method` : card(신용카드), trans(실시간계좌이체), vbank(가상계좌), 또는 phone(휴대폰소액결제)
 
 

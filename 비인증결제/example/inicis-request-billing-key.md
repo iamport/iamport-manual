@@ -1,6 +1,6 @@
 # KG이니시스 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: [EN](./en/inicis-request-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/inicis-request-billing-key.md)
 
 KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다.<Br />
 ℹ️ 자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
@@ -19,7 +19,10 @@ KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키
 
 PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `html5_inicis` 또는 `inicis`(ActiveX 방식일 경우)로 지정합니다.
+- `pg` : 
+	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
+    - 등록된 PG사가 여러개인 경우에는 `html5_inicis` 또는 `inicis`(ActiveX 방식일 경우)로 지정합니다.
+	- KG이니시스에서 발급받은 상점아이디가 여러개(각각 일반 및 정기)인 경우에는 `html5_inicis.{상점아이디}` 또는 `inicis.{상점아이디}`(for ActiveX)로 지정합니다.
 - `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
 - `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다. 빌링키 발급과 함께 최초 결제를 하려면, 결제창에 금액이 표시되도록 금액을 지정하고 발급받은 [빌링키로 결제 요청](#request-pay)을 합니다.
 
