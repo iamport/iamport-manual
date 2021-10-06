@@ -1,6 +1,6 @@
 # PG사별 정기결제(빌링) 연동 가이드
 
-:globe_with_meridians: [EN](./example/en/README.md)
+:globe_with_meridians: [EN](/en/Subscription/README.md)
 
 구독형 정기결제, 종량제 과금결제 등 원하는 시점에 재결제를 하기 위해서 카드사에 고객의 카드정보를 전달하여 카드정보와 매칭되는 결제용 암호화 키인 빌링키를 발급받아야 합니다.<Br />
 

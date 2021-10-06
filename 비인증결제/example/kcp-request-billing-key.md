@@ -1,6 +1,6 @@
 # NHN KCP 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: [EN](./en/kcp-request-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/kcp-request-billing-key.md)
 
 KCP의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 요청하여 발급받은 빌링키로 결제를 요청할 수 있습니다. 
 
@@ -20,13 +20,13 @@ KCP의 웹표준 결제창/모바일 결제창을 통해서 빌링키 발급을 
 
 PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `kcp`로 지정합니다.
+- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `kcp_billing`으로 지정합니다.
 - `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
 - `amount` : 결제창에 표시될 금액으로 실제 승인은 이루어지지 않습니다. 빌링키 발급과 함께 최초 결제를 하려면, 결제창에 금액이 표시되도록 금액을 지정하고 발급받은 [빌링키로 결제 요청](#request-pay)을 합니다.
 
 ```javascript
 IMP.request_pay({
-   pg : 'kcp_billing', //KCP일반결제는 kcp이며, KCP빌링결제는 kcp_billing 으로 구분됩니다.
+   pg : 'kcp_billing',
 	pay_method : 'card', // 'card'만 지원됩니다.
 	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',

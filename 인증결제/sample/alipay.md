@@ -1,5 +1,7 @@
 # 알리페이 일반결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/General/sample/alipay.md)  
+
 본 문서는 알리페이 관련 내용만 기술하므로 README 파일에서 다음 일반결제 연동 정보를 확인하세요.
 
 - [PC/모바일 웹에서 PG 연동하기 > 리디렉션 방식](../README.md#redirect)
@@ -34,7 +36,7 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete
 });
 ```
 

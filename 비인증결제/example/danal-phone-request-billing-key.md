@@ -1,6 +1,6 @@
 # 다날-휴대폰 정기결제(빌링) 연동 가이드 `결제창`
 
-:globe_with_meridians: [EN](./en/danal-phone-request-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/danal-phone-request-billing-key.md)
 
 다날-휴대폰 결제창을 통해서 빌링키 발급과 최초 결제를 같이 요청해야 합니다. 이후의 결제에 대해서는 발급받은 빌링키로 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.<Br />
 
@@ -18,12 +18,15 @@
 
 PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행됩니다.
 
-- `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `danal`로 지정합니다.
+- `pg` : 
+	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
+	- 다날에서 발급받은 상점아이디가 하나인 경우에는 `danal`를, 여러개(각각 일반 및 정기)인 경우에는 `danal.{상점아이디}`를 입력합니다.
 - `customer_uid` : 빌링키 등록을 위해서 지정해야 합니다.
 - `amount` : 빌링키 발급과 최초 결제 승인이 되며 매월 동일한 날짜(오차 5일 내)에 동일한 금액을 재결제해야 합니다.
 
 ```javascript
 IMP.request_pay({
+	pg : 'danal',
 	pay_method : 'phone', // 'phone'만 지원됩니다.
 	merchant_uid: "order_monthly_0001", // 상점에서 관리하는 주문 번호
 	name : '최초인증결제',

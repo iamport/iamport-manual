@@ -1,5 +1,7 @@
 # PG사별 일반결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/General/README.md)  
+
 아임포트 결제 연동 매뉴얼의 [준비하기](https://docs.iamport.kr/prepare) 가이드에 따라 아임포트 계정을 생성하고, 다음 PG사 별 일반결제 연동 가이드를 참고하여 각 PG사 테스트 계정으로 테스트 결제를 해 볼수 있습니다.<Br />
 
 ℹ️ 국내 전자결제 서비스의 단계별 흐름은 [한국결제의 특징](background.md)을 참고하세요.
@@ -143,7 +145,7 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+    m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete
 }, function(rsp) {
     if ( !rsp.success ) {
     	//결제 시작 페이지로 리디렉션되기 전에 오류가 난 경우

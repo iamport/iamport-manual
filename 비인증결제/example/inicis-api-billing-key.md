@@ -1,6 +1,6 @@
 # KG이니시스 정기결제(빌링) 연동 가이드 `REST API`
 
-:globe_with_meridians: [EN](./en/inicis-api-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/inicis-api-billing-key.md)
 
 KG이니시스와 별도 협의된 가맹점은 키인결제([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime))와 빌링키 발급([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST API를 사용할 수 있습니다.<Br />
 

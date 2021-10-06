@@ -1,6 +1,6 @@
 # JTNet 정기결제(빌링) 연동 가이드 `REST API`
 
-:globe_with_meridians: [EN](./en/jtnet-api-billing-key.md)
+:globe_with_meridians: [EN](/en/Subscription/sample/jtnet-api-billing-key.md)
 
 JTNet는 아임포트 키인결제([POST /subscribe/payments/onetime](https://api.iamport.kr/#!/subscribe/onetime))와 빌링키 발급([POST /subscribe/customers/{customer_uid}](https://api.iamport.kr/#!/subscribe.customer/customer_save)) REST API를 사용할 수 있습니다<Br />
 
