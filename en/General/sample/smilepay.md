@@ -1,6 +1,6 @@
 # SmilePay General Payment Integration Guide
 
-:globe_with_meridians: [KO](/인증결제/sample/SmilePay.md)
+:globe_with_meridians: [KO](/인증결제/sample/smilepay.md)
 
 This guide covers only SmilePay specific information. Check the following general payment integration sections in the README file.
 

@@ -1,3 +1,5 @@
+:globe_with_meridians: [EN](/en/General/README.md)  
+
 # PG사별 일반결제 연동 가이드
 
 아임포트 결제 연동 매뉴얼의 [준비하기](https://docs.iamport.kr/prepare) 가이드에 따라 아임포트 계정을 생성하고, 다음 PG사 별 일반결제 연동 가이드를 참고하여 각 PG사 테스트 계정으로 테스트 결제를 해 볼수 있습니다.<Br />
