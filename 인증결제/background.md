@@ -1,4 +1,4 @@
-# INTRO
+# 한국 전자결제 서비스 흐름
 
 :globe_with_meridians: [EN](/en/General/background.md)  
 
