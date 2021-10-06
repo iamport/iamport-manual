@@ -1,3 +1,5 @@
+# naverProducts JSON Schema
+
 ```javascript
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
@@ -78,7 +80,7 @@
 					"type": "string"
 				},
 				"selections": {
-					"description": "구매자가 선택한 옵션 조합의 고유ID",
+					"description": "구매자가 선택한 옵션 조합",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/optionItem"
@@ -90,15 +92,15 @@
 		"optionItem": {
 			"properties": {
 				"code": {
-					"description": "",
+					"description": "옵션 코드",
 					"type": "string"
 				},
 				"label": {
-					"description": "",
+					"description": "옵션 레이블",
 					"type": "string"
 				},
 				"value": {
-					"description": "",
+					"description": "옵션 값",
 					"type": "string"
 				},
 			},
