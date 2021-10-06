@@ -176,7 +176,7 @@ IMP.request_pay({
 	]
 }, function(rsp) {
     if ( !rsp.success ) {
-    	//결제 시작 페이지로 리디렉션되기 전에 오류가 난 경우
+    	//결제 시작되기 전에 오류가 난 경우
         var msg = '오류로 인하여 결제가 시작되지 못하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
 

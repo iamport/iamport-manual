@@ -7,7 +7,7 @@
 - [2. 추가구성품](#supplement)
   
 **Request**(요청)는 IMP.request_pay(param) 호출 시 전달하는 파라미터 설정입니다.  
-**Response**(응답)는 네이버페이의 상품정보 검증 요청에 대한 XML 응답입니다.
+**Response**(응답)는 네이버페이의 상품정보 검증 요청에 대한 XML 응답이며 *상품이 제공하는 모든 옵션, 추가구성품, 및 옵션 조합을 포함합니다*.
 
 ## 1. 상품 옵션<a id="product-option"/>
  

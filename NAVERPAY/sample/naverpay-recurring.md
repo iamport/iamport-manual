@@ -40,51 +40,51 @@ IMP.request_pay({
     buyer_postcode : '123-456',
     naverProductCode : '반복결제 상품코드',
     naverPopupMode : true, //팝업모드 활성화
-	  m_redirect_url : "{결제 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
-}, function(rsp) {
-    if ( rsp.success ) { //팝업 방식으로 진행 또는 결제 프로세스 시작 전 오류가 발생할 경우 호출되는 callback
-    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-    	jQuery.ajax({
-    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-    		type: 'POST',
-    		dataType: 'json',
-    		data: {
-	    		imp_uid : rsp.imp_uid
-	    		//기타 필요한 데이터가 있으면 추가 전달
-    		}
-    	}).done(function(data) {
-    		//[2] 서버에서 REST API로 정상적으로 결제고객 등록이 이뤄졌는지 체크(status : paid 이면 등록 성공을 의미)
-    		if ( everythings_fine ) {
-    			var msg = '결제가 완료되었습니다.';
-    			msg += '\n고유ID : ' + rsp.imp_uid;
-    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-    			msg += '\n결제 금액 : ' + rsp.paid_amount;
-    			msg += '카드 승인번호 : ' + rsp.apply_num;
-
-    			alert(msg);
-    		} else {
-    			//[3] 아직 제대로 결제가 되지 않았습니다.
-    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-    		}
-    	});
-    } else {
-        var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
+	  m_redirect_url : "{등록 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
+}, function(rsp) { //팝업 방식으로 진행 또는 등록 프로세스 시작 전 오류가 발생할 경우 호출되는 callback
+  if ( rsp.success ) {
+    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+    jQuery.ajax({
+      url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        imp_uid : rsp.imp_uid
+        //기타 필요한 데이터가 있으면 추가 전달
+      }
+    }).done(function(data) {
+      //[2] 서버에서 REST API로 정상적으로 결제고객 등록이 이뤄졌는지 체크(status : paid 이면 등록 성공을 의미)
+      if ( everythings_fine ) {
+        var msg = '결제가 완료되었습니다.';
+        msg += '\n고유ID : ' + rsp.imp_uid;
+        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+   			msg += '\n결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
 
         alert(msg);
-    }
+      } else {
+        //[3] 아직 제대로 결제가 되지 않았습니다.
+        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+      }
+    });
+  } else {
+      var msg = '결제에 실패하였습니다.';
+      msg += '에러내용 : ' + rsp.error_msg;
+
+      alert(msg);
+  }
 });
 ```
 ### PC, 모바일 버전에서 진행 방식<a id="method"></a>
 
 **PC 버전**
-- Chrome80이슈(SameSite=Lax기본값 적용)에 대응하기 위해 결제예약 API를 활용한 팝업창 또는 리디렉션 방식으로 결제가 진행됩니다. 
+- Chrome80이슈(SameSite=Lax기본값 적용)에 대응하기 위해 정기/반복결제 등록 API를 활용한 팝업창 또는 리디렉션 방식으로 등록이 진행됩니다. 
 - 네이버페이 공식 매뉴얼에는 Internet Explorer에서 window.opener 객체 유실 문제로 팝업창 방식을 제한한다고 안내되어 있으나, 아임포트는 팝업창 방식을 IE에서도 지원합니다.  
 
 **모바일 버전**
-- 네이버페이 신규 SDK를 활용해 리디렉션 또는 팝업창 방식으로 결제가 진행됩니다.
-- 모바일 환경에서는 팝업창을 통한 결제에 다음과 같이 제약이 많기 때문에 페이지 리디렉션 방식으로 결제를 진행하는 것이 일반적이며 네이버페이 검수팀의 권장 사항입니다. PC와 모바일 환경 모두 리디렉션 방식으로 설정하면 동일한 결제 후처리 로직을 사용할 수 있는 장점이 있습니다.  
-	- WebView를 통한 결제 : `window.open` 이벤트를 감지하여 별도의 WebView를 생성해야하는 Native 단 작업의 난이도 상승
+- 네이버페이 신규 SDK를 활용해 리디렉션 또는 팝업창 방식으로 등록이 진행됩니다.
+- 모바일 환경에서는 팝업창을 통한 등록에 다음과 같이 제약이 많기 때문에 페이지 리디렉션 방식으로 등록를 진행하는 것이 일반적이며 네이버페이 검수팀의 권장 사항입니다. PC와 모바일 환경 모두 리디렉션 방식으로 설정하면 동일한 등록 후처리 로직을 사용할 수 있는 장점이 있습니다.  
+	- WebView를 통한 등록 : `window.open` 이벤트를 감지하여 별도의 WebView를 생성해야하는 Native 단 작업의 난이도 상승
 	- Safari 등 브라우저 : 사용자 설정에 따라 강제로 팝업차단을 해버리는 경우 발생
 
 
@@ -94,7 +94,7 @@ IMP.request_pay({
 
 ℹ️ 정기/반복결제 시 실수로 인해 중복과금을 방지하기 위해 결제 등록 및 최초/반복 결제 승인을 위해 API 호출 시 매번 다른 `merchant_uid`(가맹점 주문번호)를 사용해야 합니다. 즉, 한번 사용한 `merchant_uid`는 재사용이 불가능합니다.  
  
-### 3.1 최초/이후 결제 요청하기
+## 3.1 최초/이후 결제 요청하기
 
 REST API [/subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again) 를 호출해 결제 승인 요청을 합니다.
 
@@ -124,7 +124,7 @@ REST API [/subscribe/payments/again](https://api.iamport.kr/#!/subscribe/again) 
 customer_uid={가맹점의 결제 고객을 특정하는 Unique Key}&merchant_uid={가맹점 주문번호}&amount=10000&name=Slim 요금제(최초과금)&extra[naverUseCfm]=20201001
 ```
 
-### 3.2 결제 예약하기
+## 3.2 결제 예약하기
 
 REST API [/subscribe/payments/schedule](https://api.iamport.kr/#!/subscribe/schedule)를 호출해 결제 예약 요청을 합니다.
 
