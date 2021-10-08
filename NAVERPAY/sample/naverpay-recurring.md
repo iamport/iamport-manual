@@ -1,5 +1,7 @@
 # 결제형 네이버페이 정기/반복결제 연동 가이드
 
+:globe_with_meridians: [EN](/en/NAVERPAY/sample/naverpay-recurring.md)  
+
 결제형 네이버페이 정기/반복결제는 정기/반복결제 상품의 결제 수단으로 네이버페이를 선택하여 결제가 진행됩니다.
 
 ## 1. PG 설정하기
