@@ -1,5 +1,7 @@
 # 네이버페이 배송비 정책 및 예시
 
+:globe_with_meridians: [EN](/en/NAVERPAY/sample/naverpay-shipping.md)  
+
 본 문서는 네이버페이 결제 시 적용 가능한 배송비 정책을 다음 유형별로 설명합니다.  
 
 - [1. 무료 배송](#free)

@@ -214,45 +214,45 @@ Payment approval requires configuration and implementation for navigating betwee
 
 | URL Scheme | App |
 | ---------- | - |
-| ansimclick | 삼성카드-온라인결제 |
-| ansimclickipcollect | 삼성카드-온라인결제 |
-| ansimclickscard | 삼성카드-온라인결제 |
-| chaipayment | 차이앱 |
-| citicardappkr | 씨티카드-공인인증 앱 |
-| citimobileapp | 씨티카드-간편결제 |
-| citispay | 씨티카드-앱카드 |
-| cloudpay | 하나카드-앱카드 |
-| com.wooricard.wcard | 우리WON페이 |
-| hanamopmoasign | 하나카드-공인인증 앱 |
-| hanawalletmembers | 하나카드-하나멤버스 월렛 |
-| hdcardappcardansimclick | 현대카드-앱카드 |
-| hyundaicardappcardid | 현대카드 |
-| ispmobile | ISP모바일 |
-| itms-apps | 앱스토어 |
-| kakaotalk | 카카오페이 |
-| kb-acp | 국민카드-앱카드 |
-| kb-auth | 국민 |
-| kftc-bankpay | 계좌이체 |
-| lguthepay-xpay | 페이나우 |
-| liivbank | 국민 Liiv M(리브모바일) |
-| lmslpay | 롯데 L.pay 앱 |
-| lotteappcard | 롯데카드-앱카드 |
-| lottesmartpay | 롯데카드-모바일결제 |
-| Lpayapp | (구)롯데 L.pay 앱 |
-| mpocket.online.ansimclick | 삼성카드-앱카드 |
-| NewSmartPib | 우리WON뱅킹 |
-| nhallonepayansimclick | 농협-올원페이 |
-| nhappcardansimclick | 농협-앱카드 |
-| nonghyupcardansimclick | 농협카드-공인인증 앱 |
-| payco | 페이코 |
-| samsungpay | 삼성카드-삼성페이 |
-| scardcertiapp | 삼성카드-공인인증서 |
-| shinhan-sr-ansimclick | 신한카드-앱카드 |
-| smhyundaiansimclick | 현대카드-공인인증 앱 |
-| smshinhanansimclick | 신한카드-공인인증 앱 |
-| supertoss | 토스 |
-| vguardstart | 삼성카드-백신 |
-| wooripay | 우리카드-앱카드 |
+| ansimclick | Samsung Card - Online Payment |
+| ansimclickipcollect | Samsung Card - Online Payment |
+| ansimclickscard | Samsung Card - Online Payment |
+| chaipayment | CHAI app |
+| citicardappkr | Citi Card - Certification App |
+| citimobileapp | Citi Card - Simple Pay |
+| citispay | Citi Card-App Card |
+| cloudpay | Hana Card-App Card |
+| com.wooricard.wcard | Woori WON Pay |
+| hanamopmoasign | Hana Card - Certification App |
+| hanawalletmembers | Hana Card-Hana Members Wallet |
+| hdcardappcardansimclick | Hyundai Card-App Card |
+| hyundaicardappcardid | Hyundai Card |
+| ispmobile | ISP Mobile |
+| itms-apps | App Store |
+| kakaotalk | Kakao Pay |
+| kb-acp | Kookmin Card-App Card |
+| kb-auth | Kookmin |
+| kftc-bankpay | Account transfer |
+| lguthepay-xpay | Paynow |
+| liivbank | Kookmin Liiv M (Liiv Mobile) |
+| lmslpay | Lotte L.pay App |
+| lotteappcard | Lotte Card-App Card |
+| lottesmartpay | Lotte Card - Mobile Payment |
+| Lpayapp | (Old) Lotte L.pay App |
+| mpocket.online.ansimclick | Samsung Card-App Card |
+| NewSmartPib | Woori WON Banking |
+| nhallonepayansimclick | Nonghyup-All One Pay |
+| nhappcardansimclick | Nonghyup-App Card |
+| nonghyupcardansimclick | Nonghyup Card - Certification App |
+| payco | Payco |
+| samsungpay | Samsung Card-Samsung Pay |
+| scardcertiapp | Samsung Card-Certificate |
+| shinhan-sr-ansimclick | Shinhan Card-App Card |
+| smhyundaiansimclick | Hyundai Card - Certification App |
+| smshinhanansimclick | Shinhan Card - Certification App |
+| supertoss | Toss |
+| vguardstart | Samsung Card - Vaccine |
+| wooripay | Woori Card-App Card |
 </details>
 
 ### 2.1.a Android <a id="my-to-3rd-android"></a>

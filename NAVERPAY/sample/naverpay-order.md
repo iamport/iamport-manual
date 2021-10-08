@@ -1,5 +1,7 @@
 # 주문형 네이버페이 연동하기
 
+:globe_with_meridians: [EN](/en/NAVERPAY/sample/naverpay-order.md)  
+
 주문형은 가맹점 사이트에서 주문 단계부터 상품정보와 연동하여 네이버페이로 결제를 진행하는 방식입니다.
 
 ## 1. PG 설정하기

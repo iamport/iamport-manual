@@ -1,5 +1,7 @@
 # 네이버페이 상품 옵션과 추가구성품에 대한 요청 및 응답 예시
 
+:globe_with_meridians: [EN](/en/NAVERPAY/sample/naverpay-validation.md)  
+
 - [1. 상품 옵션](#product-option)
    - [1.1 선택 가능한 옵션이 1가지인 경우](#product-option1)
    - [1.2 선택 가능한 옵션이 1가지인 경우(옵션별 가격변동 적용)](#product-option1-var)
