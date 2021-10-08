@@ -20,5 +20,5 @@ You can select Naver Pay from the product and cart pages.
 Naver Pay (Checkout) integration guides:  
 
 - [Naver Pay (Checkout) Integration Guide](sample/naverpay-order.md)
-- [Shipping Rates and Examples](sample/naverpay-shipping.md)
+- [Shipping Policy and Examples](sample/naverpay-shipping.md)
 - [naverProducts JSON Schema](sample/naverpay-schema.md)

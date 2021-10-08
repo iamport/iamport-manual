@@ -1,4 +1,4 @@
-# naverProducts JSON Schema
+# `naverProducts` JSON Schema
 
 :globe_with_meridians: [EN](/en/NAVERPAY/sample/naverpay-schema.md)  
 
