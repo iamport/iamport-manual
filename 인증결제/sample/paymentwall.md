@@ -8,7 +8,7 @@
 
 ## 1. PG 설정하기
 
-<a href="https://guide.iamport.kr/bc4ded5d-c9f0-4f0e-bd1c-160859748fdd" target="_blank">PaymentWall 일반결제 테스트 모드 설정</a> 페이지의 내용를 참고하여 PG 설정을 합니다.(수정필요)
+PaymentWall 일반결제 테스트 모드 설정 페이지의 내용를 참고하여 PG 설정을 합니다.(수정필요)
 
 ## 2. 결제 요청하기
 
