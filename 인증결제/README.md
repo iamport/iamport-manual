@@ -25,6 +25,7 @@
 - [스마일페이](./sample/smilepay.md)
 - [토스페이먼츠](./sample/uplus.md)
 - [네이버페이](/NAVERPAY/sample/naverpay-pg.md)
+- [PaymentWall](./sample/paymentwall.md)
   
 # PG 공통 연동 방법
 
