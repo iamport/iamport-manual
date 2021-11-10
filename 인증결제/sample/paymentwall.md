@@ -8,7 +8,7 @@
 
 ## 1. PG 설정하기
 
-PaymentWall 일반결제 테스트 모드 설정 페이지의 내용를 참고하여 PG 설정을 합니다.(수정필요)
+<a href='https://www.notion.so/chaifinance/Paymentwall-6e4ddcd60ec64324bcc91e7fbf896657'PaymentWall 일반결제 테스트 모드 설정</a> 페이지의 내용를 참고하여 PG 설정을 합니다.(수정필요)
 
 ## 2. 결제 요청하기
 
