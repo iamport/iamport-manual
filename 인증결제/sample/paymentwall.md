@@ -27,7 +27,7 @@ IMP.request_pay({
     merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 50,
-    buyer_email : 'iamport@siot.do',
+    buyer_email : 'iamport@siot.do',   //필수파라미터
     buyer_name : '구매자이름',
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
