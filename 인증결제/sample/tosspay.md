@@ -17,18 +17,17 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
 
 - `pg` : 
     - 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
- 
-    -Toss 간편결제는 상점아이디라는 컨셉이 없고 apiKey 만 존재합니다. (단, apiKey 는 유출되면 안되는 민감정보)
-
-    -통상적으로 모든 PG가 상점아이디 개념을 지니고 있기 때문에 아임포트에서는 pg_id 로 식별하고 있습니다.
-  
-    -이 정책을 유지하기 위해 Toss 간편결제는 다음과 같이 2가지로 pg_id 를 자동 생성합니다.
-  
-     * tosstest : 테스트모드의 Toss 간편결제 pg_id
-     * tosspay : 상용모드의 Toss 간편결제 pg_id
+    - Toss 간편결제는 상점아이디라는 컨셉이 없고 apiKey 만 존재합니다. (단, apiKey 는 유출되면 안되는 민감정보)
+    - 통상적으로 모든 PG가 상점아이디 개념을 지니고 있기 때문에 아임포트에서는 pg_id 로 식별하고 있습니다.
+    - 이 정책을 유지하기 위해 Toss 간편결제는 다음과 같이 2가지로 pg_id 를 자동 생성합니다.
+    
+          * tosstest : 테스트모드의 토스간편결제 pg_id
+          * tosspay : 상용모드의 토스간편결제 pg_id
      
 - `pay_method` : 'card' or 'trans'만 가능합니다.
 
+
+#### 연동예시
 ```javascript
 IMP.request_pay({
     pg : 'tosspay',
@@ -50,4 +49,18 @@ IMP.request_pay({
    * PC결제 : 팝업창을 통한 결제 진행
    * 모바일결제 : 페이지 리디렉션을 통한 결제 진행
 
+
+## 4. 기타 정보
+
+결제 후 저장되는 '승인'에 대한 extension 정보 ( 정산금액 관련 )
+ 
+- paidPoint : 승인금액 중 토스머니 차감액
+- discountedAmount : 승인금액 중 할인적용 금액
+- paidAmount : 승인금액 중 주결제수단(신용카드/계좌이체) 승인금액
+
+환불 후 저장되는 매 '환불' 건에 대한 extension 정보 ( 정산금액 관련 )
+ 
+- refundedPoint : 해당환불금액 중 토스머니 환불액
+- refundedDiscountAmount : 해당환불금액 중 취소된 할인금액
+- refundedPaidAmount : 해당환불금액 중 주결제수단(신용카드/계좌이체) 환불금액
 
