@@ -7,7 +7,7 @@
 
 ## 1. PG 설정하기
 
-토스간편결제 테스트 모드 설정 페이지의 내용를 참고하여 PG 설정을 합니다.
+<a href ='https://chaifinance.notion.site/9f14768770bd486f92c10fde5497216a' target='blank'>토스간편결제 테스트 모드 설정</a> 페이지의 내용를 참고하여 PG 설정을 합니다.
 
 ## 2. 결제 요청하기
 
