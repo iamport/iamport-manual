@@ -41,6 +41,8 @@ IMP.request_pay({
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
     m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete
+}, function(rsp) { // callback 로직
+	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
 });
 ```
 
