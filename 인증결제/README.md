@@ -210,52 +210,6 @@ IMP.request_pay({
 
 ## 2.1 가맹점 앱 -> 외부 앱
 
-<details>
-<summary>대표 외부 앱의 URL Scheme 펼쳐보기</summary>
-
-| URL Scheme | App |
-| ---------- | - |
-| ansimclick | 삼성카드-온라인결제 |
-| ansimclickipcollect | 삼성카드-온라인결제 |
-| ansimclickscard | 삼성카드-온라인결제 |
-| chaipayment | 차이앱 |
-| citicardappkr | 씨티카드-공인인증 앱 |
-| citimobileapp | 씨티카드-간편결제 |
-| citispay | 씨티카드-앱카드 |
-| cloudpay | 하나카드-앱카드 |
-| com.wooricard.wcard | 우리WON페이 |
-| hanamopmoasign | 하나카드-공인인증 앱 |
-| hanawalletmembers | 하나카드-하나멤버스 월렛 |
-| hdcardappcardansimclick | 현대카드-앱카드 |
-| hyundaicardappcardid | 현대카드 |
-| ispmobile | ISP모바일 |
-| itms-apps | 앱스토어 |
-| kakaotalk | 카카오페이 |
-| kb-acp | 국민카드-앱카드 |
-| kb-auth | 국민 |
-| kftc-bankpay | 계좌이체 |
-| lguthepay-xpay | 페이나우 |
-| liivbank | 국민 Liiv M(리브모바일) |
-| lmslpay | 롯데 L.pay 앱 |
-| lotteappcard | 롯데카드-앱카드 |
-| lottesmartpay | 롯데카드-모바일결제 |
-| Lpayapp | (구)롯데 L.pay 앱 |
-| mpocket.online.ansimclick | 삼성카드-앱카드 |
-| NewSmartPib | 우리WON뱅킹 |
-| nhallonepayansimclick | 농협-올원페이 |
-| nhappcardansimclick | 농협-앱카드 |
-| nonghyupcardansimclick | 농협카드-공인인증 앱 |
-| payco | 페이코 |
-| samsungpay | 삼성카드-삼성페이 |
-| scardcertiapp | 삼성카드-공인인증서 |
-| shinhan-sr-ansimclick | 신한카드-앱카드 |
-| smhyundaiansimclick | 현대카드-공인인증 앱 |
-| smshinhanansimclick | 신한카드-공인인증 앱 |
-| supertoss | 토스 |
-| vguardstart | 삼성카드-백신 |
-| wooripay | 우리카드-앱카드 |
-</details>
-
 ### 2.1.a 안드로이드 <a id="my-to-3rd-android"></a>
 
 가맹점 앱의 WebView에서 PG사별 앱 호출 및 미설치 체크 로직을 구현합니다.<Br />
@@ -302,9 +256,53 @@ public class MyViewClient extends WebViewClient {
 
 ### 2.1.b iOS <a id="my-to-3rd-ios"></a>
 
-외부 앱으로 이동 시 별도 처리과정이 필요 없으며 해당 앱을 **white-list에 등록**하면 확인 팝업창을 통해 외부 앱으로 이동합니다.   
+iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSApplicationQueriesSchemes`에 추가해야 외부 앱으로 이동할 수 있습니다.
 
-iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSApplicationQueriesSchemes`에 추가해야 외부 앱 실행 확인창이 열립니다.
+<details>
+<summary>대표 외부 앱의 URL Scheme 펼쳐보기</summary>
+
+| URL Scheme | App |
+| ---------- | - |
+| ansimclick | 삼성카드-온라인결제 |
+| ansimclickipcollect | 삼성카드-온라인결제 |
+| ansimclickscard | 삼성카드-온라인결제 |
+| chaipayment | 차이앱 |
+| citicardappkr | 씨티카드-공인인증 앱 |
+| citimobileapp | 씨티카드-간편결제 |
+| citispay | 씨티카드-앱카드 |
+| cloudpay | 하나카드-앱카드 |
+| com.wooricard.wcard | 우리WON페이 |
+| hanamopmoasign | 하나카드-공인인증 앱 |
+| hanawalletmembers | 하나카드-하나멤버스 월렛 |
+| hdcardappcardansimclick | 현대카드-앱카드 |
+| hyundaicardappcardid | 현대카드 |
+| ispmobile | ISP모바일 |
+| itms-apps | 앱스토어 |
+| kakaotalk | 카카오페이 |
+| kb-acp | 국민카드-앱카드 |
+| kb-auth | 국민 |
+| kftc-bankpay | 계좌이체 |
+| lguthepay-xpay | 페이나우 |
+| liivbank | 국민 Liiv M(리브모바일) |
+| lmslpay | 롯데 L.pay 앱 |
+| lotteappcard | 롯데카드-앱카드 |
+| lottesmartpay | 롯데카드-모바일결제 |
+| Lpayapp | (구)롯데 L.pay 앱 |
+| mpocket.online.ansimclick | 삼성카드-앱카드 |
+| newsmartpib | 우리WON뱅킹 |
+| nhallonepayansimclick | 농협-올원페이 |
+| nhappcardansimclick | 농협-앱카드 |
+| nonghyupcardansimclick | 농협카드-공인인증 앱 |
+| payco | 페이코 |
+| samsungpay | 삼성카드-삼성페이 |
+| scardcertiapp | 삼성카드-공인인증서 |
+| shinhan-sr-ansimclick | 신한카드-앱카드 |
+| smhyundaiansimclick | 현대카드-공인인증 앱 |
+| smshinhanansimclick | 신한카드-공인인증 앱 |
+| supertoss | 토스 |
+| vguardstart | 삼성카드-백신 |
+| wooripay | 우리카드-앱카드 |
+</details>
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
@@ -312,6 +310,24 @@ iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSAp
 	<string>kftc-bankpay</string>
 	...
 </array>
+```
+
+또한, URL 변경시 웹뷰내 페이지 전환을 하지 않고, 앱스킴을 실행시키려면 아래 코드를 구현하셔야 합니다.
+```swift
+// swift
+func webView(
+    _ webView: WKWebView,
+    decidePolicyFor navigationAction: WKNavigationAction,
+    decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+) {
+    if let url = navigationAction.request.url,
+    url.scheme != "http" && url.scheme != "https" {
+        UIApplication.shared.openURL(url)
+        decisionHandler(.cancel)
+    } else {
+        decisionHandler(.allow)
+    }
+}
 ```
 
 <a id="3rd-to-my"></a>
