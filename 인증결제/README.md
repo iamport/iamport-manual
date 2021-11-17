@@ -281,13 +281,13 @@ iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSAp
 | kakaotalk | 카카오페이 |
 | kb-acp | 국민카드-앱카드 |
 | kb-auth | 국민 |
-| kftc-bankpay | 계좌이체 |
+| kftc-bankpay | 뱅크페이 계좌이체 |
 | lguthepay-xpay | 페이나우 |
 | liivbank | 국민 Liiv M(리브모바일) |
 | lmslpay | 롯데 L.pay 앱 |
 | lotteappcard | 롯데카드-앱카드 |
 | lottesmartpay | 롯데카드-모바일결제 |
-| Lpayapp | (구)롯데 L.pay 앱 |
+| lpayapp | (구)롯데 L.pay 앱 |
 | mpocket.online.ansimclick | 삼성카드-앱카드 |
 | newsmartpib | 우리WON뱅킹 |
 | nhallonepayansimclick | 농협-올원페이 |
@@ -312,7 +312,7 @@ iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSAp
 </array>
 ```
 
-또한, URL 변경시 웹뷰내 페이지 전환을 하지 않고, 앱스킴을 실행시키려면 아래 코드를 구현하셔야 합니다.
+또한, url 변경 과정에서 앱 url 을 감지했을 때, 웹뷰내 페이지 전환을 하지 않고 앱스킴을 실행시키려면 아래 코드를 구현하셔야 합니다.
 ```swift
 // swift
 func webView(
