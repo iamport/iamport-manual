@@ -21,7 +21,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
 
 - `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `paypal`으로 지정합니다.
 - `pay_method` : card만 가능합니다.
-- `currency` : USD만 지원합니다. USD외 다른 화폐가 필요하신 경우 고객센터로 문의하세요.
+- `currency` : 지원 가능한 모든 통화는 [페이팔 공식 문서](https://developer.paypal.com/docs/api/reference/currency-codes/#paypal-account-payments)를 참고해주세요.
 
 ```javascript
 IMP.request_pay({
@@ -30,7 +30,7 @@ IMP.request_pay({
     merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
     name : '주문명:결제테스트',
     amount : 14.20,
-    currency : 'USD',
+    currency : 'USD', // 기본값: USD(원화 KRW는 페이팔 정책으로 인해 지원하지 않음)
     buyer_email : 'iamport@siot.do',
     buyer_name : '구매자이름',
     buyer_tel : '010-1234-5678',
