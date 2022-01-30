@@ -38,4 +38,5 @@ PG사별 지원하는 방식 및 설정이 다르기 때문에 다음의 각 PG�
 - [JTNet](./example/jtnet-api-billing-key.md)
 - [세틀뱅크](./example/settlebank-api-billing-key.md)
 - [페이조아(다우데이타)](./example/payjoa-api-billing-key.md)
+- [페이먼트월](./example/paymentwall-billing-key.md)
 
