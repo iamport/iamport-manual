@@ -1,6 +1,6 @@
 # 페이먼트월 정기결제(빌링) 연동 가이드 `REST API`
 
-ℹ️ 자세한 내용은 [REST API 방식으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
+ℹ️ 자세한 내용은 [REST API 방식으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription#issue-billing-a)를 참고하세요.
 
 
 ## 1. PG 설정하기
