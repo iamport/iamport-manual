@@ -26,6 +26,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
      
 - `pay_method` : 'card' or 'trans'만 가능합니다.
 
+### 토스간편결제는 Javascript SDK Version 1.2.0 이상 버전을 사용해야 합니다.
 
 #### 연동예시
 ```javascript
