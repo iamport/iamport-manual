@@ -34,7 +34,7 @@ IMP.request_pay({
     pg : 'tosspay',
     pay_method : 'card',
     merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
-    name : '주문명:결제테스트',
+    name : '주문명:결제테스트',   //필수 파라미터 입니다.
     amount : 1004,
     buyer_email : 'iamport@siot.do',
     buyer_name : '구매자이름',
