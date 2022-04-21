@@ -27,6 +27,8 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 파라미�
 - `naverPopupMode` : 팝업 방식으로 진행 여부 (true/false).
 	- `false`인 경우, 페이지 리디렉션 방식으로 진행되며 `m_redirect_url`을 설정해야 합니다.
 - `m_redirect_url` : 리디렉션 방식으로 진행(`naverPopupMode`: false)할 경우 결제 완료 후 리디렉션 될 URL. 
+- `purchaserName` : 구매자 이름, 결제 상품이 보험 및 위험 업종 등인 경우 필수 입력.
+- `purchaserBirthday` : 구매자 생년월일(yyyyMMdd), 결제 상품이 보험 및 위험 업종 등인 경우 필수 입력.
 - [naverProducts](#naverProducts) : 상품정보(필수 입력). 네이버페이 매뉴얼의 `productItems` 파라미터와 동일합니다.
 
 ```javascript
@@ -44,6 +46,8 @@ IMP.request_pay({
 	naverUseCfm : '20201001', //이용완료일자
     naverPopupMode : true, //팝업모드 활성화
 	m_redirect_url : "{결제 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
+    purchaserName: "구매자이름",
+    purchaserBirthday: "20151201",
     naverProducts : [{
       "categoryType": "BOOK",
 			"categoryId": "GENERAL",
