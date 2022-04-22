@@ -43,9 +43,9 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-	naverUseCfm : '20201001', //이용완료일자
+    naverUseCfm : '20201001', //이용완료일자
     naverPopupMode : true, //팝업모드 활성화
-	m_redirect_url : "{결제 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
+    m_redirect_url : "{결제 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
     purchaserName: "구매자이름",
     purchaserBirthday: "20151201",
     naverProducts : [{
