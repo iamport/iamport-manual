@@ -54,6 +54,7 @@ IMP.request_pay({
 			"uid": "107922211",
 			"name": "한국사",
 			"payReferrer": "NAVER_BOOK",
+			"sellerId": "sellerA",
 			"count": 10
 		},
 		{
@@ -62,6 +63,7 @@ IMP.request_pay({
 			"uid": "299911002",
 			"name": "러블리즈",
 			"payReferrer": "NAVER_BOOK",
+			"sellerId": "sellerB",
 			"count": 1
 		}]
 }, function(rsp) { //팝업 방식으로 진행 또는 결제 프로세스 시작 전 오류가 발생할 경우 호출되는 callback
@@ -108,6 +110,8 @@ IMP.request_pay({
 - uid (필수) : 가맹점 내부의 상품 고유 ID를 활용하는 것이 일반적이지만, 네이버페이 가이드 참고가 필요합니다. [공식 매뉴얼](https://developer.pay.naver.com/docs/v2/api#etc-etc_product)
 - name (필수) : 주문상품의 명칭
 - count (필수) : 상품 주문 개수
+- sellerId (선택) : 가맹점이 하위 판매자를 식별하기 위한 고유 ID(영문 대소문자 및 숫자 허용)
+	- 가맹점의 업종이 오픈마켓인 경우 필수 입력 
 - payReferrer (선택) : 네이버 플랫폼의 타 서비스와 제휴계약 후 유입분석을 진행하는 경우에만 입력 [공식 매뉴얼](https://developer.pay.naver.com/docs/v2/api#etc-etc_product_ref)
 
 ### PC, 모바일 버전에서 진행 방식<a id="method"></a>
