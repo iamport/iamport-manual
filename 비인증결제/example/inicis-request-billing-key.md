@@ -17,7 +17,7 @@ KG이니시스의 웹표준 결제창/모바일 결제창을 통해서 빌링키
 
 ℹ️ 자세한 내용은 [일반결제창으로 빌링키 요청하기](https://docs.iamport.kr/implementation/subscription#issue-billing-b)를 참고하세요.
 
-PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행되고, 모바일의 경우 `m_redirect_url`로 리디렉션됩니다.
+PC와 모바일 환경 모두 `IMP.request_pay(param, callback)` 호출 후 callback으로 결과를 받아볼수 있습니다.
 
 - `pg` : 
 	- 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
