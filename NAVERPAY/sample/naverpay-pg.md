@@ -27,8 +27,12 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 파라미�
 - `naverPopupMode` : 팝업 방식으로 진행 여부 (true/false).
 	- `false`인 경우, 페이지 리디렉션 방식으로 진행되며 `m_redirect_url`을 설정해야 합니다.
 - `m_redirect_url` : 리디렉션 방식으로 진행(`naverPopupMode`: false)할 경우 결제 완료 후 리디렉션 될 URL. 
-- `purchaserName` : 구매자 이름, 결제 상품이 보험 및 위험 업종 등인 경우 필수 입력.
-- `purchaserBirthday` : 구매자 생년월일(yyyyMMdd), 결제 상품이 보험 및 위험 업종 등인 경우 필수 입력.
+- `purchaserName` : 구매자 이름.
+    - 결제 상품이 고위험 업종에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다. 
+    - 비대상 가맹점은 입력하지 않습니다.
+- `purchaserBirthday` : 구매자 생년월일(yyyyMMdd).
+    - 결제 상품이 고위험 업종에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다.
+    - 비대상 가맹점은 입력하지 않습니다.
 - [naverProducts](#naverProducts) : 상품정보(필수 입력). 네이버페이 매뉴얼의 `productItems` 파라미터와 동일합니다.
 
 ```javascript
@@ -111,7 +115,8 @@ IMP.request_pay({
 - name (필수) : 주문상품의 명칭
 - count (필수) : 상품 주문 개수
 - sellerId (선택) : 가맹점이 하위 판매자를 식별하기 위한 고유 ID(영문 대소문자 및 숫자 허용)
-	- 가맹점의 업종이 오픈마켓인 경우 필수 입력 
+    - 가맹점의 업종이 통신판매중개업에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다.
+    - 비대상 가맹점은 입력하지 않습니다.
 - payReferrer (선택) : 네이버 플랫폼의 타 서비스와 제휴계약 후 유입분석을 진행하는 경우에만 입력 [공식 매뉴얼](https://developer.pay.naver.com/docs/v2/api#etc-etc_product_ref)
 
 ### PC, 모바일 버전에서 진행 방식<a id="method"></a>
