@@ -11,7 +11,7 @@
 
 ## 2. 결제 요청하기
 
-[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 차이 결제창을 호출합니다.
+[IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 토스페이 결제창을 호출합니다.
 
 PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect_url`로 리디렉션됩니다.
 
