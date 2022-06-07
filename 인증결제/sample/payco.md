@@ -19,6 +19,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 callback으
 
 - `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `payco`로 지정합니다.
 - `pay_method` : 호출 시 선택된 값은 무시되며, 페이코 결제창에서 선택한 옵션으로 설정됩니다.
+- `name` : 필수 입력 (미설정 시 페이코 결제창에서 오류 발생 가능)
 
 ```javascript
 IMP.request_pay({
