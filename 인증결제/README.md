@@ -302,6 +302,7 @@ iOS 보안 정책상 외부 호출될 URL scheme을 `info.plist` 파일의 `LSAp
 | supertoss | 토스 |
 | vguardstart | 삼성카드-백신 |
 | wooripay | 우리카드-앱카드 |
+| naversearchapp | 네이버페이 |	
 </details>
 
 ```xml
