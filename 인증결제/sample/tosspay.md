@@ -13,7 +13,7 @@
 
 [IMP.request_pay(param, callback)](https://docs.iamport.kr/sdk/javascript-sdk#request_pay)을 호출하여 차이 결제창을 호출합니다.
 
-PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect_url`로 리디렉션됩니다.
+PC의 경우 IMP.request_pay(param, callback) 호출 후 callback으로 실행되고, 모바일의 경우 m_redirect_url로 리디렉션됩니다.
 
 - `pg` : 
     - 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용됩니다.
@@ -21,7 +21,7 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 `m_redirect
     - 통상적으로 모든 PG가 상점아이디 개념을 지니고 있기 때문에 아임포트에서는 pg_id 로 식별하고 있습니다.
     - 이 정책을 유지하기 위해 Toss 간편결제는 다음과 같이 2가지로 pg_id 를 자동 생성합니다.
     
-          * tosstest : 테스트모드의 토스간편결제 pg_id
+          * tosstest : 테스트모드의 토스간편결제 pg_id. PC에서 정상적으로 결과 수신을 못합니다.  
           * tosspay : 상용모드의 토스간편결제 pg_id
      
 - `pay_method` : 'card' or 'trans'만 가능합니다.
