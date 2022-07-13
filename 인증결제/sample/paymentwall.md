@@ -19,7 +19,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 - `pg` : 등록된 PG사가 하나일 경우에는 미 설정시 `기본 PG사`가 자동으로 적용되며, 여러개인 경우에는 `paymentwall`로 지정합니다.
 - `pay_method` : 
     - card(신용카드) 로 지정하여도 모든 결제수단이 활성화 됩니다.
-
+- country_code : [코드표확인](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 ```javascript
 IMP.request_pay({
     pg : 'paymentwall',
