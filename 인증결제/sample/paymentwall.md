@@ -37,6 +37,8 @@ IMP.request_pay({
     m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}', // 예: https://www.my-service.com/payments/complete/mobile,
     bypass: {
       widget_code: "t3_1"  //터미날3 인경우 해당 파라미터 설정, 미 설정시 Defualt(일반) 결제창 활성화
+      ps : "all",         // 특정 결제수단만 활성화 하는 경우 사용 all 인 경우(default) 국가 지원 결제수단 모두 표
+      country_code:"DE"   // 코드가 지정되면 지정된 국가에서 지원하는 결제수단이 활성화됩니다.
     }
 }, function(rsp) { // callback 로직
 	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
