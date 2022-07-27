@@ -33,6 +33,9 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 파라미�
 - `naverPurchaserBirthday` : 구매자 생년월일(yyyyMMdd).
     - 결제 상품이 고위험 업종에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다.
     - 비대상 가맹점은 입력하지 않습니다.
+- `naverChainId` : 네이버페이 그룹형 가맹점용 chain id
+    - 같은 파트너 ID로 두개 이상의 서비스를 운영하는 그룹형 가맹점의 경우에만 네이버페이로부터 전달받은 값을 필수 입력합니다.
+    - 비대상 가맹점은 입력하지 않습니다.
 - [naverProducts](#naverProducts) : 상품정보(필수 입력). 네이버페이 매뉴얼의 `productItems` 파라미터와 동일합니다.
 
 ```javascript
@@ -52,6 +55,7 @@ IMP.request_pay({
     m_redirect_url : "{결제 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
     naverPurchaserName: "구매자이름",
     naverPurchaserBirthday: "20151201",
+    naverChainId: "sAMplEChAINid",
     naverProducts : [{
       "categoryType": "BOOK",
 			"categoryId": "GENERAL",
