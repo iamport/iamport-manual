@@ -26,7 +26,16 @@ PC와 모바일 모두 `IMP.request_pay(param, callback)` 호출 후 파라미�
 - `m_redirect_url` : 리디렉션 방식으로 진행(`naverPopupMode`: false)할 경우 결제 완료 후 리디렉션 될 URL. 
 - `naverProductCode` : 가맹점의 상품코드.
 	- 동일한 고객이 동일상품에 대해 중복으로 반복결제 등록하는 것을 방지하기 위한 파라미터입니다.
-	- 기본값은 random으로 자동 생성되어 중복결제가 가능하므로 값을 지정해 주세요.  
+	- 기본값은 random으로 자동 생성되어 중복결제가 가능하므로 값을 지정해 주세요.
+- `naverPurchaserName` : 구매자 이름.
+    - 결제 상품이 고위험 업종에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다. 
+    - 비대상 가맹점은 입력하지 않습니다.
+- `naverPurchaserBirthday` : 구매자 생년월일(yyyyMMdd).
+    - 결제 상품이 고위험 업종에 해당하여 네이버페이 계약 당시 별도의 안내를 받은 대상 가맹점만 필수 입력합니다.
+    - 비대상 가맹점은 입력하지 않습니다.
+- `naverChainId` : 네이버페이 그룹형 가맹점용 chain id
+    - 같은 파트너 ID로 두개 이상의 서비스를 운영하는 그룹형 가맹점의 경우에만 네이버페이로부터 전달받은 값을 필수 입력합니다.
+    - 비대상 가맹점은 입력하지 않습니다.
   
 ```javascript
 IMP.request_pay({
@@ -40,9 +49,12 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678', //필수 입력.
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    naverProductCode : '반복결제 상품코드',
     naverPopupMode : true, //팝업모드 활성화
-	  m_redirect_url : "{등록 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
+    m_redirect_url : "{등록 완료 후 리디렉션 될 URL}", //예 : http://yourservice.com/payments/complete
+    naverProductCode : '반복결제 상품코드',
+    naverPurchaserName: "구매자이름",
+    naverPurchaserBirthday: "20151201",
+    naverChainId: "sAMplEChAINid",
 }, function(rsp) { //팝업 방식으로 진행 또는 등록 프로세스 시작 전 오류가 발생할 경우 호출되는 callback
   if ( rsp.success ) {
     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
