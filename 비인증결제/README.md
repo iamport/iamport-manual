@@ -6,7 +6,7 @@
 
 빌링키 발급을 위해서 다음과 같이 두 가지 방식으로 카드정보를 카드사에 전달할 수 있습니다.
 
-- **결제창 방식**: PG사의 결제창을 통해서 카드정보를 전달하는 방식. 
+- **결제창 방식**: PG사의 결제창을 통해서 카드정보를 전달하는 방식.
 - **REST API 방식**: 아임포트 REST API를 통해서 카드정보를 전달하는 방식.
 
 | ℹ️  **빌링키 발급 및 결제 등 정기결제 연동에 대한 자세한 내용은 <a href="https://docs.iamport.kr/implementation/subscription">정기결제 연동하기</a> 문서를 참고하세요.**|
@@ -36,7 +36,7 @@ PG사별 지원하는 방식 및 설정이 다르기 때문에 다음의 각 PG�
 - [NHN KCP](./example/kcp-api-billing-key.md)
 - [KG이니시스](./example/inicis-api-billing-key.md)
 - [JTNet](./example/jtnet-api-billing-key.md)
-- [세틀뱅크](./example/settlebank-api-billing-key.md)
+- [헥토파이낸셜(구 세틀뱅크)](./example/settlebank-api-billing-key.md)
 - [페이조아(다우데이타)](./example/payjoa-api-billing-key.md)
 - [페이먼트월](./example/paymentwall-api-billing-key.md)
 

@@ -21,7 +21,7 @@
 - [나이스페이먼츠](./sample/nice.md)
 - [페이코](./sample/payco.md)
 - [페이팔](./sample/paypal.md)
-- [세틀뱅크](./sample/settle.md)
+- [헥토파이낸셜(구 세틀뱅크)](./sample/settle.md)
 - [스마일페이](./sample/smilepay.md)
 - [토스페이먼츠](./sample/uplus.md)
 - [네이버페이](/NAVERPAY/sample/naverpay-pg.md)
