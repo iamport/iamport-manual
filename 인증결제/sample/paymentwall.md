@@ -20,6 +20,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 - `pay_method` : 
     - card(신용카드) 로 지정하여도 모든 결제수단이 활성화 됩니다.
 - country_code : [코드표확인](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+- use_test_method : LIVE 프로젝트에서 테스트 결제수단이 활성화 됩니다.
 ```javascript
 IMP.request_pay({
     pg : 'paymentwall',
@@ -35,8 +36,9 @@ IMP.request_pay({
     currency : 'USD',
     language : 'en',
     m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}', // 예: https://www.my-service.com/payments/complete/mobile,
+    use_test_method : true, // 테스트 결제 수단을 활성화하는 파라미터
     bypass: {
-      widget_code: "t3_1"  //터미날3 인경우 해당 파라미터 설정, 미 설정시 Defualt(일반) 결제창 활성화
+      widget_code: "t3_1",  //터미날3 인경우 해당 파라미터 설정, 미 설정시 Defualt(일반) 결제창 활성화
       ps : "all",         // 특정 결제수단만 활성화 하는 경우 사용 all 인 경우(default) 국가 지원 결제수단 모두 표
       country_code:"DE"   // 코드가 지정되면 지정된 국가에서 지원하는 결제수단이 활성화됩니다.
     }
