@@ -27,7 +27,7 @@ PC의 경우 `IMP.request_pay(param, callback)` 호출 후 callback으로 실행
 IMP.request_pay({
     pg : 'kcp',
     pay_method : 'card',
-    merchant_uid: "order_no_0001", //상점에서 생성한 고유 주문번호
+    merchant_uid: 'order_no_0001', // 상점에서 생성한 고유 주문번호
     name : '주문명:결제테스트',
     amount : 14000,
     buyer_email : 'iamport@siot.do',
@@ -35,7 +35,10 @@ IMP.request_pay({
     buyer_tel : '010-1234-5678',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456',
-    m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}' // 예: https://www.my-service.com/payments/complete/mobile
+    m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}', // 예: https://www.my-service.com/payments/complete/mobile
+    bypass : {
+        site_logo : '{상점의 로고가 있는 정확한 URL}'  // 설정 시 결제 창 왼쪽 상단에 로고를 띄웁니다. 결제 창 호출이 느려질 수 있으며 150 X 50 미만 GIF, JPG 파일만 지원.
+    }
 }, function(rsp) { // callback 로직
 	//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
 });
