@@ -35,14 +35,14 @@ IMP.request_pay({
 	merchant_uid : '{Merchant created Order ID}', // Example: issue_billingkey_monthly_0001
 	name : 'Order name: Billing key request test',
 	amount : 50,
-	buyer_email: "iamport@example.com", // Required 
+	buyer_email: "iamport@example.com", // Required
         buyer_name: "buyer name",
 	buyer_tel : '02-1234-1234',
-	buyer_adrr : 'Gangnam-gu, Seoul, Republic of Korea'
+	buyer_adrr : 'Gangnam-gu, Seoul, Republic of Korea',
         buyer_postcode : '123-456',
         currency : 'USD',
         language : 'en',
-	m_redirect_url : '{redirect URL}' // Example: https://www.my-service.com/payments/complete/mobile (for mobile only),
+	m_redirect_url : '{redirect URL}', // Example: https://www.my-service.com/payments/complete/mobile (for mobile only),
 	customer_uid : '{Unique ID for the card (billing key)}', // Required (Example: gildong_0001_1234)
 	bypass: {
 	      widget_code: "t3_1",  // For Terminal 3, set the corresponding parameters and activate the Default payment window if not set.
