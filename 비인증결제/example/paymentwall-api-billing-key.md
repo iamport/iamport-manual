@@ -1,5 +1,7 @@
 # 페이먼트월 정기결제(빌링) 연동 가이드 `REST API`
 
+:globe_with_meridians: [EN](/en/Subscription/sample/paymentwall-api-billing-key.md)
+
 ℹ️ 자세한 내용은 [REST API 방식으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription#issue-billing-a)를 참고하세요.
 
 
