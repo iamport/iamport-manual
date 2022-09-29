@@ -10,7 +10,7 @@
 
 ## 1. PG 설정하기
 
-<a href="https://chaifinance.notion.site/d621d14a563242ddbbcdf43722c28e80" target="_blank">페이먼트월 정기결제 테스트 모드 설정</a> 페이지의 **1) 결제창 방식**의 내용를 참고하여 PG 설정을 합니다.
+<a href="https://chaifinance.notion.site/5aa0546574c94f159a7f040585af7359" target="_blank">페이먼트월 정기결제 테스트 모드 설정</a> 페이지의 **1) 결제창 방식**의 내용를 참고하여 PG 설정을 합니다.
 
 ## 2. 빌링키 발급 요청하기
 
