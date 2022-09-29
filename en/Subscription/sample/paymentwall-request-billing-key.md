@@ -11,7 +11,7 @@
 
 Use the **1) Payment window** section of the following guide to set up PAYMENTWALL as PG in test mode:
 
-- <a href="https://chaifinance.notion.site/d621d14a563242ddbbcdf43722c28e80" target="_blank"> PAYMENTWALL Subscription Test Mode Configuration</a>
+- <a href="https://chaifinance.notion.site/5aa0546574c94f159a7f040585af7359" target="_blank"> PAYMENTWALL Subscription Test Mode Configuration</a>
 
 
 ## 2. Request billing key
