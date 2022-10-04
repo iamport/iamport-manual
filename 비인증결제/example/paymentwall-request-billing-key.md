@@ -6,7 +6,6 @@
 
 ℹ️  자세한 내용은 [일반결제창으로 정기결제 연동하기](https://docs.iamport.kr/implementation/subscription?lang=ko#issue-billing-b)를 참고하세요.
 
-ℹ️  페이먼트월과 별도 협의된 가맹점은 결제창/REST API를 사용하여 정기결제(빌링)를 연동할 수 있습니다. 해당 내용은 [페이먼트월 정기결제(빌링) 연동 가이드 (REST API 방식)](/비인증결제/example/paymentwall-api-billing-key.md)을 참고하세요.
 
 ## 1. PG 설정하기
 
