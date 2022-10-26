@@ -295,7 +295,9 @@ XML 응답의 정보가 불충분 또는 잘못되었거나 요청한 상품정�
 ```
 http://{네이버페이에 등록된 URL}?product[0][id]=singleProductId&product[1][id]=optionProductId&product[1][optionManageCodes]=R_L
 ```
-
+네이버페이에서 가맹점으로 요청하는 상품정보XML URL 중 '가맹점연동도메인/가맹점페이지' 영역은 가맹점에서 임의로 설정하실 수 있으며,
+상품정보XML 이 응답되도록 구현하신 후 'dl_techsupport@navercorp.com' 로 전달주시면 가맹점 정보에 등록해드리고 있습니다.
+(※ 별도의 요청이 없으면 기본적으로 'http://가맹점연동도메인/?wc-api=naver-product-info' 로 연동됩니다.)
 
 ## 4.2 XML 응답<a id="xml-response"></a>
 
