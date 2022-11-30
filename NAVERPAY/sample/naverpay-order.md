@@ -4,6 +4,10 @@
 
 주문형은 가맹점 사이트에서 주문 단계부터 상품정보와 연동하여 네이버페이로 결제를 진행하는 방식입니다.
 
+자세한 연동 가이드는 아래 문서를 참고해주세요
+
+<a href="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/c61e773a-6f2c-4744-8976-6fef7f839da3/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%8E%98%EC%9D%B4%28%EC%A3%BC%EB%AC%B8%ED%98%95%29_Naver_Pay-Shop_Interworking_Guide_2.1-ko_%281%29.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221130%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221130T021917Z&X-Amz-Expires=86400&X-Amz-Signature=1d899ba7629ae44fc16d6ee56561d10f37d821a7b5cf9a77cca529725b47412f&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22%25EB%2584%25A4%25EC%259D%25B4%25EB%25B2%2584%25ED%258E%2598%25EC%259D%25B4%28%25EC%25A3%25BC%25EB%25AC%25B8%25ED%2598%2595%29_Naver_Pay-Shop_Interworking_Guide_2.1-ko%2520%281%29.pdf%22&x-id=GetObject" target="_blank"> 공식 연동가이드 확인 </a>
+
 ## 1. PG 설정하기
 
 <a href="https://guide.iamport.kr/485c6da8-01d7-4900-bc05-76005e5477ba" target="_blank">네이버페이(주문형/결제형) 테스트 모드 설정</a> 페이지에서 **1) 주문형** 내용을 참고하여 PG 설정을 합니다.
