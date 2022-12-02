@@ -8,6 +8,7 @@
 ## 1. PG 설정하기
 
 <a href="https://chaifinance.notion.site/5aa0546574c94f159a7f040585af7359" target="_blank">페이먼트월 정기결제 테스트 모드 설정</a> 페이지의 **2) REST API 방식**의 내용를 참고하여 PG 설정을 합니다.
+
 해당 방식으로 연동을 진행하기 위해서는 반드시 PCI-DSS 인증을 획득한 업체여야 합니다.
 
 ## 2. 일회성 결제 요청하기
