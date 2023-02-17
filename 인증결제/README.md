@@ -212,12 +212,17 @@ IMP.request_pay({
 
 ### 2.1.a 안드로이드 <a id="my-to-3rd-android"></a>
 
-가맹점 앱의 WebView에서 PG사별 앱 호출 및 미설치 체크 로직을 구현합니다.<Br />
+ℹ️ 가맹점 앱의 WebView에서 PG사별 앱 호출 및 미설치 체크 로직을 구현합니다.<Br />
+
+
+ℹ️ [Android 11 보안정책에 따른 앱 패키지 등록](https://guide.iamport.kr/df95fe31-c0d0-4215-8c4f-1d0b539fad88) 이 필요할 수 있으니 먼저 링크의 가이드를 참조하시기 바랍니다.
+
 
 [WebViewClient](https://developer.android.com/reference/android/webkit/WebViewClient.html) 클래스의 `shouldOverrideUrlLoading` 메소드를 다음과 같이 재정의하여 구현합니다.
 
-
+- java
 ```java
+// java 예시
 public class MyViewClient extends WebViewClient {
 
 	@Override
@@ -253,6 +258,41 @@ public class MyViewClient extends WebViewClient {
 	}
 }
 ```
+
+
+- kotlin
+```kotlin
+// kotlin 예시
+// 예시코드이며 가맹점 구현에 따라 다를 수 있습니다.
+override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+    request?.url?.let {
+        if (it.scheme == "about") {
+            return true // 이동하지 않음
+        }
+        val urlStr = it.toString()
+        if (!URLUtil.isNetworkUrl(urlStr) && !URLUtil.isJavaScriptUrl(urlStr)) {
+            openPaymentApp(urlStr) // 앱이동
+            return true
+        }
+    }
+    return super.shouldOverrideUrlLoading(view, request)
+}
+
+fun openPaymentApp(url: String) {
+    Intent.parseUri(url, Intent.URI_INTENT_SCHEME)?.let { intent: Intent ->
+        runCatching {
+            startActivity(intent) // 앱 이동
+        }.recoverCatching {
+            // 앱이동에 실패(미설치)시 앱스토어로 이동
+            val packageName = intent.getPackage()
+            if (!packageName.isNullOrBlank()) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+            }
+        }
+    }
+}
+```
+
 
 ### 2.1.b iOS <a id="my-to-3rd-ios"></a>
 
