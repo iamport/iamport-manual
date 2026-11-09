@@ -1,5 +1,9 @@
 # PG사별 정기결제(빌링) 연동 가이드
 
+> [!WARNING]
+> 이 문서는 더 이상 관리되지 않습니다 (Deprecated). 최신 내용은 포트원 개발자센터의 [빌링키 결제 연동하기](https://developers.portone.io/opi/ko/integration/start/v2/billing/readme?v=v2)를 참고해주세요.
+> 기존 V1 연동을 운영 중이라면 [V1 비인증결제 연동하기](https://developers.portone.io/opi/ko/integration/start/v1/non-auth?v=v1)를 참고해주세요.
+
 :globe_with_meridians: [EN](/en/Subscription/README.md)
 
 구독형 정기결제, 종량제 과금결제 등 원하는 시점에 재결제를 하기 위해서 카드사에 고객의 카드정보를 전달하여 카드정보와 매칭되는 결제용 암호화 키인 빌링키를 발급받아야 합니다.<Br />

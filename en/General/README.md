@@ -1,5 +1,9 @@
 # General Payment Integration by PG
 
+> [!WARNING]
+> This document is deprecated and no longer maintained. Please refer to [Integration Guides by PG](https://developers.portone.io/opi/ko/integration/pg/v2/readme?v=v2) in the PortOne Developer Center for the latest information.
+> If you are maintaining an existing V1 integration, refer to [V1 Integration Guides by PG](https://developers.portone.io/opi/ko/integration/pg/v1/readme?v=v1).
+
 :globe_with_meridians: [KO](/인증결제/README.md)  
 
 Create an i'mport account following the [Setup](https://docs.iamport.kr/en-US/prepare) guide in the i'mport Documentation, and use the following PG integration guides to perform a test payment in each PG’s test account.<Br />

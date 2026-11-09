@@ -1,5 +1,22 @@
 # 아임포트  
 
+> [!WARNING]
+> **이 저장소는 더 이상 관리되지 않습니다 (Deprecated)**
+>
+> 일부 내용(PG사별 설정 방법, 파라미터, 문의처 등)은 현재 서비스와 다를 수 있으니, 최신 연동 가이드는 [포트원 개발자센터](https://developers.portone.io)를 참고해주세요.
+>
+> **V2 연동 가이드**
+>
+> - [결제 연동 시작하기](https://developers.portone.io/opi/ko/integration/start/v2/readme?v=v2)
+> - [인증 결제 연동하기](https://developers.portone.io/opi/ko/integration/start/v2/checkout?v=v2)
+> - [빌링키 결제 연동하기](https://developers.portone.io/opi/ko/integration/start/v2/billing/readme?v=v2)
+> - [PG사별 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v2/readme?v=v2)
+> - [본인인증 연동하기](https://developers.portone.io/opi/ko/extra/identity-verification/readme-v2?v=v2)
+>
+> 기존 V1 연동을 운영 중이라면 [V1 결제 연동 시작하기](https://developers.portone.io/opi/ko/integration/start/v1/readme?v=v1)와 [V1 PG사별 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v1/readme?v=v1)를 참고해주세요.
+>
+> 기술 문의: <tech.support@portone.io>
+
 :globe_with_meridians: [EN](/en/README.md)  
 
 아임포트(I'mport)는,  

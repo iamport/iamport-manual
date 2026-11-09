@@ -1,5 +1,9 @@
 # Naver Pay  
 
+> [!WARNING]
+> This document is deprecated and no longer maintained. Please refer to [Naver Pay integration guide](https://developers.portone.io/opi/ko/integration/pg/v2/naverpay?v=v2) in the PortOne Developer Center for the latest information.
+> If you are maintaining an existing V1 integration, refer to [V1 Naver Pay integration guide](https://developers.portone.io/opi/ko/integration/pg/v1/naver?v=v1).
+
 :globe_with_meridians: [KO](/NAVERPAY/README.md)  
 
 ## 1. Naver Pay (Standard)  

@@ -1,5 +1,9 @@
 # Subscription Payment (Billing) Integration by PG
 
+> [!WARNING]
+> This document is deprecated and no longer maintained. Please refer to [Billing Key Payment](https://developers.portone.io/opi/ko/integration/start/v2/billing/readme?v=v2) in the PortOne Developer Center for the latest information.
+> If you are maintaining an existing V1 integration, refer to [V1 Non-authenticated Payment](https://developers.portone.io/opi/ko/integration/start/v1/non-auth?v=v1).
+
 :globe_with_meridians: [KO](/비인증결제/README.md)
 
 To make a payment at a desired time, such as subscriptions, recurring payments or pay-as-you-go billing, the customer's card information must be submitted to the credit card company. Using the card information, the credit card company issues a billing key, a payment encryption key that maps to the card information, to enable subsequent payments.<Br />

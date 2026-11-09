@@ -1,5 +1,9 @@
 # 네이버페이
 
+> [!WARNING]
+> 이 문서는 더 이상 관리되지 않습니다 (Deprecated). 최신 내용은 포트원 개발자센터의 [네이버페이(결제형) 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v2/naverpay?v=v2)를 참고해주세요.
+> 기존 V1 연동을 운영 중이라면 [V1 네이버페이(결제형) 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v1/naver?v=v1)를 참고해주세요.
+
 ## 1. 결제형 네이버페이  
 
 가장 최신의 네이버페이 결제 서비스로, 일반 PG처럼 결제 페이지에서 결제 수단 중 하나로 네이버페이를 선택하여 진행되며, 주문형 네이버페이와 달리 실시간으로 결제정보 확인이 가능합니다. 일반결제와 반복결제(정기결제)를 모두 지원합니다.  

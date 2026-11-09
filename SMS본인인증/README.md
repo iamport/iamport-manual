@@ -1,4 +1,9 @@
 # intro  
+
+> [!WARNING]
+> 이 문서는 더 이상 관리되지 않습니다 (Deprecated). 최신 내용은 포트원 개발자센터의 [본인인증 연동하기](https://developers.portone.io/opi/ko/extra/identity-verification/readme-v2?v=v2)를 참고해주세요.
+> 기존 V1 연동을 운영 중이라면 [V1 휴대폰 본인인증 연동하기](https://developers.portone.io/opi/ko/extra/identity-verification/v1/phone/readme?v=v1)를 참고해주세요.
+
 고객이 사용 중인 통신사를 통해 SMS로 전송된 인증번호(6자리)를 입력하면 해당 고객의 이름 / 생년월일 / 성별을 확인해주는 기능입니다.  
 
 ![통신사선택](screenshot/step1.png)![SMS전송된인증번호입력](screenshot/step2.png)  

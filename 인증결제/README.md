@@ -1,5 +1,9 @@
 # PG사별 일반결제 연동 가이드
 
+> [!WARNING]
+> 이 문서는 더 이상 관리되지 않습니다 (Deprecated). 최신 내용은 포트원 개발자센터의 [PG사별 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v2/readme?v=v2)를 참고해주세요.
+> 기존 V1 연동을 운영 중이라면 [V1 PG사별 연동 가이드](https://developers.portone.io/opi/ko/integration/pg/v1/readme?v=v1)를 참고해주세요.
+
 :globe_with_meridians: [EN](/en/General/README.md)  
 
 아임포트 결제 연동 매뉴얼의 [준비하기](https://docs.iamport.kr/prepare) 가이드에 따라 아임포트 계정을 생성하고, 다음 PG사 별 일반결제 연동 가이드를 참고하여 각 PG사 테스트 계정으로 테스트 결제를 해 볼수 있습니다.<Br />

@@ -1,5 +1,22 @@
 # i'mport  
 
+> [!WARNING]
+> **This repository is deprecated and no longer maintained.**
+>
+> Some content (PG settings, parameters, contact information, etc.) may differ from the current service. Please refer to the [PortOne Developer Center](https://developers.portone.io) for the latest integration guides.
+>
+> **V2 Integration Guides**
+>
+> - [Getting Started](https://developers.portone.io/opi/ko/integration/start/v2/readme?v=v2)
+> - [Authenticated Payment](https://developers.portone.io/opi/ko/integration/start/v2/checkout?v=v2)
+> - [Billing Key Payment](https://developers.portone.io/opi/ko/integration/start/v2/billing/readme?v=v2)
+> - [Integration Guides by PG](https://developers.portone.io/opi/ko/integration/pg/v2/readme?v=v2)
+> - [Identity Verification](https://developers.portone.io/opi/ko/extra/identity-verification/readme-v2?v=v2)
+>
+> If you are maintaining an existing V1 integration, refer to [V1 Getting Started](https://developers.portone.io/opi/ko/integration/start/v1/readme?v=v1) and [V1 Integration Guides by PG](https://developers.portone.io/opi/ko/integration/pg/v1/readme?v=v1).
+>
+> Technical support: <tech.support@portone.io>
+
 :globe_with_meridians: [KO](/README.md)  
 
 i'mport is a **payment platform** or **payment hosting service** that provides easier and faster integration with PG's payment modules in various development environments.  
